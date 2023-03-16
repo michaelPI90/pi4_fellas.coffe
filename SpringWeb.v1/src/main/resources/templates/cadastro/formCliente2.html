@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro Cliente</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/cadastro.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/cadastro.js"></script> 
+        
+    </head>
+    <body>
+        
+        <div id="cabecalho">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg nav-light justify-content-between">
+                    <a class=" navbar-brand " href="#">
+                        <img src="imagens/logo.png" class="img-fluid" width="150" height="150">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    
+                    <span class="navbar-toggler-icon "></span>
+                </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class=" nav-item ">
+                                <a class=" nav-link active " aria-current=" page " href=" # ">Página Inicial</a>
+                            </li>
+                            <li class=" nav-item ">
+                                <a class=" nav-link " href=" # ">Serviços</a>
+                            </li>
+                            <li class=" nav-item ">
+                                <a class=" nav-link " href=" # ">Produtos</a>
+                            </li>
+                            <li class=" nav-item ">
+                                <a class=" nav-link" href=" # ">Sobre a Adimo</a>
+                            </li>
+                            <li class=" nav-item ">
+                                <a class=" nav-link" href=" # ">Cadastre-se</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+<div class="container">
+    <h1><b>Cadastre-se para receber ofertas e novidades!</b></h1>
+            <form id="formulario" action="/CadastroCliente/salvo" th:object="${cliente}" class="col-md-8 col-xl-9" method="post">
+                <div class="row">
+                    <fieldset class="col-lg-6">
+                        <legend>Informe seus dados:</legend>
+                        <div class="form-group">
+                            <label for="nome">Nome completo*:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" th:field =" *{nome}"placeholder="Nome" autofocus required/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cpf">CPF*:</label>
+                            <input type="text" class="form-control" id="cpf" name="cpf" th:field =" *{cpf}" maxlength="11" placeholder="000.000.000-00" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="datNac">Data de Nascimento:</label>
+                            <input type="date" class="form-control" id="data_nasc" name="data_nasc" th:field =" *{data_nasc}"/>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="endereco">Endereço*:</label>
+                            <input type="text" class="form-control" id="endereco" name="endereco" th:field =" *{endereco}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail*:</label>
+                            <input type="text" class="form-control" id="email" name="email" th:field =" *{email}"/>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="senha">Senha*:</label>
+                            <input type="password" class="form-control" id="senha" name="senha" th:field =" *{senha}"/>
+                            <script type="text/javascript" src="cadastro.js"></script> 
+                            <span id="icone" class="lnr lnr-eye" onclick="mostrarSenha()"></span>   
+                        </div>
+                        
+                    </fieldset>
+                </div>
+                <div class="btns">
+                    <div th:text="${erro}" class="alert alert-info" role="alert"></div>
+
+                    <button type="submit" class="btn-primary">
+                        <span class="enviar"></span>
+                        Enviar Formulário
+                    </button>
+                    <button type="reset" class="btn-second" onclick="limparDados()" >
+                        <span class="limpar"></span>
+                        Limpar Dados
+                    </button>
+                </div>
+            </form>   
+        </div>
+        <footer id="rodape">
+            <div class="container">
+                <div class="contatos">
+    
+                    <h3 class="title text-center mb-6">Quer falar com a gente?</h3>
+                    <div class="row">
+                        <div class="col-sm">
+                            <h5 class="subtitle mb-2 ">
+                                Telefones: (11) 4004-4004 | Whatsapp: (11) 4001- 4001
+                            </h5>
+                            <h6 class="subtitle mb-2">
+                                Clientes e corretores | Seg à Sex das 8h às 21h e aos sábados das 8h às 17h
+                            </h6>
+                        </div>
+                        <div class="col-sm">
+                            <h5 class="subtitle mb-2 ">
+                                tocomduvida@adimo.com.br
+                            </h5>
+                            <h6 class="subtitle mb-2 ">
+                                Atendimento a clientes e dúvidas em geral. Respostas em até dois dias úteis.
+                            </h6>
+                        </div>
+                        <div class="col-sm">
+                            <h5 class="subtitle mb-2 ">
+                                corretores@adimo.com.br
+                            </h5>
+                            <h6 class="subtitle mb-2 ">
+                                Atendimento exclusivo para corretores. Respostas em até um dia útil.
+                            </h6>
+                        </div>
+                        <div class="col-sm">
+                            <h5 class="subtitle mb-2 ">
+                                falesobre@adimo.com.br
+                            </h5>
+                            <h6 class="subtitle mb-2 ">
+                                Atendimento exclusivo aos profissionais de imprensa.
+                            </h6>
+                        </div>
+                        <div class="col-sm">
+                            <h4 class="subtitle mb-2 ">Sobre a Adimo</h4>
+                            <div class="col-mb">
+                                <a href="#">
+                                    <h6>Quem Somos</h6>
+                                </a>
+                                <a href="#">
+                                    <h6>Serviços</h6>
+                                </a>
+                            </div>
+    
+                            <h4 class="subtitle mb-2 ">Explore</h4>
+                            <a href="#">
+                                <h6>Produtos</h6>
+                            </a>
+                            <a href="#">
+                                <h6>Cadastro</h6>
+                            </a>
+    
+                        </div>
+                    </div>
+                    <br><br/>
+    
+                    <div class="direitos">
+    
+                        <div class="row ">
+                            <div class="col-mb text-mb-center">
+                                <div class="align-self-center">
+                                    <img src="imagens/ADIMOBRANCO.png" class="img-fluid " width="100 " height="100 ">
+                                </div>
+                            </div>
+                            <div class="col-mb">
+                                <h7>© 2022 Adimo - Todos os direitos reservados.</h7>
+    
+    
+                            </div>
+    
+                        </div>
+                    </div>
+                    <br><br/>
+                    <br><br/>
+                </div>
+            </div>
+        </footer>
+
+</body>
+</html>

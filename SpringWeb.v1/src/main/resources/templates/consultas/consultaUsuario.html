@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonte Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="Stylesheet" href="/css/consultaUsuario.css">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2b5b3d715c.js" crossorigin="anonymous"></script>
+
+    <!-- Parallax -->
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+
+    <title>Tela - Consultar Usuário</title>
+</head>
+
+<body class="body">
+    <header>
+        <nav class="navbar navbar-light bg-light p-0">
+            <div id="containerItem" class="container-fluid">
+                <div>
+                    <img id="profile" src="/imagens/profile.png" alt="Imagem de perfil">
+                    <span id="span" class="navbar-brand mb-0 h1">Gabriel Costa</span>
+                </div>
+                <nav id="navBuscarItem" class="navbar navbar-light bg-light">
+                    <div class="container-fluid">
+                        <form class="d-flex">
+                            <input id="inputBuscarItem" class="form-control me-2" type="search" placeholder="Buscar..."
+                                aria-label="Search">
+                            <button id="botaoBuscarItem" class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                </nav>
+                <a href="https://www.google.com.br"><img id="logo" src="/imagens/logo.png"
+                        alt="Logo da Smart Pantry"></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="m-5">
+        <button id="botaoMenuLateral" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+            << Abrir menu lateral</button>
+
+                <div class="offcanvas offcanvas-start MenuLateral" data-bs-scroll="true" tabindex="-1"
+                    id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title textoMenuLateral" id="offcanvasWithBothOptionsLabel">Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body bodyMenuLateral">
+                        <a href="/">
+                            <p class="paragrafo">Sair</p>
+                        </a>
+                    </div>
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title textoMenuLateral" id="offcanvasWithBothOptionsLabel">Despensa</h5>
+                    </div>
+                    <div class="offcanvas-body">
+                        <a href="https://www.google.com.br">
+                            <p class="paragrafo">Visualizar Despensa</p>
+                        </a>
+                        <a href="/logado">
+                            <p class="paragrafo">Visualizar Menu</p>
+                        </a>
+                    </div>
+                </div>
+
+                <p id="tituloMenu">Consultar Usuário</p>
+               <form id="formulário" action="/ConsultarUsuario/consultar" th:object="${cliente}" class="col-md-8 col-xl-9" method="post"> 
+                    <div class="input-group flex-nowrap w-50 m-4 ">
+                        <span class="input-group-text" id="addon-wrapping">CPF</span>
+                        <input type="text" class="form-control" placeholder="Informe o CPF..." aria-label="CPF"
+                            aria-describedby="addon-wrapping" id="cpf" name="cpf" field =" *{cpf}">
+                            <div>
+                                <button type="submit" class="botoesItem">Consultar</button>
+                                <div th:text="${erro}" class="alert alert-info" role="alert"></div>
+                               
+                            </div>
+                    </div>
+                </form>
+                <table class="table table-bordered border-primary text-center" action="/listar">
+                    <thead>
+                        <tr>
+                           <th scope="col">Registro</th>
+                            <th scope="col">Selecionar</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">CPF</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Data Nascimento</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">Excluir</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Incluir Item</th>
+                            <th scope="col">Despensa</th>
+                        </tr>
+                        <tbody>
+                                <tr th:each=" clientes : ${clientes}">
+                                    <td th:text="${clientes.id}">1</td>
+                                    <td><input class="form-check-input mt-2" type="checkbox" value="${clientes.id}"
+                                            aria-label="Checkbox for following text input"></td>
+                                    <td th:text="${clientes.nome}">Victor Sousa</td>
+                                    <td th:text="${clientes.cpf}">444.444.444-44</td>
+                                    <td th:text="${clientes.email}">vhps.22@gmail.com</td>
+                                    <td th:text="${clientes.data_nasc}">30/08/1997</td>
+                                    <td th:text="${clientes.endereco}">Rua Andrea Solário</td>
+                                    <td><button class = "botoesItem"><a href="#" th:onclick="'if(confirm(\'Excluir cliente ?\')) { window.location.href = \'' 
+                                        + @{/ConsultarUsuario/{id}(id=${clientes.id})} + '/excluir\' } '" >Excluir Usuário</button></td>
+                                    <td><button class = "botoesItem"><a th:href="@{'/AlterarDados/' + ${clientes.id}}" class="botoesItem">Editar Usuário</button></td>
+                                    <td><button class = "botoesItem"><a th:href="@{'/CadastroItem/' + ${clientes.id}}" class="botoesItem">Incluir Item</button></td>
+                                    <td><button class = "botoesItem"><a th:href="@{'/Despensa/' + ${clientes.id}}" class="botoesItem">Ver Despensa</button></td>
+                       
+                                </tr>
+                        </tbody>
+                    </thead>
+
+                    
+                </table>
+                <!--<div class="d-flex justify-content-end">
+                    <a href="#" th:onclick="'if(confirm(\'Excluir cliente ?\')) { window.location.href = \'' + @{/ConsultarUsuario/{id}(id=${clientes.id})} + '/excluir\' } '" class="botoesItem">Excluir Usuário</button>
+                </div>-->
+    </div>
+
+    <footer class="footer">
+        <div class="container-footer d-flex justify-content-evenly">
+            <a href="https://www.google.com.br">
+                <p class="paragrafo">Entre em contato</p>
+            </a>
+            <a href="https://www.google.com.br">
+                <p class="paragrafo">A Smart Pantry</p>
+            </a>
+            <a href="https://www.google.com.br">
+                <p class="paragrafo">Redes Sociais</p>
+            </a>
+            <a href="https://www.google.com.br">
+                <p class="paragrafo">Dúvidas</p>
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
