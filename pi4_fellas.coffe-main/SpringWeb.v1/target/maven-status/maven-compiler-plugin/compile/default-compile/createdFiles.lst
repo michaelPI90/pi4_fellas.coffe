@@ -1,0 +1,11 @@
+com\web\pi3s\SpringWeb\repositorio\Clientesrespo.class
+com\web\pi3s\SpringWeb\models\Item.class
+com\web\pi3s\SpringWeb\repositorio\Despensarespo.class
+com\web\pi3s\SpringWeb\controllers\ClientesController.class
+com\web\pi3s\SpringWeb\repositorio\Itemrespo.class
+com\web\pi3s\SpringWeb\controllers\ItemController.class
+com\web\pi3s\SpringWeb\controllers\HomeController.class
+com\web\pi3s\SpringWeb\controllers\DespensaController.class
+com\web\pi3s\SpringWeb\models\Cliente.class
+com\web\pi3s\SpringWeb\models\Despensa.class
+com\web\pi3s\SpringWeb\models\Tipo.class
