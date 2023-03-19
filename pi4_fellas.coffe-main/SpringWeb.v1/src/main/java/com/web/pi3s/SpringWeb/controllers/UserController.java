@@ -43,7 +43,6 @@ public class UserController {
         return modelAndView;
 	}
 
-
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
 
