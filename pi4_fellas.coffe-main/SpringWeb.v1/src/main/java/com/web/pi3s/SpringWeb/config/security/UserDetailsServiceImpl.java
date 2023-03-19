@@ -1,12 +1,15 @@
 package com.web.pi3s.SpringWeb.config.security;
 
 
+import javax.management.relation.Role;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.web.pi3s.SpringWeb.models.Rolesmodels;
 import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
@@ -32,12 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
    
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usermodels usermodels = userrespo.findByUsername(username).orElseThrow();
-
-        
-       return new User(usermodels.getUsername(), usermodels.getPassword()
-       ,true, 
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usermodels usermodels = userrespo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Cliente " + email + " não encontrado"));
+       
+       return new User(usermodels.getEmail(), usermodels.getPassword(),
+       true, 
        true,
         true, 
         true, usermodels.getAuthorities());

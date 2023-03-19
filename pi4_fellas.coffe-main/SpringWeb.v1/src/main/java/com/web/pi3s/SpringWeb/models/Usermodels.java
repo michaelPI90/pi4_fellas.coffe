@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,14 @@ public class Usermodels implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String grupo;
+    @Column(nullable = false)
+    private long cpf;
+    @Column(nullable = false)
+    private boolean statusAtivo = true;
 
 
         //SERÁ RELACIONADO AQUI OS UUID DE USER COM OS UUIDS DAS ROLES, JA ESTOU DEFININDO ID DE CONEÇÃO ENTRE AS TABELAS
@@ -43,15 +52,6 @@ public class Usermodels implements UserDetails {
     @JoinTable(name = "TB_USER_ROLES",joinColumns = @JoinColumn(name = "user_id"),
                     inverseJoinColumns = @JoinColumn(name = "role_id"))
                     private List<Rolesmodels> roles;
-
-
-
-
-
-
-
-
-
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -88,6 +88,39 @@ public class Usermodels implements UserDetails {
         return this.username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public long getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
+    }
+
+    public boolean isStatusAtivo() {
+        return statusAtivo;
+    }
+
+    public void setStatusAtivo(boolean statusAtivo) {
+        this.statusAtivo = statusAtivo;
+    }
+
+    public List<Rolesmodels> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rolesmodels> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return false;
@@ -107,5 +140,15 @@ public class Usermodels implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+   
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
@@ -33,10 +34,13 @@ public class UserController {
     }
 
 
-
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/")
-	public String index(){
-		return "/home/index";
+	public ModelAndView index(){
+		ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home/index");
+
+        return modelAndView;
 	}
 
 
@@ -47,7 +51,7 @@ public class UserController {
 
     }
 
-
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvar")
     public ResponseEntity<Usermodels>  salvar(@RequestBody Usermodels usuario) {
 

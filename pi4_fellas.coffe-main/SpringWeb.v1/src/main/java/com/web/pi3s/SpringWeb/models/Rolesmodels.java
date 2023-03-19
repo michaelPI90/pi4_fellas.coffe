@@ -51,6 +51,7 @@ public class Rolesmodels implements GrantedAuthority {
         this.roleId = roleId;
     }
 
+
     public RoleName getRoleName() {
         return roleName;
     }

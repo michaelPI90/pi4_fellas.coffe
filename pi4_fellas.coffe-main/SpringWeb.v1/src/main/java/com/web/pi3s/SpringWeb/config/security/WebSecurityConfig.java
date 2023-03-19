@@ -24,8 +24,13 @@ public class WebSecurityConfig{
 
     http
 
-    .httpBasic().and().authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/api/usuario/listarTodos**").permitAll()
-     .requestMatchers(HttpMethod.POST, "/api/usuario/salvar**").permitAll().and().csrf().disable();
+    .httpBasic()
+    .and()
+    .authorizeHttpRequests()
+    .requestMatchers(HttpMethod.GET, "/api/usuario/listarTodos**").permitAll()
+     .requestMatchers(HttpMethod.POST, "/api/usuario/salvar**").hasRole("ADMIN")
+     .requestMatchers(HttpMethod.GET, "/api/usuario/**").hasRole("ESTOQUISTA").and().csrf().disable();
+
 
      
      

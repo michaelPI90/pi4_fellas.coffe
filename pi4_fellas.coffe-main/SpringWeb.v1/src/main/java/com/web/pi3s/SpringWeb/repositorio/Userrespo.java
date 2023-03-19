@@ -13,7 +13,7 @@ import com.web.pi3s.SpringWeb.models.Usermodels;
 public interface Userrespo extends JpaRepository<Usermodels, UUID>{
 
     
-    Optional<Usermodels> findByUsername(String username);
+    Optional<Usermodels> findByEmail(String email);
 
 
     
