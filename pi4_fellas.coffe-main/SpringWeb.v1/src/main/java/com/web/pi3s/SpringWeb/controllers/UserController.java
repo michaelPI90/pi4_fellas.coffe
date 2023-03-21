@@ -34,15 +34,18 @@ public class UserController {
     }
 
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/")
 	public ModelAndView index(){
 		ModelAndView modelAndView = new ModelAndView();
+        Usermodels usuario = new Usermodels();
         modelAndView.setViewName("home/index");
+        modelAndView.addObject("usuario", usuario);
 
         return modelAndView;
 	}
 
+    
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
 

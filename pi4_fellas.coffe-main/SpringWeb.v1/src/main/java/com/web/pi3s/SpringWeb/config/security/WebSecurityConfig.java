@@ -27,9 +27,9 @@ public class WebSecurityConfig{
     .httpBasic()
     .and()
     .authorizeHttpRequests()
-    .requestMatchers(HttpMethod.GET, "/api/usuario/listarTodos**").permitAll()
+    .requestMatchers(HttpMethod.GET, "/api/usuario/listarTodos**").hasAnyRole("ADMIN", "ESTOQUISTA")
      .requestMatchers(HttpMethod.POST, "/api/usuario/salvar**").hasRole("ADMIN")
-     .requestMatchers(HttpMethod.GET, "/api/usuario/**").hasRole("ESTOQUISTA").and().csrf().disable();
+     .requestMatchers(HttpMethod.GET, "/api/usuario/**").permitAll().and().csrf().disable();
 
 
      
