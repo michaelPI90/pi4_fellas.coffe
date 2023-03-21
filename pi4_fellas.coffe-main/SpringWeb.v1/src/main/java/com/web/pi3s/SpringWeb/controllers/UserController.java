@@ -45,7 +45,7 @@ public class UserController {
         return modelAndView;
 	}
 
-    
+
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
 
@@ -53,7 +53,7 @@ public class UserController {
 
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvar")
     public ResponseEntity<Usermodels>  salvar(@RequestBody Usermodels usuario) {
 
