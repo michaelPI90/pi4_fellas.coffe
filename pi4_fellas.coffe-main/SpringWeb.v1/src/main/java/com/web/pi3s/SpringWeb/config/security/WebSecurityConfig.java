@@ -4,6 +4,7 @@ package com.web.pi3s.SpringWeb.config.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,23 +21,33 @@ public class WebSecurityConfig{
      
      
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    http
+    // http
 
-    .httpBasic()
-    .and()
-    .authorizeHttpRequests()
-    .requestMatchers(HttpMethod.GET, "/api/usuario/listarTodos**").hasAnyRole("ADMIN", "ESTOQUISTA")
-     .requestMatchers(HttpMethod.POST, "/api/usuario/salvar**").hasRole("ADMIN").and().csrf().disable();
+    // .httpBasic()
+    // .and()
+    // .authorizeHttpRequests()
+    // .requestMatchers(HttpMethod.GET, "/**").permitAll()
+    //  .requestMatchers(HttpMethod.GET, "/api/usuario/index**").permitAll().
+    //  requestMatchers(HttpMethod.GET, "/api/usuario/login**").permitAll()
+    //  .and().csrf().disable();
 
 
      
+     return http.authorizeHttpRequests(authorizeconfig -> {
+            authorizeconfig.requestMatchers("/login").permitAll();
+            authorizeconfig.anyRequest().authenticated();
+         
+            
+
+     })
      
-     
+     .formLogin(Customizer.withDefaults())
+     .build();
 // .authenticated().and()
 // .csrf().disable();
-        return http.build();
+       
     
 
 

@@ -1,33 +1,35 @@
-// package com.web.pi3s.SpringWeb.controllers;
+package com.web.pi3s.SpringWeb.controllers;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// //import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.GetMapping;
-
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
-// @Controller
-// public class HomeController {
-//     @Autowired
+ @Controller
+ public class HomeController {
+
+    @RequestMapping("/")
+    public String index(Model model){
+		model.addAttribute("Seja ", "del");
+		return "/home/index";
+	}
+
+
+
+    
   
 
-//     @GetMapping("/")
-//     public String index(){
+    @PostMapping("/login")
+    public String index(){
  
 
-//         return "home/index";
-//     }
+        return "redirect:/despensa/menuDespensa";
+    }
 
 
-
-//     @GetMapping("/logado")
-//     public String logado(){
+ }
  
 
-//         return "redirect:/despensa/menuDespensa";
-//     }
 
-// }

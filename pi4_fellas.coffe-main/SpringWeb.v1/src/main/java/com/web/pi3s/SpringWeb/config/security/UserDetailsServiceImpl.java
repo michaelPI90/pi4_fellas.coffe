@@ -1,15 +1,16 @@
 package com.web.pi3s.SpringWeb.config.security;
 
 
-import javax.management.relation.Role;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.web.pi3s.SpringWeb.models.Rolesmodels;
+
 import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
@@ -20,12 +21,8 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    final Userrespo userrespo;
-
-    public UserDetailsServiceImpl(Userrespo userrespo) {
-        this.userrespo = userrespo;
-    }
-
+    @Autowired Userrespo userrespo;
+   
 
 /**
  *  AQUI VAMOS UTILIZAR O RETORNO USER DO SPRING SECURITY ASSIM UTILIZAMOS UM CONSTRUTOR DO PROPRIO 
