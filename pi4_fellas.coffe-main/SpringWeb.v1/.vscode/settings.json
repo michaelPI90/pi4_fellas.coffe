@@ -1,6 +1,7 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "interactive",
+<<<<<<< HEAD
     "sqltools.connections": [
         {
             "mysqlOptions": {
@@ -16,4 +17,7 @@
             "password": ""
         }
     ]
+=======
+    "liveServer.settings.port": 5501
+>>>>>>> 7cbb541b62e48e773e92126251a3665ca5caf9e8
 }
