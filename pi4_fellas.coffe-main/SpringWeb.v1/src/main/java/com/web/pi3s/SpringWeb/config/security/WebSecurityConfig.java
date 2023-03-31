@@ -35,8 +35,10 @@ public class WebSecurityConfig{
 
 
      
-     return http.authorizeHttpRequests(authorizeconfig -> {
+     return http.httpBasic().and().authorizeHttpRequests(authorizeconfig -> {
+          
             authorizeconfig.requestMatchers("/logar").permitAll();
+            authorizeconfig.requestMatchers("/listarTodos").permitAll();
             authorizeconfig.anyRequest().authenticated();
 
          
@@ -44,10 +46,10 @@ public class WebSecurityConfig{
 
      })
      
-     .formLogin(Customizer.withDefaults())
+     .csrf().disable()
      .build();
 // .authenticated().and()
-// .csrf().disable();
+
        
     
 

@@ -1,3 +1,6 @@
+
 function cadastro(){
-    window.location.href = "formCliente.html"
+    window.location.href = "logado.html"
   }
+
+

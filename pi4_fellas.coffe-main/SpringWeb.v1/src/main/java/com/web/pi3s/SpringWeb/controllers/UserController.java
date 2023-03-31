@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
-@RestController
+@Controller
 @RequestMapping("/api/usuario")
 public class UserController {
 
@@ -48,12 +51,23 @@ public class UserController {
 
     // }
 
+
+   
+    @GetMapping("/admin/listar")
+	 String listarUsuario(Model model) {
+		model.addAttribute("usuarios", repository.findAll());		
+		return "/alterar/alterar";		
+	}
+
+
+    
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
 
         return ResponseEntity.ok(repository.findAll());
 
     }
+
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvar")
@@ -64,7 +78,9 @@ public class UserController {
 
     }
 
-    @GetMapping("/admin/apagar/{id}")
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/admin/apagar/{id}")
     public String deleteUser(@PathVariable("id") UUID id, Usermodels model) {
         userController.apagarUsuarioPorId(id);
         return "redirect:/usuario/admin/listar";
