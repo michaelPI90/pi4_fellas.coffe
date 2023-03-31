@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console.coffee</title>
+    <link rel="stylesheet" href="../../static/css/cadastro.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Console.coffee</h1>
+    </header>
+    
+    <main>
+        <div class="card">
+            <div class="titulo-cadastro">
+            <h1>Cadastre-se Aqui</h1>
+            </div>
+            <div class="formulario">
+                <form action="/CadastroCliente/salvo" th:object="${usuario}" method="post">
+                    <div class="lineInput">
+                        <input type="text" name="username" placeholder="Nome" th:field =" *{username}">
+                    </div>
+                    <div class="lineInput">
+                        <input type="text" name="email" placeholder="E-mail" th:field =" *{email}">
+                    </div>
+                    <div class="lineInput">
+                        <input type="password" name="password" placeholder="Senha" th:field =" *{password}">
+                    </div>
+                    <div class="lineInput">
+                        <input type="text" name="cpf" placeholder="CPF" th:field =" *{cpf}">
+                    </div>
+                    <select  name="roles" th:field="*{roles}">
+                        <option value="0">Selecione um grupo</option>
+                        <option value="ROLE_ADMIN">Administrador</option>
+                        <option value="ROLE_ESTOQUISTA">Estoquista</option>
+                    </select>
+                    <div class="botao">
+                        <button>Cadastrar</button>
+                    </div>
+                    <div class="link">
+                    <a href="/">Já tem cadastro? Clique aqui para fazer login.</a>
+                    </div>
+            </div>
+                </form>
+        </div>
+       
+</body>
+</html>
+
+<!--Adicionar Gupos:
+Usuário
+Admin
+Estoquista
+Cliente-->

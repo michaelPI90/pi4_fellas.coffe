@@ -23,21 +23,22 @@ public class WebSecurityConfig{
     @Bean
      SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    // http
+    // // http
 
-    // .httpBasic()
-    // .and()
-    // .authorizeHttpRequests()
-    // .requestMatchers(HttpMethod.GET, "/**").permitAll()
-    //  .requestMatchers(HttpMethod.GET, "/api/usuario/index**").permitAll().
-    //  requestMatchers(HttpMethod.GET, "/api/usuario/login**").permitAll()
-    //  .and().csrf().disable();
+    // // .httpBasic()
+    // // .and()
+    // // .authorizeHttpRequests()
+    // // .requestMatchers(HttpMethod.GET, "/**").permitAll()
+    // //  .requestMatchers(HttpMethod.GET, "/api/usuario/index**").permitAll().
+    // //  requestMatchers(HttpMethod.GET, "/api/usuario/login**").permitAll()
+    // //  .and().csrf().disable();
 
 
      
      return http.authorizeHttpRequests(authorizeconfig -> {
-            authorizeconfig.requestMatchers("/login").permitAll();
+            authorizeconfig.requestMatchers("/logar").permitAll();
             authorizeconfig.anyRequest().authenticated();
+
          
             
 

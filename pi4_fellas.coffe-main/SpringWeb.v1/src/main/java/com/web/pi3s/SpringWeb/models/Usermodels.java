@@ -149,6 +149,14 @@ public class Usermodels implements UserDetails {
         this.grupo = grupo;
     }
 
+    @Override
+    public String toString() {
+        return "Usermodels [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
+                + ", grupo=" + grupo + ", cpf=" + cpf + ", statusAtivo=" + statusAtivo + ", roles=" + roles + "]";
+    }
+
+    
+
    
 
 }

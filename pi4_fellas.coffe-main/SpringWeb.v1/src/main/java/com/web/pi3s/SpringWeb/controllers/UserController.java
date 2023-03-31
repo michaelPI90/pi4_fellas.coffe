@@ -35,20 +35,18 @@ public class UserController {
 
     }
 
-    @PostMapping("/login")
-    public String login() {
-        return "index";
-    }
+    // @GetMapping("/CadastroCliente")
+    // public ModelAndView formCliente() {
+    //     ModelAndView modelAndView = new ModelAndView();
+    //     Usermodels usuario = new Usermodels();
+    //     //Grupo grupo = new Grupo();
+    //     modelAndView.setViewName("cadastro/cadastro");
+    //     modelAndView.addObject("usuario", usuario);
+    //     //modelAndView.addObject("grupo", grupo);
 
-    @GetMapping("/")
-    public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView();
-        Usermodels usuario = new Usermodels();
-        modelAndView.setViewName("/home/index/");
-        modelAndView.addObject("usuario", usuario);
+    //     return modelAndView;
 
-        return modelAndView;
-    }
+    // }
 
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
