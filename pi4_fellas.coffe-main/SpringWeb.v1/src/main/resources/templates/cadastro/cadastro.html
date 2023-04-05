@@ -24,53 +24,36 @@
             <div class="titulo-cadastro">
             <h1>Cadastre-se Aqui</h1>
             </div>
-<<<<<<< HEAD
             <div class="formulario">
                 <form action="/CadastroCliente/salvo" th:object="${usuario}" method="post">
                     <div class="lineInput">
-                        <input type="text" name="username" placeholder="Nome" th:field =" *{username}">
+                        <input type="text" name="username" placeholder="Nome" field =" *{username}" required>
                     </div>
                     <div class="lineInput">
-                        <input type="text" name="email" placeholder="E-mail" th:field =" *{email}">
+                        <input type="text" name="email" placeholder="E-mail" field =" *{email}" required>
                     </div>
                     <div class="lineInput">
-                        <input type="password" name="password" placeholder="Senha" th:field =" *{password}">
+                        <input type="password" name="password" placeholder="Senha" field =" *{password}" required>
                     </div>
                     <div class="lineInput">
-                        <input type="text" name="cpf" placeholder="CPF" th:field =" *{cpf}">
-                    </div>
-                    <select  name="roles" th:field="*{roles}">
-                        <option value="0">Selecione um grupo</option>
-                        <option value="ROLE_ADMIN">Administrador</option>
-                        <option value="ROLE_ESTOQUISTA">Estoquista</option>
-                    </select>
-=======
-            <div class="formulario" class="center">
-                <form action="">
-                    <div class="lineInput">
-                        <input type="text" name="nome" placeholder="Nome">
+                        <input type="password" name="password2" placeholder="Digite novamente a senha" field =" *{password}" required>
                     </div>
                     <div class="lineInput">
-                        <input type="text" name="email" placeholder="E-mail">
+                        <input type="text" name="cpf" placeholder="CPF" field =" *{cpf}" required>
                     </div>
                     <div class="lineInput">
-                        <input type="password" name="senha" placeholder="Senha">
+                        <select  name="grupo" field="*{grupo}" placeholder="Selecione um grupo" required>
+                            
+                            <option value="ROLE_ADMIN">Administrador</option>
+                            <option value="ROLE_ESTOQUISTA">Estoquista</option>
+                        </select>
                     </div>
-                    <div class="lineInput">
-                        <input type="text" name="cpf" placeholder="CPF">
-                    </div>
-                    <select name="
-                    " id=""></select>
->>>>>>> 7cbb541b62e48e773e92126251a3665ca5caf9e8
+                    <div th:text="${erro}" class="alert al" role="alert"></div>
                     <div class="botao">
                         <button>Cadastrar</button>
                     </div>
                     <div class="link">
-<<<<<<< HEAD
                     <a href="/">Já tem cadastro? Clique aqui para fazer login.</a>
-=======
-                    <a href="">Já tem cadastro? Clique aqui para fazer login.</a>
->>>>>>> 7cbb541b62e48e773e92126251a3665ca5caf9e8
                     </div>
             </div>
                 </form>

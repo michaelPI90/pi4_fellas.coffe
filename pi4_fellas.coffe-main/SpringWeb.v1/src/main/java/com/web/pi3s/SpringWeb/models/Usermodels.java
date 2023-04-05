@@ -36,12 +36,12 @@ public class Usermodels implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String grupo;
-    @Column(nullable = false)
-    private long cpf;
+    @Column(nullable = false, unique = true)
+    private String cpf;
     @Column(nullable = false)
     private boolean statusAtivo = true;
 
@@ -96,14 +96,15 @@ public class Usermodels implements UserDetails {
         this.email = email;
     }
 
+    
 
-    public long getCpf() {
-        return cpf;
-    }
+    // public long getCpf() {
+    //     return cpf;
+    // }
 
-    public void setCpf(long cpf) {
-        this.cpf = cpf;
-    }
+    // public void setCpf(long cpf) {
+    //     this.cpf = cpf;
+    // }
 
     public boolean isStatusAtivo() {
         return statusAtivo;
@@ -153,6 +154,14 @@ public class Usermodels implements UserDetails {
     public String toString() {
         return "Usermodels [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
                 + ", grupo=" + grupo + ", cpf=" + cpf + ", statusAtivo=" + statusAtivo + ", roles=" + roles + "]";
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     

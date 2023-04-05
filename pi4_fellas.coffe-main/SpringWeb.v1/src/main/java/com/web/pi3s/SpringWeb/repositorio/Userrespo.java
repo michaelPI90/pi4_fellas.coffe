@@ -19,6 +19,8 @@ public interface Userrespo extends JpaRepository<Usermodels, UUID>{
 
     
     Optional<Usermodels> findByEmail(String email);
+    Optional<Usermodels> findByCpf(String cpf);
+
 
 
     
