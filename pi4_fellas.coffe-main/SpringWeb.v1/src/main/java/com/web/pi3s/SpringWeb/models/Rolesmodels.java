@@ -1,6 +1,7 @@
 package com.web.pi3s.SpringWeb.models;
 
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +32,8 @@ public class Rolesmodels implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
     private RoleName roleName;
+ @ManyToMany
+    private List<Usermodels> usuarios;
 
 
     //TIPO DE CONTROLE DE ACESSO DO SECURITY AQUI SERÁ DEFINDDO EM MODELS O MAPEMAENTI DO RELACUINAMENTO

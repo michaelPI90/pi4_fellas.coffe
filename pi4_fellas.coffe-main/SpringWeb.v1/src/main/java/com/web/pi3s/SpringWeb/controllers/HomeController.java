@@ -74,7 +74,7 @@ public class HomeController {
   }
 
   public static boolean validadorCPF(Model model,String CPF) {
-    
+  
 		if (CPF == null)
 				return false;
 		

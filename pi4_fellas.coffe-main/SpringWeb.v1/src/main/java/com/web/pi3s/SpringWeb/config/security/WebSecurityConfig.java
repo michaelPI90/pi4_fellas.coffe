@@ -35,11 +35,14 @@ public class WebSecurityConfig{
 
 
      
-     return http.httpBasic().and().authorizeHttpRequests(authorizeconfig -> {
+    return http.httpBasic().and().authorizeHttpRequests(authorizeconfig -> {
           
-            authorizeconfig.requestMatchers("/logar").permitAll();
-            authorizeconfig.requestMatchers("/listarTodos").permitAll();
-            authorizeconfig.anyRequest().authenticated();
+
+        authorizeconfig.requestMatchers("/").hasAnyAuthority("ROLE_ADMIN", "ROLE_ESTOQUISTA");
+        authorizeconfig.requestMatchers("/logar**").hasAuthority("ROLE_ADMIN");
+       
+        authorizeconfig.requestMatchers("/listarTodos").permitAll();
+        authorizeconfig.anyRequest().authenticated();
 
          
             
