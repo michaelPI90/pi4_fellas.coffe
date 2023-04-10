@@ -51,6 +51,15 @@ public class HomeController {
 
   }
 
+
+
+  @RequestMapping(value = "/test")
+ public String showCheckbox(Model model) {
+    boolean myBooleanVariable = false;
+     model.addAttribute("myBooleanVariable", myBooleanVariable);
+     return "home/index";
+ }
+
   @PostMapping("/CadastroCliente/salvo")
   public String salvar(Model model, Usermodels c) throws Exception {
     Optional<Usermodels> userEmail = this.repository.findByEmail(c.getEmail());

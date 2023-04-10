@@ -17,7 +17,7 @@
 
 <div class="container">
   <div class="row">
-	<form th:action=@{/logar} method="get">
+	<form th:action=@{/CadastroCliente} method="get">
     <div class="col">
     	<h1>Lista de Usuários</h1>
 	
@@ -28,6 +28,8 @@
 				<th>Email</th>
 				<th>Status</th>
 				<th>Grupo</th>
+				
+				  
 			</tr>
 		</thead>
 		<tbody>
@@ -37,12 +39,18 @@
 			<tr th:each="usuario : ${usuarios}">
 				<td><span th:text="${usuario.username}"> Nome </span></td>
 				<td><span th:text="${usuario.email}"> Email </span></td>
-				<td><span th:text="${usuario.statusAtivo}"> Status </span></td>
+				<td><input 
+				type="checkbox" 
+				name="myBooleanVariable" 
+				th:checked="${usuario.statusAtivo}"/>
+				</td>
+
 				<td><span th:text="${usuario.grupo}"> Grupo </span></td>
+				
 				
 
 			</tr>
-			<button onclick="produto.alterar()">Pagina Produtos</button>
+			<button onclick="produto.desabilitar()">Pagina Produtos</button>
 
 		</tbody>
 	</table>    
