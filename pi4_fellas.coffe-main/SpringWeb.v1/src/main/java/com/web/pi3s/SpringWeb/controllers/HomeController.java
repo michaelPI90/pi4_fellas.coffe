@@ -26,8 +26,8 @@ public class HomeController {
 
   @RequestMapping("/")
   public String index(Model model, Usermodels user) {
-    model.addAttribute("Seja ", "del");
     return "/home/index";
+    
   }
 
   @PreAuthorize("permitAll()")
@@ -66,7 +66,7 @@ public class HomeController {
       model.addAttribute("erro", "CPF INVÁLIDO");
       return "/cadastro/cadastro";
     }
-
+    c.setStatusAtivo(true);
     c.setPassword(enconder.encode(c.getPassword()));
     repository.save(c); // Função que executa o cadastro
     return "/home/index";

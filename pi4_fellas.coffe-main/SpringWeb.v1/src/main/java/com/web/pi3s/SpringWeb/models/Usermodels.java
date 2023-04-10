@@ -43,7 +43,7 @@ public class Usermodels implements UserDetails {
     @Column(nullable = false, unique = true)
     private String cpf;
     @Column(nullable = false)
-    private boolean statusAtivo = true;
+    private boolean statusAtivo;
 
 
         //SERÁ RELACIONADO AQUI OS UUID DE USER COM OS UUIDS DAS ROLES, JA ESTOU DEFININDO ID DE CONEÇÃO ENTRE AS TABELAS
@@ -111,6 +111,7 @@ public class Usermodels implements UserDetails {
     }
 
     public void setStatusAtivo(boolean statusAtivo) {
+        statusAtivo =  true;
         this.statusAtivo = statusAtivo;
     }
 

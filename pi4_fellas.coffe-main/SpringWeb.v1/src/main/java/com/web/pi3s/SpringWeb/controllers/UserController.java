@@ -1,13 +1,11 @@
 package com.web.pi3s.SpringWeb.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +52,14 @@ public class UserController {
 
    
     @GetMapping("/admin/listar")
-	 String listarUsuario(Model model) {
+	 String listarUsuario(Model model, Usermodels user) {
+        Optional<Usermodels> userStatus = this.repository.findByEmail(user.getEmail());
+        System.out.println("usuário trago no find: " + userStatus.get().isStatusAtivo());
+        if(userStatus.get().isStatusAtivo() == false){
+        model.addAttribute("erro", "Usuário inativo ou não cadastrado");
+        return "/home/index";
+        }
+        
 		model.addAttribute("usuarios", repository.findAll());		
 		return "/alterar/alterar";		
 	}
