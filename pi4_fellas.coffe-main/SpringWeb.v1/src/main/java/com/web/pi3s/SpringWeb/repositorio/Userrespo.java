@@ -5,16 +5,12 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.web.pi3s.SpringWeb.models.Usermodels;
 
+public interface Userrespo extends JpaRepository<Usermodels, UUID> {
 
-
-
-public interface Userrespo extends JpaRepository<Usermodels, UUID>{
-
-    
     Optional<Usermodels> findByEmail(String email);
+
     Optional<Usermodels> findByCpf(String cpf);
 
+    Optional<Usermodels> findByUsername(String username);
 
-
-    
 }

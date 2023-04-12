@@ -18,6 +18,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * 
@@ -45,6 +46,8 @@ public class Usermodels implements UserDetails {
     @Column(nullable = false)
     private boolean statusAtivo;
 
+    @Transient
+    private String password2;
 
         //SERÁ RELACIONADO AQUI OS UUID DE USER COM OS UUIDS DAS ROLES, JA ESTOU DEFININDO ID DE CONEÇÃO ENTRE AS TABELAS
         //AQUI PODEMOS DETERINAR QUE CADA USUARIO PODDERÁ ASSUMIR DIFERENTES PAPEIS 
@@ -164,6 +167,16 @@ public class Usermodels implements UserDetails {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+    
+    
 
     
 

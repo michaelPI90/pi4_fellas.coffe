@@ -74,7 +74,11 @@ public class HomeController {
     } else if (validadorCPF(model, c.getCpf()) == false){
       model.addAttribute("erro", "CPF INVÁLIDO");
       return "/cadastro/cadastro";
+    }  else if (!c.getPassword().equals(c.getPassword2())){
+      model.addAttribute("erro", "SENHAS INFORMADAS NÃO ESTÃO IGUAIS");
+      return "/cadastro/cadastro";
     }
+
     c.setStatusAtivo(true);
     c.setPassword(enconder.encode(c.getPassword()));
     repository.save(c); // Função que executa o cadastro

@@ -5,7 +5,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" href="/css/listarUsuarios.css" />
+	<link rel="stylesheet" href="/css/listarUsuarios.css" />
 
 </head>
 
@@ -22,7 +22,6 @@
 			<input type="text" class="form-control" placeholder="Informe um nome..." aria-describedby="addon-wrapping"
 				id="username" name="nome">
 			<div>
-				<!-- <button type="submit" class = "botoesItem"><a th:href="@{'/admin/listarConsultado/' + ${usuarios.id}}" class="botoesItem">Consultar</button>-->
 				<button type="submit" class="botoesItem">Consultar</button>
 				<div th:text="${erro}" class="alert alert-info" role="alert"></div>
 
@@ -47,17 +46,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:if="${usuarios.empty}">
+								<!-- <tr th:if="${usuarios.empty}">
 									<td colspan="2">Sem usuários</td>
-								</tr>
+								</tr> -->
 								<tr th:each="usuario : ${usuarios}">
 									<td><span th:text="${usuario.username}"> Nome </span></td>
 									<td><span th:text="${usuario.email}"> Email </span></td>
-									<td><input 
-										type="checkbox" 
-										name="myBooleanVariable" 
-										th:checked="${usuario.statusAtivo}"/>
-										</td>
+									<td><input type="checkbox" name="myBooleanVariable"
+											th:checked="${usuario.statusAtivo}" />
+									</td>
 
 									<td><span th:text="${usuario.grupo}"> Grupo </span></td>
 

@@ -1,5 +1,6 @@
 package com.web.pi3s.SpringWeb.controllers;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,43 +38,44 @@ public class UserController {
 
     }
 
-    // @GetMapping("/CadastroCliente")
-    // public ModelAndView formCliente() {
-    //     ModelAndView modelAndView = new ModelAndView();
-    //     Usermodels usuario = new Usermodels();
-    //     //Grupo grupo = new Grupo();
-    //     modelAndView.setViewName("cadastro/cadastro");
-    //     modelAndView.addObject("usuario", usuario);
-    //     //modelAndView.addObject("grupo", grupo);
 
-    //     return modelAndView;
-
-    // }
-
-
-   
     @GetMapping("/admin/listar")
-	 String listarUsuario(Model model, Usermodels user) {
+    String listarUsuario(Model model, Usermodels user) {
         Optional<Usermodels> userStatus = this.repository.findByEmail(user.getEmail());
-        System.out.println("usuário trago no find: " + userStatus.get().isStatusAtivo());
-        if(userStatus.get().isStatusAtivo() == false){
-        model.addAttribute("erro", "Usuário inativo ou não cadastrado");
-        return "/home/index";
+
+        if (!enconder.matches(user.getPassword(), userStatus.get().getPassword())) {
+            model.addAttribute("erro", "Dados inválidos");
+            return "/home/index";
         }
-        
-		model.addAttribute("usuarios", repository.findAll());		
-		return "/alterar/alterar";		
-	}
+        else if (!userStatus.get().isStatusAtivo()) {
+            model.addAttribute("erro", "Usuário inativo");
+            return "/home/index";
+        }
 
+        model.addAttribute("usuarios", repository.findAll());
+        return "/alterar/alterar";
+    }
 
-    
+    @GetMapping("/ConsultarUsuario") // @PostMapping("/ConsultarUsuario")
+    public String consultar(Model model, @RequestParam String nome) {
+
+        Optional<Usermodels> username = this.repository.findByUsername(nome);
+
+        if (username.isPresent()) {
+            model.addAttribute("usuarios", Arrays.asList(username.get()));
+            return "/alterar/alterar";
+        }
+
+        model.addAttribute("erro", "Usuário não encontrado!");
+        return "/alterar/alterar";
+    }
+
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
 
         return ResponseEntity.ok(repository.findAll());
 
     }
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvar")
@@ -82,7 +85,6 @@ public class UserController {
         return ResponseEntity.ok(repository.save(usuario));
 
     }
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/admin/apagar/{id}")
