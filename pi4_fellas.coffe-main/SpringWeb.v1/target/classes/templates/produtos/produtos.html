@@ -28,17 +28,28 @@
     <div class="card">
         <div class="lineInput">
             <label for="">Produto</label>
-            <input type="text" id="produto" placeholder="Nome do produto">
+            <input type="text" id="produto" placeholder="Nome do produto" maxlength="100">
         </div>
-
+        <div class="lineInput">
+            <label for="">Descrição Detalhada</label>
+            <input type="text" id="descricao" placeholder="Descreva o produto detalhadamente" maxlength="2000">
+        </div>
         <div class="lineInput">
             <label for="">Valor</label>
-            <input type="text" id="valor" placeholder="Valor do produto">
+            <input type="text" id="valor" placeholder="Defina um valor para o produto">
         </div>
         
-        <button onclick="produto.adicionar()">Adicionar</button>
-        <button onclick="produto.excluir()">Excluir</button>
-        <button onclick="produto.alterar()">Alterar</button>
+        <div class="lineInput">
+            <label for="">Quantidade no Estoque</label>
+            <input type="text" id="qtd-estoque" placeholder="Informe a quantidade do produto em estoque">
+        </div>
+        <div class="lineInput">
+            <label for=""></label>
+            <input type="text" id="produto" placeholder="Upload da Imagem do Produto">
+        </div>
+
+        <button onclick="produto.adicionar()">Salvar</button>
+        <button onclick="produto.alterar()">Cancelar</button>
     </div>
 
     <div class="content">
@@ -55,8 +66,8 @@
                     <td>Café Especial</td>
                     <td>90</td>
                     <td>
-                        <img src="../assets/escrever.png" alt="">
-                        <img src="../assets/excluir.png" alt="">
+                        <img src="../../static/imagens/escrever.png" alt="">
+                        <img src="../../static/imagens/excluir.png" alt="">
                     </td>
                 </tr>
                 <tr>
@@ -64,8 +75,8 @@
                     <td>Café Especial</td>
                     <td>90</td>
                     <td>
-                        <img src="../assets/escrever.png" alt="">
-                        <img src="../assets/excluir.png" alt="">
+                        <img src="../../static/imagens/escrever.png" alt="">
+                        <img src="../../static/imagens/excluir.png" alt="">
                     </td>
                 </tr>
                 <tr>
@@ -73,8 +84,8 @@
                     <td>Café Especial</td>
                     <td>90</td>
                     <td>
-                        <img src="../assets/escrever.png" alt="">
-                        <img src="../assets/excluir.png" alt="">
+                        <img src="../../static/imagens/escrever.png" alt="">
+                        <img src="../../static/imagens/excluir.png" alt="">
                     </td>
                 </tr>
                 <tr>
@@ -82,8 +93,8 @@
                     <td>Café Especial</td>
                     <td>90</td>
                     <td>
-                        <img src="../assets/escrever.png" alt="">
-                        <img src="../assets/excluir.png" alt="">
+                        <img src="../../static/imagens/escrever.png" alt="">
+                        <img src="../../static/imagens/excluir.png" alt="">
                     </td>
                 </tr>
                 <tr>
@@ -91,8 +102,8 @@
                     <td>Café Especial</td>
                     <td>90</td>
                     <td>
-                        <img src="../assets/escrever.png" alt="">
-                        <img src="../assets/excluir.png" alt="">
+                        <img src="../../static/imagens/escrever.png" alt="">
+                        <img src="../../static/imagens/excluir.png" alt="">
                     </td>
                 </tr>
             </tbody>
