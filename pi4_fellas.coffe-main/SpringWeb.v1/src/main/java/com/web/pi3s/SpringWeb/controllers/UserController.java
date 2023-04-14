@@ -51,7 +51,7 @@ public class UserController {
         } else if (userEncontrado.get().getGrupo().equals("ROLE_CLIENTE")) {
             erroMsg = "Grupo inválido!!!";
         } else if (userEncontrado.get().getGrupo().equals("ROLE_ESTOQUISTA")) {
-            return "redirect:/ListarProdutos";
+            return "redirect:/ListarProdutosEstoquista";
         } else {
             model.addAttribute("usuarios", repository.findAll());
             return "/alterar/alterar";

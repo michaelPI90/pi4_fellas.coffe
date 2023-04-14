@@ -23,7 +23,7 @@ public class HomeController {
   Userrespo repository;
 
   @RequestMapping("/")
-  public String index(Model model, Usermodels user) {
+  public String index(Model model) {
     return "/home/index";
 
   }

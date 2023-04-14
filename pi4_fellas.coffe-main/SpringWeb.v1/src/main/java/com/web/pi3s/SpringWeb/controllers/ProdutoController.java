@@ -36,6 +36,19 @@ public class ProdutoController {
 
     }
 
+    @GetMapping("/ListarProdutosEstoquista")
+    public ModelAndView listaProdutoEstoquista(ModelAndView modelAndView) {
+      List<Produtomodels> produtosOrdenados =  this.repository.ordernar();
+        //Produtomodels produtos = new Produtomodels();
+        //Collections.sort(produtosOrdenados, Collections.reverseOrder());
+        modelAndView.setViewName("produtos/produtosEstoquista");
+        //modelAndView.addObject("produtos", Collections.sort(produtosOrdenados, Collections.reverseOrder()));
+        modelAndView.addObject("produtos", produtosOrdenados);
+
+        return modelAndView;
+
+    }
+
    
     @GetMapping("/CadastroProduto")
     public ModelAndView formProduto(ModelAndView modelAndView) {
