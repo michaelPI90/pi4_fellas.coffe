@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Console.coffee</title>
-    <link rel="stylesheet" href="/css/produtos.css">
+    <link rel="stylesheet" href="/css/cadastrarProduto.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +22,10 @@
     </header>
 
     <main>
-        <!-- <div class="title">
+        <div class="title">
             <h2>Cadastrar Produto</h2>
             <span>Preencha todos os campos com atenção</span>
-        </div> 
+        </div>
 
 
         <div class="card">
@@ -74,63 +74,12 @@
                     </div>
 
                     <button onclick="produto.adicionar()">Salvar</button>
-                    <button onclick="produto.alterar()">Cancelar</button>
                 </form>
+                <a href="/ListarProdutos"><button class="botaoCancelar">Cancelar</button> </a>
             </div>
-        </div> -->
-
-        <div class="consultar-produto"></div>
-            <h2>Listar Produtos</h2>
         </div>
 
-        <form id="formulário" action=/ConsultarProduto method="get">
-            <div class="input-produto">
-                <input type="text" class="form-control" placeholder="Informe o nome do produto..."
-                    aria-describedby="addon-wrapping" id="nomeProduto" name="nomeProduto">
-                <div class="botao-consultar">
-                    <button type="submit" class="botoesItem">Consultar</button>
-
-                    <div th:text="${erro}" class="alert alert-info" role="alert"></div>
-
-                </div>
-
-        </form>
-
-        <div class="content">
-            <table border="1">
-                <thead>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Valor</th>
-                    <th>Quantidade disponível</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </thead>
-                <tbody>
-                    <!-- <tr th:if="${usuarios.empty}">
-                        <td colspan="2">Sem usuários</td>
-                    </tr> -->
-                    <tr th:each="produto : ${produtos}">
-                        <td><span th:text="${produto.id}">ID</span></td>
-                        <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
-                        <td><span th:text="${produto.precoProduto}"> Valor </span></td>
-                        <td><span th:text="${produto.qntdEstoque}"> Quantidade disponível </span></td>
-                        <td><input type="checkbox" name="myBooleanVariable" th:checked="${produto.statusAtivo}" />
-                        </td>
-                        <td>
-                            <img src="../../static/imagens/escrever.png" alt="">
-                        </td>
-
-
-
-                    </tr>
-                    <!-- <button onclick="produto.desabilitar()">Pagina Usuario</button> -->
-
-                </tbody>
-            </table>
-        </div>
     </main>
-    <div class="adicionar-produto"><a href="/CadastroProduto"><button class="botoesItem">+ Produto</button></a></div>
 </body>
 
 </html>

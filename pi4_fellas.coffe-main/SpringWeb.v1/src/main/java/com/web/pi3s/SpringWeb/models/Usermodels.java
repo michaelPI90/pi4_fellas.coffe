@@ -33,7 +33,7 @@ public class Usermodels implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private UUID userId;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String username;
     @Column(nullable = false)
     private String password;

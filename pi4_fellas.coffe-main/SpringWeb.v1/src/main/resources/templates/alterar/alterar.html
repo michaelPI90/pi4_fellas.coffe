@@ -23,26 +23,29 @@
 				id="username" name="nome">
 			<div>
 				<button type="submit" class="botoesItem">Consultar</button>
+				
+				
 				<div th:text="${erro}" class="alert alert-info" role="alert"></div>
-
+				
 			</div>
-
+			
+			
 		</form>
-
+		
 		<div class="container">
 			<div class="row">
 				<form th:action=@{/logar} method="get">
 					<div class="col">
-
-						<table class="table table-striped">
+						
+						<table class="table-striped">
 							<thead>
 								<tr>
 									<th>Nome</th>
 									<th>Email</th>
 									<th>Status</th>
 									<th>Grupo</th>
-
-
+									
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -53,22 +56,23 @@
 									<td><span th:text="${usuario.username}"> Nome </span></td>
 									<td><span th:text="${usuario.email}"> Email </span></td>
 									<td><input type="checkbox" name="myBooleanVariable"
-											th:checked="${usuario.statusAtivo}" />
+										th:checked="${usuario.statusAtivo}" />
 									</td>
-
+									
 									<td><span th:text="${usuario.grupo}"> Grupo </span></td>
-
-
-
+									
+									
+									
 								</tr>
-								<button onclick="produto.desabilitar()">Pagina Produtos</button>
-
+								
 							</tbody>
 						</table>
 					</div>
-
+				</form>	
+				<a href="/CadastroCliente"><button type="" class="botoesItem">Cadastro</button></a>
+				<a href="/ListarProdutos"><button>Listar Produtos</button></a>
+				</div>
 			</div>
-		</div>
 
 
 </body>

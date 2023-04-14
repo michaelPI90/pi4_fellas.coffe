@@ -15,7 +15,7 @@ header {
 }
 
 main {
-    padding: 30px 50px;
+    padding: 30px 50px 0px 50px;
 }
 
 .card {
@@ -24,6 +24,10 @@ main {
     padding: 20px;
     margin-top: 15px;
     border-radius: 5px;
+}
+
+.consultar-produto {
+    padding: 20px 0px 0px 0px;
 }
 
 .lineInput {
@@ -35,6 +39,14 @@ input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.input-produto {
+    padding: 15px 0px;
+}
+
+.botao-consultar {
+    margin: 15px 0px;
 }
 
 button {
@@ -79,4 +91,8 @@ table td img {
 
 .center {
     text-align: center;
+}
+
+.adicionar-produto {
+    padding: 0px 50px;
 }

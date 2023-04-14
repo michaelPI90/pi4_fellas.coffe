@@ -25,7 +25,7 @@
             <h1>Cadastre-se Aqui</h1>
             </div>
             <div class="formulario">
-                <form action="/CadastroCliente/salvo" th:object="${usuario}" method="post">
+                <form action="/CadastroCliente/cadastrar" th:object="${usuario}" method="post">
                     <div class="lineInput">
                         <input type="text" name="username" placeholder="Nome" field =" *{username}" required>
                     </div>
@@ -46,15 +46,14 @@
                             
                             <option value="ROLE_ADMIN">Administrador</option>
                             <option value="ROLE_ESTOQUISTA">Estoquista</option>
+                            <option value="ROLE_CLIENTE">Cliente</option>
                         </select>
                     </div>
                     <div th:text="${erro}" class="alert al" role="alert"></div>
                     <div class="botao">
                         <button>Cadastrar</button>
                     </div>
-                    <div class="link">
-                    <a href="/">Já tem cadastro? Clique aqui para fazer login.</a>
-                    </div>
+                    
             </div>
                 </form>
         </div>

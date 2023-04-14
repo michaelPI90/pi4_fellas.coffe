@@ -38,25 +38,29 @@ public class UserController {
 
     }
 
-
     @GetMapping("/admin/listar")
     String listarUsuario(Model model, Usermodels user) {
-        Optional<Usermodels> userStatus = this.repository.findByEmail(user.getEmail());
-
-        if (!enconder.matches(user.getPassword(), userStatus.get().getPassword())) {
-            model.addAttribute("erro", "Dados inválidos");
-            return "/home/index";
+        Optional<Usermodels> userEncontrado = this.repository.findByEmail(user.getEmail());
+        String erroMsg = null;
+        if (userEncontrado.isEmpty()) {
+            erroMsg = "Email não encontrado!!!";
+        } else if (!enconder.matches(user.getPassword(), userEncontrado.get().getPassword())) {
+            erroMsg = "Senha incorreta!!!";
+        } else if (!userEncontrado.get().isStatusAtivo()) {
+            erroMsg = "Usuário inativo!!!";
+        } else if (userEncontrado.get().getGrupo().equals("ROLE_CLIENTE")) {
+            erroMsg = "Grupo inválido!!!";
+        } else if (userEncontrado.get().getGrupo().equals("ROLE_ESTOQUISTA")) {
+            return "redirect:/ListarProdutos";
+        } else {
+            model.addAttribute("usuarios", repository.findAll());
+            return "/alterar/alterar";
         }
-        else if (!userStatus.get().isStatusAtivo()) {
-            model.addAttribute("erro", "Usuário inativo");
-            return "/home/index";
-        }
-
-        model.addAttribute("usuarios", repository.findAll());
-        return "/alterar/alterar";
+        model.addAttribute("erro", erroMsg);
+        return "/home/index";
     }
 
-    @GetMapping("/ConsultarUsuario") // @PostMapping("/ConsultarUsuario")
+    @GetMapping("/ConsultarUsuario")
     public String consultar(Model model, @RequestParam String nome) {
 
         Optional<Usermodels> username = this.repository.findByUsername(nome);
