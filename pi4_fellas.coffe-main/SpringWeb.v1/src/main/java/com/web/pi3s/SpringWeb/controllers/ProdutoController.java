@@ -1,17 +1,14 @@
 package com.web.pi3s.SpringWeb.controllers;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
+
 
 import javax.print.event.PrintEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
@@ -28,18 +25,21 @@ public class ProdutoController {
 
     @GetMapping("/ListarProdutos")
     public ModelAndView listaProduto(ModelAndView modelAndView) {
-        // ModelAndView modelAndView = new ModelAndView();
+      List<Produtomodels> produtosOrdenados =  this.repository.ordernar();
         //Produtomodels produtos = new Produtomodels();
+        //Collections.sort(produtosOrdenados, Collections.reverseOrder());
         modelAndView.setViewName("produtos/produtos");
-        modelAndView.addObject("produtos", repository.findAll());
+        //modelAndView.addObject("produtos", Collections.sort(produtosOrdenados, Collections.reverseOrder()));
+        modelAndView.addObject("produtos", produtosOrdenados);
 
         return modelAndView;
 
     }
 
+   
     @GetMapping("/CadastroProduto")
     public ModelAndView formProduto(ModelAndView modelAndView) {
-        // ModelAndView modelAndView = new ModelAndView();
+        
        Produtomodels produtos = new Produtomodels();
         modelAndView.setViewName("cadastrarProduto/cadastrarProduto");
         modelAndView.addObject("produtos", produtos);
@@ -74,10 +74,10 @@ public class ProdutoController {
     @GetMapping("/ConsultarProduto")
     public String consultar(Model model, @RequestParam String nomeProduto) {
 
-        Optional<Produtomodels> produtoConsultado = this.repository.findByNomeProduto(nomeProduto);
+        List<Produtomodels> produtoConsultado = this.repository.findByNomeProdutoContainingIgnoreCase(nomeProduto);
 
-        if (produtoConsultado.isPresent()) {
-            model.addAttribute("produtos", Arrays.asList(produtoConsultado.get()));
+        if (!produtoConsultado.isEmpty()) {
+            model.addAttribute("produtos", Arrays.asList(produtoConsultado.toArray()));
             return "/produtos/produtos";
         }
 

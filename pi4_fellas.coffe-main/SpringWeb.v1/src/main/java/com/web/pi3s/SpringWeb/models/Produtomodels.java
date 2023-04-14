@@ -2,16 +2,10 @@ package com.web.pi3s.SpringWeb.models;
 
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.util.List;
 
 
-import jakarta.persistence.Lob;
-
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 /**
@@ -26,7 +20,7 @@ public class Produtomodels {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int id;
+    private Integer id;
     @Column(nullable = false)
     private String nomeProduto;
     @Column(nullable = false, length = 2000)
@@ -41,12 +35,23 @@ public class Produtomodels {
     private boolean statusAtivo;
     private String imagemProduto;
 
+   
+    public Produtomodels() {
+    }
     
-
-    public int getId() {
+    public Produtomodels(Integer id, String nomeProduto, double precoProduto, int qntdEstoque, String avaliacao,
+            boolean statusAtivo) {
+        this.id = id;
+        this.nomeProduto = nomeProduto;
+        this.precoProduto = precoProduto;
+        this.qntdEstoque = qntdEstoque;
+        this.avaliacao = avaliacao;
+        this.statusAtivo = statusAtivo;
+    }
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getNomeProduto() {
