@@ -64,7 +64,8 @@
 									<td><span hidden th:text="${usuario.email}" ></span></td>
 									<td><span hidden th:text="${usuario.password}"></span></td>
 
-									<td><button type="submit" class = "botoesItem" ><a th:href="@{'/api/usuario/alterarDados/' + ${usuario.userId}}">Editar Usuário</button></td>
+									<td><button type="submit" class = "botoesItem" >
+										<a th:href="@{'/api/usuario/alterarDados/' + ${usuario.userId}}">Editar Usuário</button></td>
 									
 
 

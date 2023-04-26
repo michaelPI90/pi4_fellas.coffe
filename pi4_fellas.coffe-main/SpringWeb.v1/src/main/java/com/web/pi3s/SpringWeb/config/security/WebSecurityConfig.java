@@ -39,7 +39,7 @@ public class WebSecurityConfig{
           
 
         authorizeconfig.requestMatchers("/").hasAnyAuthority("ROLE_ADMIN", "ROLE_ESTOQUISTA");
-        authorizeconfig.requestMatchers("/logar**").hasAuthority("ROLE_ADMIN");
+        authorizeconfig.requestMatchers("/api/usuario/admin/listar**").hasAuthority("ROLE_ADMIN");
        
         authorizeconfig.requestMatchers("/listarTodos").permitAll();
         authorizeconfig.anyRequest().authenticated();

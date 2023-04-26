@@ -8,12 +8,19 @@
 
 </head>
 <body>
+
+    <form th:action=@{/api/usuario/admin/listar} method="get">
 <header>
       <h1>Console.coffee</h1>
 </header>
+<button type="submit">Listar Usuario</button>
+</form>
 
-<a href="/alterar/alterar"></a><button type="" >Listar usuários</button></a>
-<button onclick="produto.alterar()">Listar produtos</button>
 
-</body>
+<a href="/alterar/alterar"></a><button type="submit">Listar produtos</button>
+
+
+
+
+</form>
 </html>

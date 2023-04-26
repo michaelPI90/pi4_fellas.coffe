@@ -29,15 +29,7 @@ public class HomeController {
 
   }
 
-  // @PreAuthorize("permitAll()")
-  // // @PreAuthorize("hasRole('ROLE_ADMIN')")
-  // @RequestMapping("/logar")
 
-  // public String login(Model model) {
-
-  // model.addAttribute(model);
-  // return "produtos/produtos";
-  // }
 
   @GetMapping("/CadastroCliente")
   public ModelAndView formCliente(Model model) {
@@ -50,16 +42,7 @@ public class HomeController {
 
   }
 
-  // @PostMapping("/desabilitaUser")
-  // public String disbaleUser( Model model, Usermodels user) {
-  //   System.out.println("USER DO DESABILITAR: " + user);
-  //   Optional<Usermodels> c = repository.findById(user.getUserId());
-  //   System.out.println("USER DPS DO FIND: " + c);
-  //   model.addAttribute("usuario",c.get() );
-  //   user.setStatusAtivo(false);
-   
-  //   return "home/index";
-  // }
+
 
   @PostMapping("/CadastroCliente/cadastrar")
   public String salvar(Model model, Usermodels c) throws Exception {

@@ -43,7 +43,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/admin/listar")
+    @PostMapping("/home/logar")
     String listarUsuario(Model model, Usermodels user) {
         Optional<Usermodels> userEncontrado = this.repository.findByEmail(user.getEmail());
 
@@ -57,7 +57,7 @@ public class UserController {
         } else if (userEncontrado.get().getGrupo().equals("ROLE_CLIENTE")) {
             erroMsg = "Grupo inválido!!!";
         } else if (userEncontrado.get().getGrupo().equals("ROLE_ESTOQUISTA")) {
-            return "redirect:/ListarProdutosEstoquista";
+            return "/logado/logadoEstoquista";
         } else {
             model.addAttribute("usuarios", repository.findAll());
             return "/alterar/alterar";
@@ -65,8 +65,8 @@ public class UserController {
         model.addAttribute("erro", erroMsg);
         return "/home/index";
     }
-
-    @GetMapping("/listar")
+    
+    @GetMapping("/admin/listar")
     String listar(Model model, Usermodels user) {
 
         model.addAttribute("usuarios", repository.findAll());
@@ -88,12 +88,23 @@ public class UserController {
         return "/alterar/alterar";
     }
 
+
+    @RequestMapping(value = "/alterarDados/{userId}", method = RequestMethod.POST)
+    public String atualizar(@RequestParam("ativar")List <String> ativar, Model model, UUID userId, Usermodels user) {
+
+        atualizar(model, userId, user);
+
+        return "redirect:/api/usuario/listar";
+    }
+
+  
+
     @GetMapping("/alterarDados/{userId}")
     public String atualizar(Model model, @PathVariable UUID userId, Usermodels user) {
 
         salvar(userId, user);
 
-        return "redirect:/api/usuario/listar";
+        return "redirect:/api/usuario/admin/listar";
     }
 
     @GetMapping("/listarTodos")
@@ -121,6 +132,9 @@ public class UserController {
         return modelAndView;
 
     }
+
+
+
 
     @GetMapping("/ListarProdutos")
     public ModelAndView listaProduto(ModelAndView modelAndView) {

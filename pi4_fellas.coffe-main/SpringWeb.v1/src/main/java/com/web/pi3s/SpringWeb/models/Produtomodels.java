@@ -20,7 +20,7 @@ public class Produtomodels {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private Integer id;
+    private int Id;
     @Column(nullable = false)
     private String nomeProduto;
     @Column(nullable = false, length = 2000)
@@ -32,7 +32,7 @@ public class Produtomodels {
     @Column(nullable = false)
     private String avaliacao;
     @Column(nullable = false)
-    private boolean statusAtivo;
+    private boolean statusAtivo = true;
     private String imagemProduto;
 
    
@@ -41,7 +41,7 @@ public class Produtomodels {
     
     public Produtomodels(Integer id, String nomeProduto, double precoProduto, int qntdEstoque, String avaliacao,
             boolean statusAtivo) {
-        this.id = id;
+        this.Id = id;
         this.nomeProduto = nomeProduto;
         this.precoProduto = precoProduto;
         this.qntdEstoque = qntdEstoque;
@@ -49,10 +49,10 @@ public class Produtomodels {
         this.statusAtivo = statusAtivo;
     }
     public Integer getId() {
-        return id;
+        return Id;
     }
     public void setId(Integer id) {
-        this.id = id;
+        this.Id = id;
     }
     public String getNomeProduto() {
         return nomeProduto;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="UTF-8">
@@ -115,11 +116,13 @@
                         <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
                         <td><span th:text="${produto.precoProduto}"> Valor </span></td>
                         <td><span th:text="${produto.qntdEstoque}"> Quantidade disponível </span></td>
-                        <td><input type="checkbox" name="myBooleanVariable" th:checked="${produto.statusAtivo}" />
+                        <td><input type="checkbox"  th:checked="${produto.statusAtivo}" />
                         </td>
                         <td>
                             <img src="../../static/imagens/escrever.png" alt="">
                         </td>
+                        <td><button type="submit" class = "botoesItem" >
+                            <a th:href="@{'/statusProduto/' + ${produto.id}}">Editar Produto</button></td>
 
 
 
