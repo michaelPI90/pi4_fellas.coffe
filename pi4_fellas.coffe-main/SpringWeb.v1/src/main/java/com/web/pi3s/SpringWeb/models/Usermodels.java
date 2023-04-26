@@ -44,7 +44,7 @@ public class Usermodels implements UserDetails {
     @Column(nullable = false, unique = true)
     private String cpf;
     @Column(nullable = false)
-    private boolean statusAtivo;
+    private boolean statusAtivo = true;
 
     @Transient
     private String password2;
@@ -114,7 +114,7 @@ public class Usermodels implements UserDetails {
     }
 
     public void setStatusAtivo(boolean statusAtivo) {
-        statusAtivo =  true;
+        //statusAtivo =  false;
         this.statusAtivo = statusAtivo;
     }
 
@@ -175,6 +175,25 @@ public class Usermodels implements UserDetails {
     public void setPassword2(String password2) {
         this.password2 = password2;
     }
+
+    
+
+    public Usermodels() {
+    }
+
+    public Usermodels(UUID userId, String username, String password, String email, String grupo, String cpf,
+            boolean statusAtivo) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.grupo = grupo;
+        this.cpf = cpf;
+        this.statusAtivo = statusAtivo;
+       
+    }
+
+    
     
     
 

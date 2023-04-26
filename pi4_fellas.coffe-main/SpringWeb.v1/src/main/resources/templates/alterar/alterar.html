@@ -23,20 +23,21 @@
 				id="username" name="nome">
 			<div>
 				<button type="submit" class="botoesItem">Consultar</button>
-				
-				
+
+
 				<div th:text="${erro}" class="alert alert-info" role="alert"></div>
-				
+
 			</div>
-			
-			
+
+
 		</form>
-		
+
 		<div class="container">
 			<div class="row">
-				<form th:action=@{/logar} method="get">
+				<form >
+				<!-- <form th:action=@{/desabilitaUser} th:object="${usuario}" method="post"> -->
 					<div class="col">
-						
+
 						<table class="table-striped">
 							<thead>
 								<tr>
@@ -44,8 +45,8 @@
 									<th>Email</th>
 									<th>Status</th>
 									<th>Grupo</th>
-									
-									
+
+
 								</tr>
 							</thead>
 							<tbody>
@@ -53,28 +54,36 @@
 									<td colspan="2">Sem usuários</td>
 								</tr> -->
 								<tr th:each="usuario : ${usuarios}">
-									<td><span th:text="${usuario.username}"> Nome </span></td>
-									<td><span th:text="${usuario.email}"> Email </span></td>
-									<td><input type="checkbox" name="myBooleanVariable"
+									<td contenteditable="true" aria-disabled="false"><span th:text="${usuario.username}"> Nome </span></td>
+									<td contenteditable="true" aria-disabled="false"><span th:text="${usuario.email}"> Email </span></td>
+									<td><input type="checkbox" 
 										th:checked="${usuario.statusAtivo}" />
 									</td>
+									<td contenteditable="true"><span th:text="${usuario.grupo}"> Grupo </span></td>
+									<td><span th:text="${usuario.cpf}" ></span></td>
+									<td><span hidden th:text="${usuario.email}" ></span></td>
+									<td><span hidden th:text="${usuario.password}"></span></td>
+
+									<td><button type="submit" class = "botoesItem" ><a th:href="@{'/api/usuario/alterarDados/' + ${usuario.userId}}">Editar Usuário</button></td>
 									
-									<td><span th:text="${usuario.grupo}"> Grupo </span></td>
-									
-									
-									
+
+
 								</tr>
-								
+
 							</tbody>
 						</table>
 					</div>
-				</form>	
+				</form>
 				<a href="/CadastroCliente"><button type="" class="botoesItem">Cadastro</button></a>
 				<a href="/ListarProdutos"><button>Listar Produtos</button></a>
-				</div>
 			</div>
+		</div>
 
 
+
+	</main>
+		
+		
 </body>
 
 </html>

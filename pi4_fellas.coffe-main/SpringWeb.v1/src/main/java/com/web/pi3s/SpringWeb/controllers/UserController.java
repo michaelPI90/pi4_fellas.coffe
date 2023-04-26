@@ -12,15 +12,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.models.Usermodels;
+import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
 @Controller
@@ -33,14 +37,16 @@ public class UserController {
     PasswordEncoder enconder;
     @Autowired
     Userrespo repository;
+    Produtorespo repoProd;
 
     public void apagarUsuarioPorId(UUID id) {
 
     }
 
-    @GetMapping("/admin/listar")
+    @PostMapping("/admin/listar")
     String listarUsuario(Model model, Usermodels user) {
         Optional<Usermodels> userEncontrado = this.repository.findByEmail(user.getEmail());
+
         String erroMsg = null;
         if (userEncontrado.isEmpty()) {
             erroMsg = "Email não encontrado!!!";
@@ -60,6 +66,14 @@ public class UserController {
         return "/home/index";
     }
 
+    @GetMapping("/listar")
+    String listar(Model model, Usermodels user) {
+
+        model.addAttribute("usuarios", repository.findAll());
+        return "/alterar/alterar";
+
+    }
+
     @GetMapping("/ConsultarUsuario")
     public String consultar(Model model, @RequestParam String nome) {
 
@@ -74,6 +88,14 @@ public class UserController {
         return "/alterar/alterar";
     }
 
+    @GetMapping("/alterarDados/{userId}")
+    public String atualizar(Model model, @PathVariable UUID userId, Usermodels user) {
+
+        salvar(userId, user);
+
+        return "redirect:/api/usuario/listar";
+    }
+
     @GetMapping("/listarTodos")
     public ResponseEntity<List<Usermodels>> listarTodos() {
 
@@ -83,10 +105,34 @@ public class UserController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvar")
-    public ResponseEntity<Usermodels> salvar(@RequestBody Usermodels usuario) {
+    public ModelAndView salvar(UUID userID, Usermodels user) {
+        ModelAndView modelAndView = new ModelAndView();
+        Usermodels u = repository.findByUserId(user.getUserId());
 
-        usuario.setPassword(enconder.encode(usuario.getPassword()));
-        return ResponseEntity.ok(repository.save(usuario));
+        if (u.isStatusAtivo()) {
+            u.setStatusAtivo(false);
+
+        } else {
+            u.setStatusAtivo(true);
+        }
+        repository.save(u);
+
+        modelAndView.setViewName("alterar/alterar");
+        return modelAndView;
+
+    }
+
+    @GetMapping("/ListarProdutos")
+    public ModelAndView listaProduto(ModelAndView modelAndView) {
+        List<Produtomodels> produtosOrdenados = this.repoProd.ordernar();
+        // Produtomodels produtos = new Produtomodels();
+        // Collections.sort(produtosOrdenados, Collections.reverseOrder());
+        modelAndView.setViewName("produtos/produtos");
+        // modelAndView.addObject("produtos", Collections.sort(produtosOrdenados,
+        // Collections.reverseOrder()));
+        modelAndView.addObject("produtos", produtosOrdenados);
+
+        return modelAndView;
 
     }
 
