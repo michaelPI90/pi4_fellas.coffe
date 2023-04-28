@@ -7,13 +7,6 @@ body {
     background-color: #fafbfc;
 }
 
-header {
-    background-color: #592e0b;
-    padding: 10px;
-    color: white;
-    text-align: center;
-}
-
 main {
     padding: 30px 50px;
 }
@@ -81,3 +74,9 @@ table td img {
 .center {
     text-align: center;
 }
+
+a {
+    color: white;
+    text-decoration: none;
+}
+

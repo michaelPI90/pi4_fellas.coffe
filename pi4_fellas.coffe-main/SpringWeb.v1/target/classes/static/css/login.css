@@ -57,6 +57,13 @@ body {
   margin-left: 30px; /* espaçamento entre os controles */
 }
 
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .profile,
 .shopping-cart {
   margin-left: 30px; /* espaçamento entre os controles */
@@ -94,6 +101,7 @@ p, a {
     font-weight: 700;
     color: #9e3f15;
     text-decoration: none;
+    
 
 }
 
@@ -211,3 +219,6 @@ a {
 .container {
     margin: 20px 0px; 
 }
+
+
+

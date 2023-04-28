@@ -17,7 +17,7 @@ public class UploadUtil {
             try {
                 
                 //criando diretorio para armazena o arquivo
-                String pastaUploadImagem = "C:\\Users\\camyb\\OneDrive\\Documentos\\PI4\\pi4_fellas.coffe\\pi4_fellas.coffe-main\\SpringWeb.v1\\src\\main\\resources\\static\\imagens";
+                String pastaUploadImagem = "Downloads";
                 File dir = new File(pastaUploadImagem);
                 if(!dir.exists()){
                     dir.mkdirs();

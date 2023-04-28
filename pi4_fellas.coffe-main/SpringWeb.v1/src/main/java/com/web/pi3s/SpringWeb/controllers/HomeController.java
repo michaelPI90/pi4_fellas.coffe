@@ -24,11 +24,7 @@ public class HomeController {
   @RequestMapping("/")
   public String index(Model model, Usermodels usuario) {
   
-      
         return "/home/index";
-    
-      
-  
 
   }
 
@@ -126,14 +122,10 @@ public class HomeController {
     }
   }
 
-  // @RequestMapping(value = "/AlterarDados/{userId}", method = RequestMethod.GET)
-  // public String atualizar(@PathVariable UUID userId, Usermodels user) {
+  @GetMapping("/homeCliente")
+    public String index() {
+  
+        return "/home/cliente";
 
-  // Usermodels u = this.repository.findByUserId(userId);
-  // System.out.println("USER:" + u);
-
-  // repository.save(u);
-
-  // return "alterar/alterar";
-  // }
+  }
 }

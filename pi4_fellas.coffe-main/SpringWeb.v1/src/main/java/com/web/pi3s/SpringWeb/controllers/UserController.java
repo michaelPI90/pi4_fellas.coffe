@@ -86,18 +86,9 @@ public class UserController {
         return "/alterar/alterar";
     }
 
-
-    @RequestMapping(value = "/alterarDados/{userId}", method = RequestMethod.POST)
-    public String atualizar(@RequestParam("ativar")List <String> ativar, Model model, UUID userId, Usermodels user) {
-
-        atualizar(model, userId, user);
-
-        return "redirect:/api/usuario/listar";
-    }
-
   
 
-    @GetMapping("/alterarDados/{userId}")
+    @GetMapping("/alterarStatus/{userId}")
     public String atualizar(Model model, @PathVariable UUID userId, Usermodels user) {
 
         salvar(userId, user);
@@ -105,12 +96,12 @@ public class UserController {
         return "redirect:/api/usuario/admin/listar";
     }
 
-    @GetMapping("/listarTodos")
-    public ResponseEntity<List<Usermodels>> listarTodos() {
+    // @GetMapping("/listarTodos")
+    // public ResponseEntity<List<Usermodels>> listarTodos() {
 
-        return ResponseEntity.ok(repository.findAll());
+    //     return ResponseEntity.ok(repository.findAll());
 
-    }
+    // }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvar")
@@ -128,6 +119,39 @@ public class UserController {
 
         modelAndView.setViewName("alterar/alterar");
         return modelAndView;
+
+    }
+
+    @GetMapping("/alterarDadosUsuario/{userId}")
+    public String atualizarDados(Model model, @PathVariable UUID userId, Usermodels user, String cpf,  String username, 
+    String password,  String email,  String grupo, boolean statusAtivo) {
+           System.out.println(" VERIFICANDO DADO: " + username);
+           salvarDados( userId,  user,  cpf,   username, 
+            password,   email,   grupo,  statusAtivo);
+            
+            //salvarDados(userId, user);
+            //repository.save(user);
+            
+            return "redirect:/api/usuario/admin/listar";
+        }
+        
+        //@PostMapping("/salvar")
+        public ModelAndView salvarDados( UUID userId, Usermodels user, String cpf,  String username, 
+        String password,  String email,  String grupo, boolean statusAtivo) {
+            ModelAndView modelAndView = new ModelAndView();
+            
+            this.repository.updateUserid(cpf, username, password, email, grupo, statusAtivo, userId);
+
+    //     if (u.isStatusAtivo()) {
+    //         u.setStatusAtivo(false);
+
+    //     } else {
+    //         u.setStatusAtivo(true);
+    //     }
+    //     repository.save(u);
+
+     modelAndView.setViewName("alterar/alterar");
+      return modelAndView;
 
     }
 
@@ -154,5 +178,8 @@ public class UserController {
         userController.apagarUsuarioPorId(id);
         return "redirect:/usuario/admin/listar";
     }
+
+
+    
 
 }
