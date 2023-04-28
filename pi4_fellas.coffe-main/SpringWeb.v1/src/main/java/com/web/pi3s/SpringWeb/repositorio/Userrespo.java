@@ -3,11 +3,7 @@ package com.web.pi3s.SpringWeb.repositorio;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import com.web.pi3s.SpringWeb.models.Usermodels;
 
 public interface Userrespo extends JpaRepository<Usermodels, UUID> {

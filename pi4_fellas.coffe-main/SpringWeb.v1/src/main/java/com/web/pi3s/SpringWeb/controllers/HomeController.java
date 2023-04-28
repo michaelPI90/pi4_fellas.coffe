@@ -2,10 +2,8 @@ package com.web.pi3s.SpringWeb.controllers;
 
 import java.util.InputMismatchException;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +22,15 @@ public class HomeController {
   Userrespo repository;
 
   @RequestMapping("/")
-  public String index(Model model) {
-    return "/home/index";
+  public String index(Model model, Usermodels usuario) {
+  
+      
+        return "/home/index";
+    
+      
+  
 
   }
-
 
 
   @GetMapping("/CadastroCliente")

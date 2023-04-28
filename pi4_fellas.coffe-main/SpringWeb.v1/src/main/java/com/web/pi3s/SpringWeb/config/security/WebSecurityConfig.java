@@ -3,8 +3,6 @@ package com.web.pi3s.SpringWeb.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,11 +36,12 @@ public class WebSecurityConfig{
     return http.httpBasic().and().authorizeHttpRequests(authorizeconfig -> {
           
 
-        authorizeconfig.requestMatchers("/").hasAnyAuthority("ROLE_ADMIN", "ROLE_ESTOQUISTA");
+        authorizeconfig.requestMatchers("/").hasAnyAuthority("ROLE_ADMIN", "ROLE_ESTOQUISTA", "ROLE_CLIENTE");
         authorizeconfig.requestMatchers("/api/usuario/admin/listar**").hasAuthority("ROLE_ADMIN");
        
         authorizeconfig.requestMatchers("/listarTodos").permitAll();
         authorizeconfig.anyRequest().authenticated();
+    
 
          
             

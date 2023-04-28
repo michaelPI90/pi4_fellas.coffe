@@ -1,10 +1,7 @@
 package com.web.pi3s.SpringWeb.controllers;
 
-import java.io.IOException;
 import java.util.*;
 
-
-import javax.print.event.PrintEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

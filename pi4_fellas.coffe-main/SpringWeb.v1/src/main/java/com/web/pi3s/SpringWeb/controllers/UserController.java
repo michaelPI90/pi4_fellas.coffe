@@ -12,14 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.pi3s.SpringWeb.models.Produtomodels;
@@ -55,12 +52,13 @@ public class UserController {
         } else if (!userEncontrado.get().isStatusAtivo()) {
             erroMsg = "Usuário inativo!!!";
         } else if (userEncontrado.get().getGrupo().equals("ROLE_CLIENTE")) {
-            erroMsg = "Grupo inválido!!!";
+            erroMsg = "Você não é usuário do BackOffice!!!";
         } else if (userEncontrado.get().getGrupo().equals("ROLE_ESTOQUISTA")) {
             return "/logado/logadoEstoquista";
+            
         } else {
             model.addAttribute("usuarios", repository.findAll());
-            return "/alterar/alterar";
+            return "/logado/logadoAdmin";
         }
         model.addAttribute("erro", erroMsg);
         return "/home/index";

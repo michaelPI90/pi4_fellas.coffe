@@ -2,9 +2,6 @@ package com.web.pi3s.SpringWeb.models;
 
 
 
-import java.util.List;
-
-
 import jakarta.persistence.*;
 
 

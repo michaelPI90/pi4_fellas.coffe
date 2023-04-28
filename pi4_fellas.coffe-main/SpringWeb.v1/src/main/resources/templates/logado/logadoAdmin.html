@@ -4,23 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/listarUsuarios.css" />
-
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <form th:action=@{/api/usuario/admin/listar} method="get">
-<header>
-      <h1>Console.coffee</h1>
-</header>
+  <header>
+    <div class="b-container">
+      <div class="logo">
+        <img src="/imagens/logo-header.png" alt="" />
+      </div>
+    
+    <div class="nav-menu">
+        <ul class="menu">
+          <li>
+            <!-- <a href="">Home</a> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+
+
+  <form th:action=@{/api/usuario/admin/listar} method="get">
 <button type="submit">Listar Usuario</button>
 </form>
 
-
-<a href="/alterar/alterar"></a><button type="submit">Listar produtos</button>
-
-
-
+<a href="/ListarProdutos" > <button type="submit">Listar produtos</button></a>
 
 </form>
 </html>
