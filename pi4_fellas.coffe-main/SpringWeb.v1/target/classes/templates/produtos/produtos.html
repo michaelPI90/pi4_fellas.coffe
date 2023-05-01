@@ -19,18 +19,18 @@
 <body>
 
     <header>
-		<div class="b-container">
-		  <div class="logo">
-			<img src="/imagens/logo-header.png" alt="" />
-		  </div>
-		
-		<div class="nav-menu">
-			<ul class="menu">
-			  <li>
-				<!-- <a href="">Home</a> -->
-			  </li>
-			</ul>
-		 <!--   <div class="controls">
+        <div class="b-container">
+            <div class="logo">
+                <img src="/imagens/logo-header.png" alt="" />
+            </div>
+
+            <div class="nav-menu">
+                <ul class="menu">
+                    <li>
+                        <!-- <a href="">Home</a> -->
+                    </li>
+                </ul>
+                <!--   <div class="controls">
 			  <div class="profile">
 				<a href="#">
 				  <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -50,8 +50,8 @@
 				</a>
 			  </div>
 		  </div>-->
-		  </div>
-	  </header>
+            </div>
+    </header>
 
     <main>
         <!-- <div class="title">
@@ -112,7 +112,7 @@
         </div> -->
 
         <div class="consultar-produto"></div>
-            <h2>Listar Produtos</h2>
+        <h2>Listar Produtos</h2>
         </div>
 
         <form id="formulário" action=/ConsultarProduto method="get">
@@ -137,7 +137,8 @@
                     <th>Quantidade disponível</th>
                     <th>Status</th>
                     <th></th>
-                
+                    
+
                 </thead>
                 <tbody>
                     <!-- <tr th:if="${usuarios.empty}">
@@ -148,14 +149,15 @@
                         <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
                         <td><span th:text="${produto.precoProduto}"> Valor </span></td>
                         <td><span th:text="${produto.qntdEstoque}"> Quantidade disponível </span></td>
-                        <td><input type="checkbox"  th:checked="${produto.statusAtivo}" />
+                        <td><input type="checkbox" th:checked="${produto.statusAtivo}" />
                         </td>
                         <!-- <td>
                             <img src="../../static/imagens/escrever.png" alt="">
                         </td> -->
-                        <td><button type="submit" class = "botoesItem" >
-                            <a th:href="@{'/statusProduto/' + ${produto.id}}">Desabilitar/Habilitar Produto</button></td>
-
+                        <td><button type="submit" class="botoesItem">
+                                <a th:href="@{'/statusProduto/' + ${produto.id}}">Desabilitar/Habilitar Produto</button>
+                        </td>
+                        
 
 
                     </tr>

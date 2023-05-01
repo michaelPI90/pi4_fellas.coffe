@@ -57,7 +57,7 @@ public class HomeController {
       c.setStatusAtivo(true);
       c.setPassword(enconder.encode(c.getPassword()));
       repository.save(c); // Função que executa o cadastro
-      return "/home/index";
+      return "redirect:/api/usuario/admin/listar";
     }
     model.addAttribute("erro", erroMsg);
     return "/cadastro/cadastro";
@@ -122,10 +122,5 @@ public class HomeController {
     }
   }
 
-  @GetMapping("/homeCliente")
-    public String index() {
-  
-        return "/home/cliente";
-
-  }
+ 
 }

@@ -7,6 +7,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/css/listarUsuarios.css" />
 	<link rel="stylesheet" href="/css/login.css">
+	<script>
+		function salvarUsuario(button){
+        	var row = button.parentNode.parentNode;
+        	var username = row.getElementsByTagName("td")[0].getElementsByTagName("input")[0];
+        	var email = row.getElementsByTagName("td")[1].getElementsByTagName("span")[0];
+			var status = row.getElementsByTagName("td")[2].getElementsByTagName("input")[0];
+			var grupo = row.getElementsByTagName("td")[3].getElementsByTagName("span")[0];
+			var userId = row.getElementsByTagName("td")[6].getElementsByTagName("input")[0];
+
+			fetch('/api/usuario/alterarDadosUsuario', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					username: username.value,
+					statusAtivo: status.checked,
+					email: email.textContent,
+					grupo: grupo.textContent,
+					userId: userId.value
+				})
+			})
+			.then(response => {
+				if(response.ok){
+					alert('Usuário alterado com sucesso!')
+				}else{
+					alert('Ocorreu um erro ao alterar o usuário!')
+					location.reload()
+				}
+			})
+			.catch(error => {
+				alert('Ocorreu um erro ao enviar a solicitação: ' + error.message)
+				location.reload()
+			})
+      	}
+	</script>
 
 
 </head>
@@ -14,17 +50,17 @@
 <body>
 	<header>
 		<div class="b-container">
-		  <div class="logo">
-			<img src="/imagens/logo-header.png" alt="" />
-		  </div>
-		
-		<div class="nav-menu">
-			<ul class="menu">
-			  <li>
-				<!-- <a href="">Home</a> -->
-			  </li>
-			</ul>
-		 <!--   <div class="controls">
+			<div class="logo">
+				<img src="/imagens/logo-header.png" alt="" />
+			</div>
+
+			<div class="nav-menu">
+				<ul class="menu">
+					<li>
+						<!-- <a href="">Home</a> -->
+					</li>
+				</ul>
+				<!--   <div class="controls">
 			  <div class="profile">
 				<a href="#">
 				  <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -44,8 +80,8 @@
 				</a>
 			  </div>
 		  </div>-->
-		  </div>
-	  </header>
+			</div>
+	</header>
 	<main>
 		<div class="title">
 			<h2>Lista de usuários</h2>
@@ -67,17 +103,19 @@
 
 		<div class="container">
 			<div class="row">
-				 <form ><!-- th:action="@{'/api/usuario/alterarDadosUsuario/' + ${usuario?.userId}}" method="post"> -->
-					
+				<form>
+
 					<div class="col">
 
-						<table class="table-striped">
+						<table class="table-striped" id="table">
 							<thead>
 								<tr>
 									<th>Nome</th>
 									<th>Email</th>
 									<th>Status</th>
 									<th>Grupo</th>
+									<th>CPF</th>
+									<th>Senha</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -87,22 +125,27 @@
 									<td colspan="2">Sem usuários</td>
 								</tr> -->
 								<tr th:each="usuario : ${usuarios}">
-									<td contenteditable="true" aria-disabled="false"><span
-											th:text="${usuario.username}"><input type="text" th:text="${usuario.username}" name="username"/>Nome </span></td>
-									<td contenteditable="true" aria-disabled="false"><span th:text="${usuario.email}">
-											Email </span></td>
-									<td><input type="checkbox" th:checked="${usuario.statusAtivo}" />
+
+									<td aria-disabled="false"><input th:value="${usuario?.username}" class="usuario" id="username"
+											name="username"> </td>
+
+									<td><span th:text="${usuario?.email}" class="usuario" id="email"
+											name="email"></span>
 									</td>
-									<td contenteditable="true"><span th:text="${usuario.grupo}"> Grupo </span></td>
-									
-									<td><button type="submit" class="botoesItem">
-											<a th:href="@{'/api/usuario/alterarStatus/' + ${usuario.userId}}">Habilitar/Desabilitar
-												Usuário</button></td>
-									<td><button type="submit" class="botoesItem">
-											<a th:href="@{'/api/usuario/alterarDadosUsuario/' + ${usuario.userId}}">Salvar modificações</button></td>
 
+									<td><input type="checkbox" th:checked="${usuario?.statusAtivo} " class="usuario" id="statusAtivo" name="statusAtivo" />
+									</td>
 
+									<td><span th:text="${usuario?.grupo}" class="usuario" id="grupo" name="grupo"></span></td>
 
+									<td><input th:value="${usuario?.cpf}" class="usuario" id="cpf" name="cpf"></td>
+									<td><input th:value="${usuario?.password}" class="usuario" id="password" name="password"> </td>
+									<td hidden><input th:value="${usuario.userId}" class="usuario" id="userId" name="userId"> </td>
+
+									<!-- <td><button type="submit">
+										<a th:href="@{'/api/usuario/alterarStatus/' + ${usuario.userId}}">Habilitar/Desabilitar
+											Usuário</button></td> -->
+									<td><button onclick="event.preventDefault(); salvarUsuario(this)">Salvar modificações</button></td>
 								</tr>
 
 							</tbody>

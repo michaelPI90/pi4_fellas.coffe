@@ -181,6 +181,14 @@ public class Usermodels implements UserDetails {
     public Usermodels() {
     }
 
+    public Usermodels(String username, String email, String grupo, boolean statusAtivo, UUID userId) {
+        this.username = username;
+        this.email = email;
+        this.grupo = grupo;
+        this.statusAtivo = statusAtivo;
+        this.userId = userId;
+    }
+
     public Usermodels(UUID userId, String username, String password, String email, String grupo, String cpf,
             boolean statusAtivo) {
         this.userId = userId;
@@ -192,13 +200,4 @@ public class Usermodels implements UserDetails {
         this.statusAtivo = statusAtivo;
        
     }
-
-    
-    
-    
-
-    
-
-   
-
 }
