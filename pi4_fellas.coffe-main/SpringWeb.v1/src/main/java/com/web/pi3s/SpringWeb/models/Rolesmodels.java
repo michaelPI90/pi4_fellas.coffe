@@ -1,14 +1,9 @@
 package com.web.pi3s.SpringWeb.models;
 
-
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.security.core.GrantedAuthority;
-
-
 import com.web.pi3s.SpringWeb.Enum.RoleName;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -24,11 +19,11 @@ public class Rolesmodels implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
     private RoleName roleName;
- @ManyToMany
+    @ManyToMany
     private List<Usermodels> usuarios;
 
-
-    //TIPO DE CONTROLE DE ACESSO DO SECURITY AQUI SERÁ DEFINDDO EM MODELS O MAPEMAENTI DO RELACUINAMENTO
+    // TIPO DE CONTROLE DE ACESSO DO SECURITY AQUI SERÁ DEFINDDO EM MODELS O
+    // MAPEMAENTI DO RELACUINAMENTO
     @Override
     public String getAuthority() {
         return this.roleName.toString();
@@ -46,7 +41,6 @@ public class Rolesmodels implements GrantedAuthority {
     public void setRoleId(UUID roleId) {
         this.roleId = roleId;
     }
-
 
     public RoleName getRoleName() {
         return roleName;

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console.coffee</title>
+    <link rel="stylesheet" href="/css/produtos.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script src="script.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Console.coffee</h1>
+    </header>
+
+    <main>
+        <!-- <div class="title">
+            <h2>Cadastrar Produto</h2>
+            <span>Preencha todos os campos com atenção</span>
+        </div> 
+
+
+        <div class="card">
+            <div class="formulario">
+                <form action="/CadastroProduto/cadastrado" th:object="${produtos}" method="post" enctype="multipart/form-data">
+                    <div class="lineInput">
+                        <label for="">Produto</label>
+                        <input type="text" id="nomeProduto" name="nomeProduto" field=" *{nomeProduto}"
+                            placeholder="Nome do produto" maxlength="100" required>
+                    </div>
+                    <div class="lineInput">
+                        <label for="">Descrição Detalhada</label>
+                        <input type="text" id="descricaoDetalhada" name="descricaoDetalhada"
+                            field=" *{descricaoDetalhada}" placeholder="Descreva o produto detalhadamente"
+                            maxlength="2000" required>
+                    </div>
+                    <div class="lineInput">
+                        <label for="">Preço</label>
+                        <input type="number" min="0" step="0.02" id="precoProduto" name="precoProduto"
+                            field=" *{precoProduto}" placeholder="Defina um valor para o produto" required>
+                    </div>
+
+                    <div class="lineInput">
+                        <label for="">Quantidade no Estoque</label>
+                        <input type="text" id="qtd-estoque" name="qntdEstoque" field=" *{qntdEstoque}"
+                            placeholder="Informe a quantidade do produto em estoque" required>
+                    </div>
+                    <div class="lineInput">
+                        <label for="">Avaliação</label>
+                        <select name="avaliacao" field="*{avaliacao}" placeholder="Avalie o produto" required>
+
+                            <option value="1">1 estrela</option>
+                            <option value="1,5">1,5 estrela</option>
+                            <option value="2">2 estrelas</option>
+                            <option value="2,5">2,5 estrelas</option>
+                            <option value="3">3 estrelas</option>
+                            <option value="3,5">3,5 estrelas</option>
+                            <option value="4">4 estrelas</option>
+                            <option value="4,5">4,5 estrelas</option>
+                            <option value="5">5 estrelas</option>
+                        </select>
+                    </div>
+                    <div class="lineInput">
+                        <label for="arquivo">Imagem do produto</label>
+                        <input type="file" id="arquivo" placeholder="Upload da Imagem" name="imagem" required>
+                    </div>
+
+                    <button onclick="produto.adicionar()">Salvar</button>
+                    <button onclick="produto.alterar()">Cancelar</button>
+                </form>
+            </div>
+        </div> -->
+
+        <div class="consultar-produto"></div>
+            <h2>Listar Produtos</h2>
+        </div>
+
+        <form id="formulário" action=/ConsultarProduto method="get">
+            <div class="input-produto">
+                <input type="text" class="form-control" placeholder="Informe o nome do produto..."
+                    aria-describedby="addon-wrapping" id="nomeProduto" name="nomeProduto">
+                <div class="botao-consultar">
+                    <button type="submit" class="botoesItem">Consultar</button>
+
+                    <div th:text="${erro}" class="alert alert-info" role="alert"></div>
+
+                </div>
+
+        </form>
+
+        <div class="content">
+            <table border="1">
+                <thead>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Quantidade disponível</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+                    <!-- <tr th:if="${usuarios.empty}">
+                        <td colspan="2">Sem usuários</td>
+                    </tr> -->
+                    <tr th:each="produto : ${produtos}">
+                        <td><span th:text="${produto.id}">ID</span></td>
+                        <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
+                        <td><span th:text="${produto.precoProduto}"> Valor </span></td>
+                        <td><span th:text="${produto.qntdEstoque}"> Quantidade disponível </span></td>
+                        <td><input type="checkbox" name="myBooleanVariable" th:checked="${produto.statusAtivo}" />
+                        </td>
+                        <td>
+                            <img src="../../static/imagens/escrever.png" alt="">
+                        </td>
+
+
+
+                    </tr>
+                    <!-- <button onclick="produto.desabilitar()">Pagina Usuario</button> -->
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- <div class="adicionar-produto"><a href="/CadastroProduto"><button class="botoesItem">+ Produto</button></a></div> -->
+</body>
+
+</html>
