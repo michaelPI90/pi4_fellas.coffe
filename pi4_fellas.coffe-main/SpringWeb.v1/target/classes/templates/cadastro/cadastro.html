@@ -69,6 +69,7 @@
           <div class="lineInput">
             <input type="text" name="username" placeholder="Nome" field=" *{username}" required>
           </div>
+<<<<<<< HEAD
           <div class="lineInput">
             <input type="text" name="email" placeholder="E-mail" field=" *{email}" required>
           </div>
@@ -98,6 +99,49 @@
       </div>
     </div>
   </main>
+=======
+      </header>
+    
+    <main>
+        <div class="card">
+            <div class="titulo-cadastro">
+            <h1>Cadastre-se Aqui</h1>
+            </div>
+            <div class="formulario">
+                <form action="/CadastroCliente/cadastrar" th:object="${usuario}" method="post">
+                    <div class="lineInput">
+                        <input type="text" name="username" placeholder="Nome" field =" *{username}" required>
+                    </div>
+                    <div class="lineInput">
+                        <input type="text" name="email" placeholder="E-mail" field =" *{email}" required>
+                    </div>
+                    <div class="lineInput">
+                        <input type="password" name="password" placeholder="Senha" field =" *{password}" required>
+                    </div>
+                    <div class="lineInput">
+                        <input type="password" name="password2" placeholder="Digite novamente a senha" field =" *{password2}" required>
+                    </div>
+                    <div class="lineInput">
+                        <input type="text" name="cpf" placeholder="CPF" field =" *{cpf}" required>
+                    </div>
+                    <div class="lineInput">
+                        <select  name="grupo" field="*{grupo}" placeholder="Selecione um grupo" required>
+                            
+                            <option value="ROLE_ADMIN">Administrador</option>
+                            <option value="ROLE_ESTOQUISTA">Estoquista</option>
+                            
+                        </select>
+                    </div>
+                    <div th:text="${erro}" class="alert al" role="alert"></div>
+                    <div class="botao">
+                        <button>Cadastrar</button>
+                    </div>
+                    
+            </div>
+                </form>
+        </div>
+       
+>>>>>>> 38ccd4a9c302983bd63b8e61a146d9b7d1262266
 </body>
 
 </html>

@@ -25,11 +25,8 @@ public interface Userrespo extends JpaRepository<Usermodels, UUID> {
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query(value="UPDATE TB_USER SET cpf=?, username=?, password=?, email=?, grupo=?, status_ativo=? WHERE user_id=?", nativeQuery = true)
-    // public Usermodels updateUser (@Param("id") UUID userId );
-    public Usermodels updateUserid (String cpf, String username,  String password,  String email,  String grupo, boolean statusAtivo, UUID userId);
-
-
-
+    @Query(value="UPDATE TB_USER SET username=?, email=?, grupo=?, status_ativo=? WHERE user_id=?", nativeQuery = true)
+    public Integer alterarUsuario(String username, String email, String grupo, boolean statusAtivo, UUID userId);
+   
 
 }
