@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 
-        <!-- <div class="b-container">
+  <!-- <div class="b-container">
           <div class="logo">
             <img src="../../imagens/logo-header.png" alt="" />
           </div> -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Console.coffee</title>
-    <link rel="stylesheet" href="/css/cadastro.css">
-    <link rel="stylesheet" href="/css/login.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console.coffee</title>
+  <link rel="stylesheet" href="../../static/css/cadastro.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </head>
+
 <body>
 
-    <header>
-        <div class="b-container">
-          <div class="logo">
-            <img src="/imagens/logo-header.png" alt="" />
-          </div>
-        
-        <div class="nav-menu">
-            <ul class="menu">
-              <li>
-                <!-- <a href="">Home</a> -->
-              </li>
-            </ul>
-         <!--   <div class="controls">
+  <header>
+    <div class="b-container">
+      <div class="logo">
+        <img src="/imagens/logo-header.png" alt="" />
+      </div>
+
+      <div class="nav-menu">
+        <ul class="menu">
+          <li>
+            <!-- <a href="">Home</a> -->
+          </li>
+        </ul>
+      </div>
+  </header>
+
+
+  <!--   <div class="controls">
               <div class="profile">
                 <a href="#">
                   <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -53,49 +57,49 @@
                 </a>
               </div>
           </div>-->
+
+
+  <main>
+    <div class="card">
+      <div class="titulo-cadastro">
+        <h1>Cadastre-se Aqui</h1>
+      </div>
+      <div class="formulario">
+        <form action="/CadastroCliente/cadastrar" th:object="${usuario}" method="post">
+          <div class="lineInput">
+            <input type="text" name="username" placeholder="Nome" field=" *{username}" required>
           </div>
-      </header>
-    
-    <main>
-        <div class="card">
-            <div class="titulo-cadastro">
-            <h1>Cadastre-se Aqui</h1>
-            </div>
-            <div class="formulario">
-                <form action="/CadastroCliente/cadastrar" th:object="${usuario}" method="post">
-                    <div class="lineInput">
-                        <input type="text" name="username" placeholder="Nome" field =" *{username}" required>
-                    </div>
-                    <div class="lineInput">
-                        <input type="text" name="email" placeholder="E-mail" field =" *{email}" required>
-                    </div>
-                    <div class="lineInput">
-                        <input type="password" name="password" placeholder="Senha" field =" *{password}" required>
-                    </div>
-                    <div class="lineInput">
-                        <input type="password" name="password2" placeholder="Digite novamente a senha" field =" *{password2}" required>
-                    </div>
-                    <div class="lineInput">
-                        <input type="text" name="cpf" placeholder="CPF" field =" *{cpf}" required>
-                    </div>
-                    <div class="lineInput">
-                        <select  name="grupo" field="*{grupo}" placeholder="Selecione um grupo" required>
-                            
-                            <option value="ROLE_ADMIN">Administrador</option>
-                            <option value="ROLE_ESTOQUISTA">Estoquista</option>
-                            <option value="ROLE_CLIENTE">Cliente</option>
-                        </select>
-                    </div>
-                    <div th:text="${erro}" class="alert al" role="alert"></div>
-                    <div class="botao">
-                        <button>Cadastrar</button>
-                    </div>
-                    
-            </div>
-                </form>
-        </div>
-       
+          <div class="lineInput">
+            <input type="text" name="email" placeholder="E-mail" field=" *{email}" required>
+          </div>
+          <div class="lineInput">
+            <input type="password" name="password" placeholder="Senha" field=" *{password}" required>
+          </div>
+          <div class="lineInput">
+            <input type="password" name="password2" placeholder="Digite novamente a senha" field=" *{password2}"
+              required>
+          </div>
+          <div class="lineInput">
+            <input type="text" name="cpf" placeholder="CPF" field=" *{cpf}" required>
+          </div>
+          <div class="lineInput">
+            <select name="grupo" field="*{grupo}" placeholder="Selecione um grupo" required>
+
+              <option value="ROLE_ADMIN">Administrador</option>
+              <option value="ROLE_ESTOQUISTA">Estoquista</option>
+              <option value="ROLE_CLIENTE">Cliente</option>
+            </select>
+          </div>
+          <div th:text="${erro}" class="alert al" role="alert"></div>
+          <div class="botao">
+            <button>Cadastrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
 </body>
+
 </html>
 
 <!--Adicionar Gupos:
