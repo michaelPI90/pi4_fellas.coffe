@@ -1,5 +1,6 @@
 package com.web.pi3s.SpringWeb.controllers;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -14,7 +15,6 @@ import org.springframework.ui.Model;
 
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
-import com.web.pi3s.SpringWeb.util.UploadUtil;
 
 @Controller
 public class ProdutoController {
@@ -61,25 +61,22 @@ public class ProdutoController {
     }
 
     @PostMapping("/CadastroProduto/cadastrado")
-    public ModelAndView cadastro(@ModelAttribute Produtomodels produtos, @RequestParam("imagem") MultipartFile imagem) {
+    public ModelAndView cadastro(@ModelAttribute("produto") Produtomodels produtos,
+            @RequestParam("imagens") MultipartFile[] imagens) throws IOException {
+      
         ModelAndView mv = new ModelAndView("produtos/produtos");
-
         mv.addObject("produtos", produtos);
 
-        try {
-            if (UploadUtil.fazerUploadImagem(imagem)) {
-                produtos.setImagemProduto(imagem.getOriginalFilename());
+        for (int i = 0; i < imagens.length; i++) {
 
-            }
-            produtos.setStatusAtivo(true);
-            produtorespo.save(produtos);
+            produtos.getImagemProduto().add(imagens[i].getBytes());
+
             System.out.println("Salvo com sucesso: " + produtos.getNomeProduto() + " " + produtos.getImagemProduto());
-            return listaProduto(mv);
-        } catch (Exception e) {
-            mv.addObject("erro", e.getMessage());
-            System.out.println("Erro ao salvar " + e.getMessage());
-            return mv;
+
         }
+        
+        produtorespo.save(produtos);
+        return listaProduto(mv);
 
     }
 

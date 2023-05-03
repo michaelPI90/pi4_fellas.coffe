@@ -1,6 +1,5 @@
 package com.web.pi3s.SpringWeb.controllers;
 
-import java.util.InputMismatchException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +7,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.web.pi3s.SpringWeb.models.Clientemodels;
-import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Clienterespo;
-import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
 @Controller
-@RequestMapping("/cliente")
+@RequestMapping("fellas.coffe")
 public class ClienteController {
 
   @Autowired
@@ -24,10 +19,10 @@ public class ClienteController {
   @Autowired
   Clienterespo repository;
 
-  @RequestMapping("/homeCliente")
+  @GetMapping("/homeCliente")
   public String index(Model model, Clientemodels cliente) {
   
-        return "/hoeme/cliente";
+        return "/home/cliente";
 
   }
 
