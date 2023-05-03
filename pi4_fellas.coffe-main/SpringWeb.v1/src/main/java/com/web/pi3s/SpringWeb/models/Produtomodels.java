@@ -2,6 +2,9 @@ package com.web.pi3s.SpringWeb.models;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 
@@ -30,7 +33,7 @@ public class Produtomodels {
     private String avaliacao;
     @Column(nullable = false)
     private boolean statusAtivo = true;
-    private String imagemProduto;
+    private List<byte[]> imagemProduto;
 
    
     public Produtomodels() {
@@ -84,13 +87,19 @@ public class Produtomodels {
    
     
     
-   
-    public String getImagemProduto() {
+ 
+    public List<byte[]> getImagemProduto() {
+        if(imagemProduto == null){
+            imagemProduto = new ArrayList<>();
+        }
+      
         return imagemProduto;
     }
-    public void setImagemProduto(String imagemProduto) {
+
+    public void setImagemProduto(List<byte[]> imagemProduto) {
         this.imagemProduto = imagemProduto;
     }
+
     public boolean isStatusAtivo() {
         return statusAtivo;
     }
