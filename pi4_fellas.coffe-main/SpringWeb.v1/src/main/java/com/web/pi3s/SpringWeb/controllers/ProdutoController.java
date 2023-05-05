@@ -3,7 +3,6 @@ package com.web.pi3s.SpringWeb.controllers;
 import java.io.IOException;
 import java.util.*;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,46 +12,52 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
+import com.web.pi3s.SpringWeb.models.Imagenmodels;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
+import com.web.pi3s.SpringWeb.repositorio.Imagenrespo;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 
 @Controller
 public class ProdutoController {
 
-     @Autowired
+    @Autowired
     Produtorespo produtorespo;
+    @Autowired
+    Imagenrespo imagenrespo;
 
     @GetMapping("/ListarProdutos")
     public ModelAndView listaProduto(ModelAndView modelAndView) {
-      List<Produtomodels> produtosOrdenados =  this.produtorespo.ordernar();
-        //Produtomodels produtos = new Produtomodels();
-        //Collections.sort(produtosOrdenados, Collections.reverseOrder());
+        List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
+        // Produtomodels produtos = new Produtomodels();
+        // Collections.sort(produtosOrdenados, Collections.reverseOrder());
         modelAndView.setViewName("produtos/produtos");
-        //modelAndView.addObject("produtos", Collections.sort(produtosOrdenados, Collections.reverseOrder()));
+        // modelAndView.addObject("produtos", Collections.sort(produtosOrdenados,
+        // Collections.reverseOrder()));
         modelAndView.addObject("produtos", produtosOrdenados);
 
         return modelAndView;
 
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/ListarProdutosEstoquista")
     public ModelAndView listaProdutoEstoquista(ModelAndView modelAndView) {
-      List<Produtomodels> produtosOrdenados =  this.produtorespo.ordernar();
-        //Produtomodels produtos = new Produtomodels();
-        //Collections.sort(produtosOrdenados, Collections.reverseOrder());
+        List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
+        // Produtomodels produtos = new Produtomodels();
+        // Collections.sort(produtosOrdenados, Collections.reverseOrder());
         modelAndView.setViewName("produtos/produtosEstoquista");
-        //modelAndView.addObject("produtos", Collections.sort(produtosOrdenados, Collections.reverseOrder()));
+        // modelAndView.addObject("produtos", Collections.sort(produtosOrdenados,
+        // Collections.reverseOrder()));
         modelAndView.addObject("produtos", produtosOrdenados);
 
         return modelAndView;
 
     }
 
-   
     @GetMapping("/CadastroProduto")
     public ModelAndView formProduto(ModelAndView modelAndView) {
-        
-       Produtomodels produtos = new Produtomodels();
+
+        Produtomodels produtos = new Produtomodels();
         modelAndView.setViewName("cadastrarProduto/cadastrarProduto");
         modelAndView.addObject("produtos", produtos);
 
@@ -61,24 +66,46 @@ public class ProdutoController {
     }
 
     @PostMapping("/CadastroProduto/cadastrado")
-    public ModelAndView cadastro(@ModelAttribute("produto") Produtomodels produtos,
+    public ModelAndView cadastro(@ModelAttribute("produto") Produtomodels produtos, Imagenmodels novaImagem,
             @RequestParam("imagens") MultipartFile[] imagens) throws IOException {
-      
+
+       // List<byte[]> imagensBytes = new ArrayList<>();
+
+       for (int i = 0; i < imagens.length; i++) {
+           
+            novaImagem.setNomeImagem(imagens[i].getOriginalFilename());
+           
+            novaImagem.setConteudoImagem(imagens[i].getBytes());
+            novaImagem.setProduto(produtos);
+            produtos.setImagem(imagens[i].getBytes());
+          
+         
+        }
+       
+        produtorespo.save(produtos);
+        imagenrespo.save(novaImagem);
+     
+
         ModelAndView mv = new ModelAndView("produtos/produtos");
         mv.addObject("produtos", produtos);
 
-        for (int i = 0; i < imagens.length; i++) {
+        // for (int i = 0; i < imagens.length; i++) {
+        // Imagenmodels imagem;
+        // imagem.getConteudoImagem().add(imagens[i]
+        // produtos.getImagemProduto().add(imagens[i].
 
-            produtos.getImagemProduto().add(imagens[i].getBytes());
+        // System.out.println("Salvo com sucesso: " + produtos.getNomeProduto() + " " +
+        // produtos.getImagemProduto());
 
-            System.out.println("Salvo com sucesso: " + produtos.getNomeProduto() + " " + produtos.getImagemProduto());
+        // }
 
-        }
-        
-        produtorespo.save(produtos);
+        // produtorespo.save(produtos);
         return listaProduto(mv);
 
     }
+
+
+    
 
     @GetMapping("/ConsultarProduto")
     public String consultar(Model model, @RequestParam String nomeProduto) {
@@ -94,13 +121,10 @@ public class ProdutoController {
         return "/produtos/produtos";
     }
 
-
-
-
     @GetMapping("/statusProduto/{productId}")
     public String atualizar(Model model, @PathVariable Integer productId, Produtomodels user) {
 
-        salvarProduto( model, productId, user);
+        salvarProduto(model, productId, user);
 
         return "redirect:/ListarProdutos";
     }
@@ -116,8 +140,7 @@ public class ProdutoController {
     @PostMapping("/salvarProduto")
     public ModelAndView salvarProduto(Model model, Integer userID, Produtomodels product) {
         ModelAndView modelAndView = new ModelAndView();
-        Produtomodels  u = produtorespo.findByid(userID);
-       
+        Produtomodels u = produtorespo.findByid(userID);
 
         if (u.isStatusAtivo()) {
             u.setStatusAtivo(false);

@@ -5,6 +5,7 @@ package com.web.pi3s.SpringWeb.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.qos.logback.core.subst.Token.Type;
 import jakarta.persistence.*;
 
 
@@ -12,6 +13,7 @@ import jakarta.persistence.*;
  * 
  * Uma entidade de usuário que serve
  */
+
 @Entity
 @Table(name = "TB_PRODUTO")
 public class Produtomodels {
@@ -33,8 +35,10 @@ public class Produtomodels {
     private String avaliacao;
     @Column(nullable = false)
     private boolean statusAtivo = true;
-    private List<byte[]> imagemProduto;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Imagenmodels> imagem;
 
+   
    
     public Produtomodels() {
     }
@@ -88,16 +92,16 @@ public class Produtomodels {
     
     
  
-    public List<byte[]> getImagemProduto() {
-        if(imagemProduto == null){
-            imagemProduto = new ArrayList<>();
+    public List<Imagenmodels> getImagemProduto() {
+        if(imagem == null){
+            imagem = new ArrayList<>();
         }
       
-        return imagemProduto;
+        return imagem;
     }
 
-    public void setImagemProduto(List<byte[]> imagemProduto) {
-        this.imagemProduto = imagemProduto;
+    public void setImagemProduto(List<Imagenmodels> imagemProduto) {
+        this.imagem = imagemProduto;
     }
 
     public boolean isStatusAtivo() {
