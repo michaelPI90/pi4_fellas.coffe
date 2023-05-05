@@ -89,23 +89,20 @@ public class ProdutoController {
         ModelAndView mv = new ModelAndView("produtos/produtos");
         mv.addObject("produtos", produtos);
 
-        // for (int i = 0; i < imagens.length; i++) {
-        // Imagenmodels imagem;
-        // imagem.getConteudoImagem().add(imagens[i]
-        // produtos.getImagemProduto().add(imagens[i].
-
-        // System.out.println("Salvo com sucesso: " + produtos.getNomeProduto() + " " +
-        // produtos.getImagemProduto());
-
-        // }
-
-        // produtorespo.save(produtos);
+       
         return listaProduto(mv);
 
     }
 
+    @GetMapping("/product/{productId}")
+public String showProductPage(Model model, @PathVariable Integer productId) {
+    Optional<Imagenmodels> imageList =  imagenrespo.findById(productId);
+    model.addAttribute("imageList", imageList);
 
-    
+    return "/mostrar/teste";
+}
+
+
 
     @GetMapping("/ConsultarProduto")
     public String consultar(Model model, @RequestParam String nomeProduto) {
