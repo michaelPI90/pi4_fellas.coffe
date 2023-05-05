@@ -126,7 +126,7 @@
 								</tr> -->
 								<tr th:each="usuario : ${usuarios}">
 
-									<td aria-disabled="false"><input th:value="${usuario?.username}" class="usuario" id="username"
+									<td aria-disabled="true"><input th:value="${usuario?.username}" class="usuario" id="username"
 											name="username"> </td>
 
 									<td><span th:text="${usuario?.email}" class="usuario" id="email"
