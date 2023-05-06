@@ -151,7 +151,7 @@
                         <td><input th:value="${produto?.qntdEstoque}" id="qntdEstoque" name="qntdEstoque"></td>
                         <td><input type="checkbox" th:checked="${produto.statusAtivo}" />
                         </td>
-                        <td hidden><span th:value="${produto.imagem}" id="imagem" name="imagem"></span></td>
+                        <td hidden><span th:value="${produto.getImagem}" id="imagem" name="getImagem"></span></td>
                       
                         <td><button onclick="event.preventDefault(); salvarProduto(this)">Salvar modificações</button></td>
 								

@@ -154,8 +154,6 @@ public String showProductPage(Model model, @PathVariable Integer productId) {
 
     @PostMapping("/alterarDadosProduto")
     public ResponseEntity<String> atualizarDadosProduto(@RequestBody Produtomodels produto) {
-        System.out.println("================BATENDO AQUI NO METODO DE ALTERAR PRODUTO===================");
-        System.out.println("PRODUTO: " + produto);
         ResponseEntity resp;
         try{
             produtorespo.alterarProduto(produto.getQntdEstoque(), produto.getId());

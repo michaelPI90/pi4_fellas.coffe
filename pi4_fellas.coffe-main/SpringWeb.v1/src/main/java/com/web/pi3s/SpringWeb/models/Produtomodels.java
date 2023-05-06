@@ -115,10 +115,6 @@ public class Produtomodels {
         return imagem;
     }
 
-    public void setImagem(List<Imagenmodels> imagem) {
-        this.imagem = imagem;
-    }
-
     public Produtomodels(List<Imagenmodels> imagem) {
         this.imagem = new ArrayList<>();
     }
