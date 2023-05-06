@@ -19,7 +19,7 @@
 
 <body>
     <div th:each="image : ${imageList}">
-        <img th:src="@{'data:image/png;base64,' + #strings.encodeBase64(image.getConteudoImagem)" />
+        <img th:src="@{'data:image/png;base64,' + #strings.encodeBase64(image.getConteudoImagem)}" />
         
     </div>
 

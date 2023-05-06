@@ -1,16 +1,10 @@
 package com.web.pi3s.SpringWeb.models;
 
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-
 
 /**
  * 
@@ -40,12 +34,8 @@ public class Produtomodels {
     private boolean statusAtivo = true;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List <Imagenmodels> imagem;
+    private List<Imagenmodels> imagem;
 
-  
-
-   
-   
     public int getId() {
         return id;
     }
@@ -56,7 +46,7 @@ public class Produtomodels {
 
     public Produtomodels() {
     }
-    
+
     public Produtomodels(Integer id, String nomeProduto, double precoProduto, int qntdEstoque, String avaliacao,
             boolean statusAtivo) {
         this.id = id;
@@ -65,6 +55,12 @@ public class Produtomodels {
         this.qntdEstoque = qntdEstoque;
         this.avaliacao = avaliacao;
         this.statusAtivo = statusAtivo;
+    }
+
+    public Produtomodels(Integer id, int qntdEstoque) {
+        this.id = id;
+        this.qntdEstoque = qntdEstoque;
+
     }
 
     public String getNomeProduto() {
@@ -115,8 +111,6 @@ public class Produtomodels {
         this.statusAtivo = statusAtivo;
     }
 
-
-    
     public List<Imagenmodels> getImagem() {
         return imagem;
     }
@@ -126,16 +120,10 @@ public class Produtomodels {
     }
 
     public Produtomodels(List<Imagenmodels> imagem) {
-        this.imagem =  new ArrayList<>();
+        this.imagem = new ArrayList<>();
     }
 
     public void setImagem(byte[] bytes) {
     }
-   
-   
-    
-    
-
-   
 
 }

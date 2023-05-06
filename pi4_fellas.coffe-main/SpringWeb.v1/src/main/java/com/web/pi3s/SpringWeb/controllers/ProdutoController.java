@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
-
+import org.springframework.http.HttpStatus;
 import com.web.pi3s.SpringWeb.models.Imagenmodels;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Imagenrespo;
@@ -151,5 +151,21 @@ public String showProductPage(Model model, @PathVariable Integer productId) {
         return modelAndView;
 
     }
+
+    @PostMapping("/alterarDadosProduto")
+    public ResponseEntity<String> atualizarDadosProduto(@RequestBody Produtomodels produto) {
+        System.out.println("================BATENDO AQUI NO METODO DE ALTERAR PRODUTO===================");
+        System.out.println("PRODUTO: " + produto);
+        ResponseEntity resp;
+        try{
+            produtorespo.alterarProduto(produto.getQntdEstoque(), produto.getId());
+            resp = ResponseEntity.ok("Produto alterado com sucesso!");
+        }catch(Exception e){
+            e.printStackTrace();
+            resp = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Não foi possível alterar o produto: " + e.getMessage());
+        }
+        return resp;
+    }
+
 
 }

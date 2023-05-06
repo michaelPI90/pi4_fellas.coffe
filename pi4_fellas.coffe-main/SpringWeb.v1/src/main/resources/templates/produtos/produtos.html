@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <script src="script.js"></script>
+    <script src="/js/salvarModificacaoProduto.js"></script>
 </head>
 
 <body>
@@ -145,22 +145,16 @@
                         <td colspan="2">Sem usuários</td>
                     </tr> -->
                     <tr th:each="produto : ${produtos}">
-                        <td><span th:text="${produto.id}">ID</span></td>
+                        <td><span th:text="${produto?.id}" id="id" name="id"></span></td>
                         <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
                         <td><span th:text="${produto.precoProduto}"> Valor </span></td>
-                        <td><span th:text="${produto.qntdEstoque}"> Quantidade disponível </span></td>
+                        <td><input th:value="${produto?.qntdEstoque}" id="qntdEstoque" name="qntdEstoque"></td>
                         <td><input type="checkbox" th:checked="${produto.statusAtivo}" />
                         </td>
-                        <!-- <td>
-                            <img src="../../static/imagens/escrever.png" alt="">
-                        </td> -->
-                        <td><button type="submit" class="botoesItem">
-                                <a th:href="@{'/statusProduto/' + ${produto.id}}">Desabilitar/Habilitar Produto</button>
-                        </td>
-
-                        <td><button type="submit">
-                           <a th:href="@{'/product/' + ${produto.id}}" >teste</button>
-                        </td>
+                        <td hidden><span th:value="${produto.imagem}" id="imagem" name="imagem"></span></td>
+                      
+                        <td><button onclick="event.preventDefault(); salvarProduto(this)">Salvar modificações</button></td>
+								
                         
 
 

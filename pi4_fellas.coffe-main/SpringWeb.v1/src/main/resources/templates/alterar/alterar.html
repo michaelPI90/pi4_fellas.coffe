@@ -7,42 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/css/listarUsuarios.css" />
 	<link rel="stylesheet" href="/css/login.css">
-	<script>
-		function salvarUsuario(button){
-        	var row = button.parentNode.parentNode;
-        	var username = row.getElementsByTagName("td")[0].getElementsByTagName("input")[0];
-        	var email = row.getElementsByTagName("td")[1].getElementsByTagName("span")[0];
-			var status = row.getElementsByTagName("td")[2].getElementsByTagName("input")[0];
-			var grupo = row.getElementsByTagName("td")[3].getElementsByTagName("span")[0];
-			var userId = row.getElementsByTagName("td")[6].getElementsByTagName("input")[0];
+	<script src="/js/salvarModificacaoUsuario.js"></script>
 
-			fetch('/api/usuario/alterarDadosUsuario', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					username: username.value,
-					statusAtivo: status.checked,
-					email: email.textContent,
-					grupo: grupo.textContent,
-					userId: userId.value
-				})
-			})
-			.then(response => {
-				if(response.ok){
-					alert('Usuário alterado com sucesso!')
-				}else{
-					alert('Ocorreu um erro ao alterar o usuário!')
-					location.reload()
-				}
-			})
-			.catch(error => {
-				alert('Ocorreu um erro ao enviar a solicitação: ' + error.message)
-				location.reload()
-			})
-      	}
-	</script>
 
 
 </head>
@@ -126,27 +92,32 @@
 								</tr> -->
 								<tr th:each="usuario : ${usuarios}">
 
-									<td aria-disabled="true"><input th:value="${usuario?.username}" class="usuario" id="username"
-											name="username"> </td>
+									<td aria-disabled="true"><input th:value="${usuario?.username}" class="usuario"
+											id="username" name="username"> </td>
 
 									<td><span th:text="${usuario?.email}" class="usuario" id="email"
 											name="email"></span>
 									</td>
 
-									<td><input type="checkbox" th:checked="${usuario?.statusAtivo} " class="usuario" id="statusAtivo" name="statusAtivo" />
+									<td><input type="checkbox" th:checked="${usuario?.statusAtivo} " class="usuario"
+											id="statusAtivo" name="statusAtivo" />
 									</td>
 
-									<td><span th:text="${usuario?.grupo}" class="usuario" id="grupo" name="grupo"></span></td>
+									<td><span th:text="${usuario?.grupo}" class="usuario" id="grupo"
+											name="grupo"></span></td>
 
 									<td><input th:value="${usuario?.cpf}" class="usuario" id="cpf" name="cpf"></td>
-									<td><input th:value="${usuario?.password}" class="usuario" id="password" name="password"> </td>
-									<td hidden><input th:value="${usuario.userId}" class="usuario" id="userId" name="userId"> </td>
-								
+									<td><input th:value="${usuario?.password}" class="usuario" id="password"
+											name="password"> </td>
+									<td hidden><input th:value="${usuario.userId}" class="usuario" id="userId"
+											name="userId"> </td>
+
 
 									<!-- <td><button type="submit">
 										<a th:href="@{'/api/usuario/alterarStatus/' + ${usuario.userId}}">Habilitar/Desabilitar
 											Usuário</button></td> -->
-									<td><button onclick="event.preventDefault(); salvarUsuario(this)">Salvar modificações</button></td>
+									<td><button onclick="event.preventDefault(); salvarUsuario(this)">Salvar
+											modificações</button></td>
 								</tr>
 
 							</tbody>
