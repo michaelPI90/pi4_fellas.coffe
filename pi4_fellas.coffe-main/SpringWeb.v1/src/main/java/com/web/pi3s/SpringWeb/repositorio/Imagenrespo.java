@@ -15,4 +15,6 @@ public interface Imagenrespo extends  CrudRepository<Imagenmodels, Integer>  {
 
     List<Imagenmodels> findBynomeImagemContainingIgnoreCase(String nomeProduto);
 
+    Optional<Imagenmodels> findById(Long id);
+
 }

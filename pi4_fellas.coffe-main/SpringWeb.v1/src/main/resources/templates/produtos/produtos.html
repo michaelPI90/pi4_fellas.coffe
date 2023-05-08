@@ -155,7 +155,11 @@
                       
                         <td><button onclick="event.preventDefault(); salvarProduto(this)">Salvar modificações</button></td>
 								
-                        
+                        <td><button type="submit">
+                            <a th:href="@{'/product/' + ${produto.id}}">teste</button>
+                         </td>
+ 
+                         
 
 
                     </tr>
