@@ -27,7 +27,7 @@ public class Imagenmodels {
     private String nomeImagem;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tb_produto_id")
     private Produtomodels produto;
 
