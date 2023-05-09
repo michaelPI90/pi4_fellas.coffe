@@ -131,7 +131,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<byte[]> exibirImagem(@PathVariable Long id) {
+    public ResponseEntity<byte[]> exibirImagem(@PathVariable int id) {
         Optional<Imagenmodels> imagemOptional = imagenrespo.findById(id);
 
         if (imagemOptional.isPresent()) {
