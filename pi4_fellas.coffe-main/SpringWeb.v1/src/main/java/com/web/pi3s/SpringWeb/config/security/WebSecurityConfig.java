@@ -36,7 +36,7 @@ public class WebSecurityConfig{
     return http.httpBasic().and().authorizeHttpRequests(authorizeconfig -> {
           
 
-        authorizeconfig.requestMatchers("/").hasAnyAuthority("ROLE_ADMIN", "ROLE_ESTOQUISTA", "ROLE_CLIENTE");
+        authorizeconfig.requestMatchers("/").permitAll();
         authorizeconfig.requestMatchers("/api/usuario/admin/listar**").hasAuthority("ROLE_ADMIN");
        
         authorizeconfig.requestMatchers("/listarTodos").permitAll();

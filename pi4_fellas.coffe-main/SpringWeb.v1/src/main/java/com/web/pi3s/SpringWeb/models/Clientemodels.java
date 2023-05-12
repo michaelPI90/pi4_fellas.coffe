@@ -1,5 +1,11 @@
 package com.web.pi3s.SpringWeb.models;
 
+import java.util.Collection;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +20,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "TB_CLIENTE")
-public class Clientemodels {
+public class Clientemodels implements UserDetails{
     //private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,13 +30,25 @@ public class Clientemodels {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
-    private String senha;
+    private String password;
+    @Column(nullable = false)
+    private String password2;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
+    @DateTimeFormat(pattern =  "dd-MMM-YYYY")
     private String dataNasc;
     @Column(nullable = false)
     private String enderecoFaturamento;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getPassword2() {
+        return password2;
+    }
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
     @Column(nullable = false)
     private String enderecoEntrega;
     @Column(nullable = false)
@@ -54,12 +72,7 @@ public class Clientemodels {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+
     public String getEmail() {
         return email;
     }
@@ -108,11 +121,11 @@ public class Clientemodels {
 
     
 
-    public Clientemodels(int id, String nome, String senha, String email, String dataNasc, String enderecoFaturamento,
+    public Clientemodels(int id, String nome, String password, String email, String dataNasc, String enderecoFaturamento,
             String enderecoEntrega, String cep, String cpf, String genero) {
         this.id = id;
         this.nome = nome;
-        this.senha = senha;
+        this.password = password;
         this.email = email;
         this.dataNasc = dataNasc;
         this.enderecoFaturamento = enderecoFaturamento;
@@ -122,6 +135,41 @@ public class Clientemodels {
         this.genero = genero;
     }
     public Clientemodels() {
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
+    @Override
+    public String getPassword() {
+       return  this.password;
+    }
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+       return false;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+       return false;
+    }
+    @Override
+    public boolean isEnabled() {
+       return false;
+    }
+    public boolean isStatusAtivo() {
+        return statusAtivo;
+    }
+    public void setStatusAtivo(boolean statusAtivo) {
+        this.statusAtivo = statusAtivo;
     }
 
     

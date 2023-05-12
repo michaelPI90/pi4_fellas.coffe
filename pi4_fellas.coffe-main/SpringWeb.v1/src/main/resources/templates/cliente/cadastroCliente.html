@@ -68,10 +68,14 @@
                 <h1>Cadastre-se Aqui</h1>
             </div>
             <div class="formulario">
-                <form class="col-12 d-flex" action="">
+                <form action="/fellas.coffe/clienteCadastro" th:object="${cliente}" method="post">
                     <div class="col-6">
                         <div class="lineInput w-75">
-                            <input type="text" name="username" placeholder="Nome Completo">
+                            <input type="text" name="nome"  field="*{nome}" placeholder="Nome Completo">
+                        </div>
+
+                         <div class="lineInput w-75">
+                         <span> Idade:  </span><input type="date" name="dataNasc"  field="*{dataNasc}" placeholder="dataNasc">
                         </div>
                         <div class="lineInput w-75">
                             <input type="text" name="email" placeholder="O seu melhor e-mail">
@@ -83,34 +87,39 @@
                             <input type="password" name="password2" placeholder="Confirme a senha">
                         </div>
                         <div>
-                            <select class="form-select w-50 mb-2" aria-label="Default select example">
+                            <select class="form-select w-50 mb-2"  name="genero" field="*{genero}" aria-label="Default select example">
                                 <option selected>Selecione o gênero</option>
-                                <option value="1">Homem Cis</option>
-                                <option value="2">Mulher Cis</option>
-                                <option value="3">Transgenero</option>
-                                <option value="3">Pansexual</option>
-                                <option value="3">Prefiro não informar</option>
+                                <option value="Homem Cis">Homem Cis</option>
+                                <option value="Mulher Cis">Mulher Cis</option>
+                                <option value="Transgenero">Transgenero</option>
+                                <option value="Pansexual">Pansexual</option>
+                                <option value="Prefiro não informar">Prefiro não informar</option>
                             </select>
                         </div>
                         <div class="lineInput w-50">
-                            <input type="text" name="cpf" placeholder="CPF">
+                            <input type="text" name="cpf" field="*{cpf}" placeholder="CPF">
                         </div>
                         <div class="alert al" role="alert"></div>
                     </div>
                     <div class="col-6">
                         <div class="input-group mb-3 w-50">
-                            <input type="text" class="form-control" placeholder="CEP" aria-label="Username"
+                            <input type="text" class="form-control" placeholder="CEP" name="cep" field="*{cep}"  fieldaria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
 
                         <div class="input-group mb-3 w-50">
-                            <input type="text" class="form-control" placeholder="Logradouro"
+                            <input type="text" class="form-control" placeholder="Logradouro"  name="enderecoEntrega"
+                                aria-label="Recipient's username" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3 w-50">
+                            <input type="text" class="form-control" placeholder="enderecoFaturamento"  name="enderecoFaturamento"
                                 aria-label="Recipient's username" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="mb-3 w-50">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Número" id="basic-url"
+                                <input type="text" class="form-control" name="enderecoEntrega" placeholder="Número" id="basic-url"
                                     aria-describedby="basic-addon3 basic-addon4">
                             </div>
 
@@ -120,15 +129,15 @@
                             </div>
 
                             <div class="input-group mb-3 w-100 gap-3">
-                                <input type="text" class="form-control" placeholder="Bairro"
+                                <input type="text" class="form-control" name="enderecoEntrega" placeholder="Bairro"
                                     aria-label="Bairro do endereço">
-                                <input type="text" class="form-control" placeholder="Cidade"
+                                <input type="text" class="form-control" name="enderecoEntrega" placeholder="Cidade"
                                     aria-label="Cidade do endereço">
                             </div>
 
                             <div class="input-group d-flex justify-content-between">
                                 <div class="w-25">
-                                    <input class="form-control h-100" placeholder="UF"
+                                    <input class="form-control h-100" name="enderecoEntrega" placeholder="UF"
                                         aria-label="Sigla do estado"></input>
                                 </div>
                                 <button>Cadastrar</button>

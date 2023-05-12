@@ -56,7 +56,7 @@
             <h1>Fazer Login</h1>
             </div>
             <div class="formulario">
-                <form th:action=@{cliente/logar} method="post">
+                <form th:action=@{clienteLogar} method="post">
                     <div class="lineInput">
                         <input type="text" name="email" placeholder="E-mail">
                     </div>
@@ -67,6 +67,14 @@
                     <div class="botao">
                         <button>Entrar</button>
                     </div>
+
+                  </form>
+                    <form th:action=@{clienteCadastro} method="get">
+                    <div class="botao">
+                      <button>Cadastre-se</button>
+                  </div>
+
+                
                     <div class="link">
                     </div>
             </div>

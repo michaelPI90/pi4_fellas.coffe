@@ -9,6 +9,11 @@ import com.web.pi3s.SpringWeb.models.Clientemodels;
 public interface Clienterespo extends CrudRepository<Clientemodels, Integer> {
 
     Optional<Clientemodels> findByEmail(String email);
+ 
+
+    Optional<Clientemodels> findByCpf(String cpf);
+
+ 
     
 
 }
