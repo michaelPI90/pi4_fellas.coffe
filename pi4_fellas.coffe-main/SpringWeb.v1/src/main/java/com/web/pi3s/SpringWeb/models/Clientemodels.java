@@ -31,9 +31,14 @@ public class Clientemodels implements UserDetails{
     private String nome;
     @Column(nullable = false)
     private String password;
+   
+   
+    @Column(nullable = false, unique = true)
+    private String cpf;
+    @Column(nullable = false, unique = true)
+    private String genero;
     @Column(nullable = false)
-    private String bairro;
-
+    private boolean statusAtivo = true;
    
 
     @Column(nullable = false)
@@ -45,6 +50,11 @@ public class Clientemodels implements UserDetails{
     private String dataNasc;
     @Column(nullable = false)
     private String enderecoFaturamento;
+    @Column(nullable = false)
+    private String enderecoEntrega;
+
+
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -54,16 +64,8 @@ public class Clientemodels implements UserDetails{
     public void setPassword2(String password2) {
         this.password2 = password2;
     }
-    @Column(nullable = false)
-    private String enderecoEntrega;
-    @Column(nullable = false)
-    private String cep;
-    @Column(nullable = false, unique = true)
-    private String cpf;
-    @Column(nullable = false, unique = true)
-    private String genero;
-    @Column(nullable = false)
-    private boolean statusAtivo = true;
+  
+   
 
     public int getId() {
         return id;
@@ -91,12 +93,7 @@ public class Clientemodels implements UserDetails{
         this.dataNasc = dataNasc;
     }
    
-    public String getCep() {
-        return cep;
-    }
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+    
     public String getCpf() {
         return cpf;
     }
@@ -124,12 +121,7 @@ public class Clientemodels implements UserDetails{
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public String getBairro() {
-        return bairro;
-    }
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+ 
 
 
     public Clientemodels(int id, String nome, String password, String bairro, String password2, String email,
@@ -138,13 +130,13 @@ public class Clientemodels implements UserDetails{
         this.id = id;
         this.nome = nome;
         this.password = password;
-        this.bairro = bairro;
+     
         this.password2 = password2;
         this.email = email;
         this.dataNasc = dataNasc;
         this.enderecoFaturamento = enderecoFaturamento;
         this.enderecoEntrega = enderecoEntrega;
-        this.cep = cep;
+       
         this.cpf = cpf;
         this.genero = genero;
         this.statusAtivo = statusAtivo;

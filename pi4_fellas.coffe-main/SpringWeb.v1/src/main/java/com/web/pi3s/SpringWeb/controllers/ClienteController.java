@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.pi3s.SpringWeb.models.Clientemodels;
@@ -178,6 +179,22 @@ PasswordEncoder enconder;
   }
 
 
+
+
+  @PostMapping("/consultacep")
+  public String consultarCep(@RequestParam("cep") String cep, Model model) {
+      // Use uma biblioteca de consulta de CEP para buscar as informações correspondentes ao CEP fornecido
+      // Por exemplo, usando o ViaCEP
+      String url = "https://viacep.com.br/ws/" + cep + "/json/";
+      RestTemplate restTemplate = new RestTemplate();
+      Clientemodels enderecoCliente = restTemplate.getForObject(url, Clientemodels.class);
+  
+      // Adiciona as informações do CEP ao modelo
+      model.addAttribute("endereco", enderecoCliente);
+  
+      // Retorna a página HTML para exibir as informações
+      return "cliente/cadastroCliente";
+  }
 
 
 
