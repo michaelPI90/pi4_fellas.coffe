@@ -32,6 +32,11 @@ public class Clientemodels implements UserDetails{
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
+    private String bairro;
+
+   
+
+    @Column(nullable = false)
     private String password2;
     @Column(nullable = false, unique = true)
     private String email;
@@ -119,13 +124,22 @@ public class Clientemodels implements UserDetails{
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    
+    public String getBairro() {
+        return bairro;
+    }
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-    public Clientemodels(int id, String nome, String password, String email, String dataNasc, String enderecoFaturamento,
-            String enderecoEntrega, String cep, String cpf, String genero) {
+
+    public Clientemodels(int id, String nome, String password, String bairro, String password2, String email,
+            String dataNasc, String enderecoFaturamento, String enderecoEntrega, String cep, String cpf, String genero,
+            boolean statusAtivo) {
         this.id = id;
         this.nome = nome;
         this.password = password;
+        this.bairro = bairro;
+        this.password2 = password2;
         this.email = email;
         this.dataNasc = dataNasc;
         this.enderecoFaturamento = enderecoFaturamento;
@@ -133,6 +147,7 @@ public class Clientemodels implements UserDetails{
         this.cep = cep;
         this.cpf = cpf;
         this.genero = genero;
+        this.statusAtivo = statusAtivo;
     }
     public Clientemodels() {
     }

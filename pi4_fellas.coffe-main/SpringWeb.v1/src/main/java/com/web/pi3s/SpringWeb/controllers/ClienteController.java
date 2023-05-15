@@ -115,7 +115,7 @@ PasswordEncoder enconder;
       return "cliente/homeLogado";
     }
     model.addAttribute("erro", erroMsg);
-    return "/cliente/clienteCadastro";
+    return "/cliente/cadastroCliente";
 
   }
 
