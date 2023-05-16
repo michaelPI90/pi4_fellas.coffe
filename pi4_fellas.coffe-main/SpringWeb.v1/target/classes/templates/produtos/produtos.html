@@ -54,62 +54,7 @@
     </header>
 
     <main>
-        <!-- <div class="title">
-            <h2>Cadastrar Produto</h2>
-            <span>Preencha todos os campos com atenção</span>
-        </div> 
-
-
-        <div class="card">
-            <div class="formulario">
-                <form action="/CadastroProduto/cadastrado" th:object="${produtos}" method="post" enctype="multipart/form-data">
-                    <div class="lineInput">
-                        <label for="">Produto</label>
-                        <input type="text" id="nomeProduto" name="nomeProduto" field=" *{nomeProduto}"
-                            placeholder="Nome do produto" maxlength="100" required>
-                    </div>
-                    <div class="lineInput">
-                        <label for="">Descrição Detalhada</label>
-                        <input type="text" id="descricaoDetalhada" name="descricaoDetalhada"
-                            field=" *{descricaoDetalhada}" placeholder="Descreva o produto detalhadamente"
-                            maxlength="2000" required>
-                    </div>
-                    <div class="lineInput">
-                        <label for="">Preço</label>
-                        <input type="number" min="0" step="0.02" id="precoProduto" name="precoProduto"
-                            field=" *{precoProduto}" placeholder="Defina um valor para o produto" required>
-                    </div>
-
-                    <div class="lineInput">
-                        <label for="">Quantidade no Estoque</label>
-                        <input type="text" id="qtd-estoque" name="qntdEstoque" field=" *{qntdEstoque}"
-                            placeholder="Informe a quantidade do produto em estoque" required>
-                    </div>
-                    <div class="lineInput">
-                        <label for="">Avaliação</label>
-                        <select name="avaliacao" field="*{avaliacao}" placeholder="Avalie o produto" required>
-
-                            <option value="1">1 estrela</option>
-                            <option value="1,5">1,5 estrela</option>
-                            <option value="2">2 estrelas</option>
-                            <option value="2,5">2,5 estrelas</option>
-                            <option value="3">3 estrelas</option>
-                            <option value="3,5">3,5 estrelas</option>
-                            <option value="4">4 estrelas</option>
-                            <option value="4,5">4,5 estrelas</option>
-                            <option value="5">5 estrelas</option>
-                        </select>
-                    </div>
-                    <div class="lineInput">
-                        <label for="arquivo">Imagem do produto</label>
-                        <input type="file" id="arquivo" placeholder="Upload da Imagem" name="imagem" required>
-                    </div>
-
-                    <button onclick="produto.adicionar()">Salvar</button>
-                    <button onclick="produto.alterar()">Cancelar</button>
-                </form>
-            </div>
-        </div> -->
+   
 
         <div class="consultar-produto"></div>
         <h2>Listar Produtos</h2>
@@ -136,6 +81,7 @@
                     <th>Valor</th>
                     <th>Quantidade disponível</th>
                     <th>Status</th>
+                    <th>Visualizar</th>
                     <th></th>
                     
 
@@ -146,8 +92,8 @@
                     </tr> -->
                     <tr th:each="produto : ${produtos}">
                         <td><span th:text="${produto?.id}" id="id" name="id"></span></td>
-                        <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
-                        <td><span th:text="${produto.precoProduto}"> Valor </span></td>
+                        <td><input th:value="${produto.nomeProduto}"> </span></td>
+                        <td><input th:value="${produto.precoProduto}"> </span></td>
                         <td><input th:value="${produto?.qntdEstoque}" id="qntdEstoque" name="qntdEstoque"></td>
                         <td><input type="checkbox" th:checked="${produto.statusAtivo}" />
                         </td>
