@@ -64,14 +64,18 @@ PasswordEncoder enconder;
 
   @GetMapping("/detalhesProduto")
   public ModelAndView detalhesProduto(Model model) {
+
     ModelAndView modelAndView = new ModelAndView();
     Produtomodels detalhesProduto = new Produtomodels();
+  
     modelAndView.setViewName("cliente/detalhesProduto");
     modelAndView.addObject("detalhesProduto", detalhesProduto);
 
     return modelAndView;
 
   }
+
+
 
 
   @PostMapping("clienteLogar")
@@ -181,20 +185,6 @@ PasswordEncoder enconder;
 
 
 
-  @PostMapping("/consultacep")
-  public String consultarCep(@RequestParam("cep") String cep, Model model) {
-      // Use uma biblioteca de consulta de CEP para buscar as informações correspondentes ao CEP fornecido
-      // Por exemplo, usando o ViaCEP
-      String url = "https://viacep.com.br/ws/" + cep + "/json/";
-      RestTemplate restTemplate = new RestTemplate();
-      Clientemodels enderecoCliente = restTemplate.getForObject(url, Clientemodels.class);
-  
-      // Adiciona as informações do CEP ao modelo
-      model.addAttribute("endereco", enderecoCliente);
-  
-      // Retorna a página HTML para exibir as informações
-      return "cliente/cadastroCliente";
-  }
 
 
 
