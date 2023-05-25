@@ -16,32 +16,36 @@ import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Clienterespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
-
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 
-
-
 @RequestMapping("/fellas.coffe")
 
-
-
-
 public class ClienteController {
-    
-@Autowired
-Clienterespo clienterespo;
-@Autowired
-PasswordEncoder enconder;
+
+  @Autowired
+  Clienterespo clienterespo;
+  @Autowired
+  PasswordEncoder enconder;
 
   @GetMapping("/homeCliente")
-  public String index(Model model, Clientemodels cliente) {
-        return "/cliente/home";
+  public String index() {
+    return "/cliente/home";
+  }
+
+  @GetMapping("/logado")
+  public ModelAndView logado() {
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("cliente/homeLogado");
+    mv.addObject("usuarioLogado", new Clientemodels());
+
+    return mv;
 
   }
 
   @GetMapping("/clienteLogin")
-  public ModelAndView formCliente(Model model) {
+  public ModelAndView formCliente() {
     ModelAndView modelAndView = new ModelAndView();
     Clientemodels usuario = new Clientemodels();
     modelAndView.setViewName("cliente/loginCliente");
@@ -67,7 +71,7 @@ PasswordEncoder enconder;
 
     ModelAndView modelAndView = new ModelAndView();
     Produtomodels detalhesProduto = new Produtomodels();
-  
+
     modelAndView.setViewName("cliente/detalhesProduto");
     modelAndView.addObject("detalhesProduto", detalhesProduto);
 
@@ -75,37 +79,37 @@ PasswordEncoder enconder;
 
   }
 
-
-
-
   @PostMapping("clienteLogar")
-  String listarUsuario(Model model, Clientemodels user) {
-      Optional<Clientemodels> userEncontrado = this.clienterespo.findByEmail(user.getEmail());
+  ModelAndView listarUsuario(Model model, Clientemodels user, HttpSession session) {
+    Clientemodels userEncontrado = this.clienterespo.findByEmail(user.getEmail());
+    ModelAndView mv = new ModelAndView();
+    String erroMsg = null;
+    if (userEncontrado == null) {
+      erroMsg = "Email não encontrado clique em cadastra-se caso não tenha cadastro";
 
-      String erroMsg = null;
-      if (userEncontrado.isEmpty()) {
-          erroMsg = "Email não encontrado clique em cadastra-se caso não tenha cadastro";
-        
-      } else if (!enconder.matches(user.getPassword(), userEncontrado.get().getPassword())) {
-          erroMsg = "verifique se a senha foi digitada corretamente";
-         
-      } else if (!userEncontrado.get().isStatusAtivo()) {
-          erroMsg = "Usuário inativo!!!";
-      }
+    } else if (!enconder.matches(user.getPassword(), userEncontrado.getPassword())) {
+      erroMsg = "verifique se a senha foi digitada corretamente";
 
-      else {
-        model.addAttribute("usuarios", clienterespo.findAll());
-        return "/cliente/homeLogado";
+    } else if (!userEncontrado.isStatusAtivo()) {
+      erroMsg = "Usuário inativo!!!";
     }
-      model.addAttribute("erro", erroMsg);
-      return "/cliente/loginCliente";
-  }
 
+    else {
+      session.setAttribute("usuarioLogado", user);
+      System.out.println(user);
+      session.setMaxInactiveInterval(1);
+
+      return logado();
+    }
+    model.addAttribute("erro", erroMsg);
+    mv.setViewName("/cliente/loginCliente");
+    return mv;
+  }
 
   @PostMapping("/clienteCadastro")
   public String salvar(Model model, Clientemodels c) throws Exception {
     String erroMsg = null;
-    if (this.clienterespo.findByEmail(c.getEmail()).isPresent()) {
+    if (this.clienterespo.findByEmail(c.getEmail()) != null) {
       erroMsg = "EMAIL JÁ CADASTRADO";
     } else if (this.clienterespo.findByCpf(c.getCpf()).isPresent()) {
       erroMsg = "CPF JÁ CADASTRADO";
@@ -182,12 +186,11 @@ PasswordEncoder enconder;
     }
   }
 
+  @PostMapping("/Logout")
+  public ModelAndView logout(HttpSession session) {
+    session.invalidate();
 
-
-
-
-
-
-
+    return formCliente();
+  }
 
 }
