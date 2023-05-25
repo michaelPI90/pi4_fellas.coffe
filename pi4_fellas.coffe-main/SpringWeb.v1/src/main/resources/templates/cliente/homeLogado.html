@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+
+  <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -23,16 +24,13 @@
         <div class="logo">
           <img src="/imagens/logo-header.png" alt="" />
         </div>
-        <tr th:each="usuario : ${usuarioLogado}">
+      
 
-          <td aria-disabled="true"><input th:value="${usuario?.username}" class="usuario"
-              id="username" name="username"> </td>
 
-          <td><span th:text="${usuario?.cpf}" class="usuario" id="cpf"
-              name="cpf"></span>
-          </td>
-         
-          </tr>
+            
+        <td aria-disabled="true"><input th:value="${session.usuarioLogado.cpf}" class="usuarioLogado"
+          id="username" name="username"> </td>
+      
 
             <div class="nav-menu">
                 <ul class="menu">
@@ -42,7 +40,7 @@
                 </ul>
                 <div class="controls">
                     <div class="profile">
-                        <a href="/fellas.coffe/clienteLogin">
+                        <a href="/fellas.coffe/alterar">
                             <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32"
                                 height="32" viewBox="0 0 32 32">
                                 <path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />

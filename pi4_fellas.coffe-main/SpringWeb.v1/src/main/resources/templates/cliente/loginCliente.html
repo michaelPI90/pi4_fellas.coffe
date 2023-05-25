@@ -56,7 +56,7 @@
             <h1>Fazer Login</h1>
             </div>
             <div class="formulario">
-                <form th:action=@{clienteLogar} method="post">
+                <form th:action=@{clienteLogar} method="post" th:object="${usuario}">
                     <div class="lineInput">
                         <input type="text" name="email" placeholder="E-mail">
                     </div>

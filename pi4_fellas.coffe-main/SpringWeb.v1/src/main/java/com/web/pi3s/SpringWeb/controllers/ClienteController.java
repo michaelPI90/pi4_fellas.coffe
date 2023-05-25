@@ -38,6 +38,17 @@ public class ClienteController {
   public ModelAndView logado() {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("cliente/homeLogado");
+    mv.addObject("userLogado", new Clientemodels());
+
+    return mv;
+
+  }
+
+
+  @GetMapping("/alterar")
+  public ModelAndView viwAlterar() {
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("cliente/alterarDadosCliente");
     mv.addObject("usuarioLogado", new Clientemodels());
 
     return mv;
@@ -81,24 +92,22 @@ public class ClienteController {
 
   @PostMapping("clienteLogar")
   ModelAndView listarUsuario(Model model, Clientemodels user, HttpSession session) {
-    Clientemodels userEncontrado = this.clienterespo.findByEmail(user.getEmail());
+    
     ModelAndView mv = new ModelAndView();
+    mv.addObject("usuario", new Clientemodels());
     String erroMsg = null;
+
+    Clientemodels userEncontrado = this.clienterespo.findByEmail(user.getEmail());
     if (userEncontrado == null) {
       erroMsg = "Email não encontrado clique em cadastra-se caso não tenha cadastro";
 
-    } else if (!enconder.matches(user.getPassword(), userEncontrado.getPassword())) {
-      erroMsg = "verifique se a senha foi digitada corretamente";
 
     } else if (!userEncontrado.isStatusAtivo()) {
       erroMsg = "Usuário inativo!!!";
     }
 
     else {
-      session.setAttribute("usuarioLogado", user);
-      System.out.println(user);
-      session.setMaxInactiveInterval(1);
-
+      session.setAttribute("usuarioLogado", userEncontrado);
       return logado();
     }
     model.addAttribute("erro", erroMsg);
@@ -185,6 +194,35 @@ public class ClienteController {
       return (false);
     }
   }
+
+
+
+  @PostMapping("/alterarCadastro")
+public String alterarCadastro(Model model, HttpSession session, Clientemodels novoUsuario) {
+    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+    
+    // Verifica se o usuário está logado na sessão
+    if (usuarioLogado == null) {
+        // Redireciona para a página de login caso não esteja logado
+        return "redirect:/fellas.coffe/clienteLogin";
+    }
+    
+    // Atualiza os dados do usuário logado com os novos dados
+    usuarioLogado.setNome(novoUsuario.getNome());
+    usuarioLogado.setEmail(novoUsuario.getEmail());
+    usuarioLogado.setGenero(novoUsuario.getGenero());
+    // Outros campos que precisam ser atualizados
+    
+    // Salva as alterações no repositório
+    clienterespo.save(usuarioLogado);
+    
+    // Atualiza o usuário na sessão
+    session.setAttribute("usuarioLogado", usuarioLogado);
+    
+    // Redireciona para a página de perfil do usuário
+    return "redirect:/fellas.coffe/logado";
+}
+
 
   @GetMapping("/carrinho")
   public String visualizarCarrionho() {
