@@ -186,6 +186,14 @@ public class ClienteController {
     }
   }
 
+  @GetMapping("/carrinho")
+  public String visualizarCarrionho() {
+    return "/cliente/carrinho";
+  }
+
+
+
+
   @PostMapping("/Logout")
   public ModelAndView logout(HttpSession session) {
     session.invalidate();
