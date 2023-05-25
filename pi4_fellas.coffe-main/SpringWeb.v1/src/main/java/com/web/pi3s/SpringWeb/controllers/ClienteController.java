@@ -55,6 +55,25 @@ public class ClienteController {
 
   }
 
+
+  @GetMapping("/alterarCadastro")
+public String exibirFormulario(Model model, HttpSession session) {
+    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    // Verifica se o usuário está logado na sessão
+    if (usuarioLogado == null) {
+        // Redireciona para a página de login caso não esteja logado
+        return "redirect:/fellas.coffe/clienteLogin";
+    }
+
+    // Adicione o usuário logado ao modelo para exibir os dados no formulário
+    model.addAttribute("usuario", usuarioLogado);
+
+    // Retorne o nome da página de formulário para que seja exibido o conteúdo
+    return "cliente/alterarDadosCliente";
+}
+
+
   @GetMapping("/clienteLogin")
   public ModelAndView formCliente() {
     ModelAndView modelAndView = new ModelAndView();

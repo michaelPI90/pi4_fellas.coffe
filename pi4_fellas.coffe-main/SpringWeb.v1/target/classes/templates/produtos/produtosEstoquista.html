@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="UTF-8">
@@ -7,80 +8,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Console.coffee</title>
     <link rel="stylesheet" href="/css/produtos.css">
-
+    <link rel="stylesheet" href="/css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <script src="script.js"></script>
+    <script src="/js/salvarModificacaoProduto.js"></script>
 </head>
 
 <body>
 
     <header>
-        <h1>Console.coffee</h1>
+        <div class="b-container">
+            <div class="logo">
+                <img src="/imagens/logo-header.png" alt="" />
+            </div>
+
+            <div class="nav-menu">
+                <ul class="menu">
+                    <li>
+                        <!-- <a href="">Home</a> -->
+                    </li>
+                </ul>
+                <!--   <div class="controls">
+			  <div class="profile">
+				<a href="#">
+				  <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+					<path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />
+					<path id="Caminho_10" data-name="Caminho 10" d="M15.333,2A13.333,13.333,0,1,0,28.667,15.333,13.338,13.338,0,0,0,15.333,2ZM8.76,23.707c.573-1.2,4.067-2.373,6.573-2.373s6.013,1.173,6.573,2.373a10.567,10.567,0,0,1-13.147,0Zm15.053-1.933c-1.907-2.32-6.533-3.107-8.48-3.107s-6.573.787-8.48,3.107a10.667,10.667,0,1,1,16.96,0Zm-8.48-14.44A4.667,4.667,0,1,0,20,12,4.655,4.655,0,0,0,15.333,7.333Zm0,6.667a2,2,0,1,1,2-2A2,2,0,0,1,15.333,14Z" transform="translate(0.667 0.667)" />
+				  </svg>
+				   <p>Faça login/ Crie seu login</p>
+				</a>
+			  </div>
+			  <div class="shopping-cart">
+				<a href="#">
+				  <svg id="shopping_cart_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+					<path id="Caminho_11" data-name="Caminho 11" d="M0,0H32V32H0Z" fill="none"></path>
+					<path class="header__content__cart__color" id="Caminho_12" data-name="Caminho 12" d="M20.4,16.667a2.654,2.654,0,0,0,2.333-1.373L27.507,6.64a1.328,1.328,0,0,0-1.16-1.973H6.613L5.36,2H1V4.667H3.667l4.8,10.12-1.8,3.253A2.671,2.671,0,0,0,9,22H25V19.333H9l1.467-2.667ZM7.88,7.333h16.2L20.4,14H11.04Zm1.12,16A2.667,2.667,0,1,0,11.667,26,2.663,2.663,0,0,0,9,23.333Zm13.333,0A2.667,2.667,0,1,0,25,26,2.663,2.663,0,0,0,22.333,23.333Z" transform="translate(0.333 0.667)"></path>
+				  </svg>
+				   <span class="product-number">3</span>
+				</a>
+			  </div>
+		  </div>-->
+            </div>
     </header>
 
     <main>
-        <!-- <div class="title">
-            <h2>Cadastrar Produto</h2>
-            <span>Preencha todos os campos com atenção</span>
-        </div> 
-
-
-        <div class="card">
-            <div class="formulario">
-                <form action="/CadastroProduto/cadastrado" th:object="${produtos}" method="post" enctype="multipart/form-data">
-                    <div class="lineInput">
-                        <label for="">Produto</label>
-                        <input type="text" id="nomeProduto" name="nomeProduto" field=" *{nomeProduto}"
-                            placeholder="Nome do produto" maxlength="100" required>
-                    </div>
-                    <div class="lineInput">
-                        <label for="">Descrição Detalhada</label>
-                        <input type="text" id="descricaoDetalhada" name="descricaoDetalhada"
-                            field=" *{descricaoDetalhada}" placeholder="Descreva o produto detalhadamente"
-                            maxlength="2000" required>
-                    </div>
-                    <div class="lineInput">
-                        <label for="">Preço</label>
-                        <input type="number" min="0" step="0.02" id="precoProduto" name="precoProduto"
-                            field=" *{precoProduto}" placeholder="Defina um valor para o produto" required>
-                    </div>
-
-                    <div class="lineInput">
-                        <label for="">Quantidade no Estoque</label>
-                        <input type="text" id="qtd-estoque" name="qntdEstoque" field=" *{qntdEstoque}"
-                            placeholder="Informe a quantidade do produto em estoque" required>
-                    </div>
-                    <div class="lineInput">
-                        <label for="">Avaliação</label>
-                        <select name="avaliacao" field="*{avaliacao}" placeholder="Avalie o produto" required>
-
-                            <option value="1">1 estrela</option>
-                            <option value="1,5">1,5 estrela</option>
-                            <option value="2">2 estrelas</option>
-                            <option value="2,5">2,5 estrelas</option>
-                            <option value="3">3 estrelas</option>
-                            <option value="3,5">3,5 estrelas</option>
-                            <option value="4">4 estrelas</option>
-                            <option value="4,5">4,5 estrelas</option>
-                            <option value="5">5 estrelas</option>
-                        </select>
-                    </div>
-                    <div class="lineInput">
-                        <label for="arquivo">Imagem do produto</label>
-                        <input type="file" id="arquivo" placeholder="Upload da Imagem" name="imagem" required>
-                    </div>
-
-                    <button onclick="produto.adicionar()">Salvar</button>
-                    <button onclick="produto.alterar()">Cancelar</button>
-                </form>
-            </div>
-        </div> -->
+   
 
         <div class="consultar-produto"></div>
-            <h2>Listar Produtos</h2>
+        <h2>Listar Produtos</h2>
         </div>
 
         <form id="formulário" action=/ConsultarProduto method="get">
@@ -104,23 +81,38 @@
                     <th>Valor</th>
                     <th>Quantidade disponível</th>
                     <th>Status</th>
-                    <th>Ações</th>
+                    <th>Salvar</th>
+                    <th>Visualizar</th>
+                    
+
                 </thead>
                 <tbody>
                     <!-- <tr th:if="${usuarios.empty}">
                         <td colspan="2">Sem usuários</td>
                     </tr> -->
                     <tr th:each="produto : ${produtos}">
-                        <td><span th:text="${produto.id}">ID</span></td>
+                        <td><span th:text="${produto?.id}" id="id" name="id"></span></td>
                         <td><span th:text="${produto.nomeProduto}"> Nome </span></td>
                         <td><span th:text="${produto.precoProduto}"> Valor </span></td>
-                        <td><span th:text="${produto.qntdEstoque}"> Quantidade disponível </span></td>
-                        <td><input type="checkbox" name="myBooleanVariable" th:checked="${produto.statusAtivo}" />
+                        <td><input th:value="${produto?.qntdEstoque}" id="qntdEstoque" name="qntdEstoque"></td>
+                        <td><input type="checkbox" th:checked="${produto.statusAtivo}" />
                         </td>
-                        <td>
-                            <img src="../../static/imagens/escrever.png" alt="">
-                        </td>
+                        <td hidden><span th:value="${produto.getImagem}" id="imagem" name="getImagem"></span></td>
+                      
+                        <td><button onclick="event.preventDefault(); salvarProduto(this)">Salvar modificações</button></td>
+								
+                        <td><button type="submit">
+                            <a href="/fellas.coffe/detalhesProduto" class="btn btn-primary btn-card">Detalhes</a>
+                         </td>
 
+                        
+
+                      
+                        
+                            
+                      
+ 
+                         
 
 
                     </tr>
@@ -130,7 +122,8 @@
             </table>
         </div>
     </main>
-    <!-- <div class="adicionar-produto"><a href="/CadastroProduto"><button class="botoesItem">+ Produto</button></a></div> -->
+    <div class="adicionar-produto"><a href="/CadastroProduto"><button class="botoesItem">+ Produto</button></a></div>
+    <div class="adicionar-produto"><a href="/api/usuario/home/logar"><button class="botoesItem">Cancelar</button></a></div>
 </body>
 
 </html>

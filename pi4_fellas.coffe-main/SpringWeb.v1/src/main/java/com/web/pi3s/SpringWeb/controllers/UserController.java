@@ -73,6 +73,22 @@ public class UserController {
 
     }
 
+    @GetMapping("/home/logar")
+    public String exibirFormularioLogin(Model model) {
+        model.addAttribute("user", new Usermodels());
+        return "/logado/logadoEstoquista";
+    }
+    
+
+
+
+    @GetMapping("/admin/home")
+public String exibirListaUsuarios(Model model) {
+    model.addAttribute("usuarios", repository.findAll());
+    return "/logado/logadoAdmin";
+}
+
+
     @GetMapping("/ConsultarUsuario")
     public String consultar(Model model, @RequestParam String nome) {
 
