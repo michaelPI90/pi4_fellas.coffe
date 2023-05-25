@@ -23,6 +23,16 @@
         <div class="logo">
           <img src="/imagens/logo-header.png" alt="" />
         </div>
+        <tr th:each="usuario : ${usuarioLogado}">
+
+          <td aria-disabled="true"><input th:value="${usuario?.username}" class="usuario"
+              id="username" name="username"> </td>
+
+          <td><span th:text="${usuario?.cpf}" class="usuario" id="cpf"
+              name="cpf"></span>
+          </td>
+         
+          </tr>
 
             <div class="nav-menu">
                 <ul class="menu">
@@ -43,6 +53,10 @@
                            
                         </a>
                     </div>
+                    <form th:action="Logout" method="post">
+                      <button type="submit">Sair</button>
+                    
+                      </form>
                     <div class="shopping-cart">
                         <a href="#">
                             <svg id="shopping_cart_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
