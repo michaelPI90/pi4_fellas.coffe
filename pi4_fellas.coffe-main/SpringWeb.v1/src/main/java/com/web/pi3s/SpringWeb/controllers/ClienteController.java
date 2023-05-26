@@ -149,7 +149,7 @@ public String exibirFormulario(Model model, HttpSession session) {
       c.setStatusAtivo(true);
       c.setPassword(enconder.encode(c.getPassword()));
       clienterespo.save(c); // Função que executa o cadastro
-      return "cliente/homeLogado";
+      return "cliente/loginCliente";
     }
     model.addAttribute("erro", erroMsg);
     return "/cliente/cadastroCliente";
