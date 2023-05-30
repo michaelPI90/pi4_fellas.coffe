@@ -1,0 +1,172 @@
+/* Seletores Globais */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #fafbfc;
+}
+
+button {
+  font-weight: bold;
+  border: 0px;
+  padding: 10px 15px;
+  background-color: #9e3f15;
+}
+
+p,
+a {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  color: #9e3f15;
+  text-decoration: none;
+}
+
+main {
+  padding: 15px 50px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Seletores de Classes */
+
+.b-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 50px;
+  box-sizing: border-box;
+  background-color: #efad60;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  flex: 1;
+}
+
+.logo img {
+  width: 270px;
+}
+
+.nav-menu {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+
+.profile a,
+.shopping-cart a {
+  display: flex;
+  align-items: center;
+}
+
+.profile svg,
+.shopping-cart svg {
+  width: 24px;
+  height: 24px;
+  fill: #9e3f15;
+}
+
+.profile #account_circle_black_24dp {
+  position: relative;
+}
+
+.profile #account_circle_black_24dp:before {
+  content: "Faça login/crie seu login";
+  position: absolute;
+  top: -10px;
+  right: 40px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.header__content__cart__color {
+  fill: #9e3f15;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.titulo-cadastro {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formulario {
+  align-items: center;
+}
+
+.lineInput {
+  display: grid;
+  margin-bottom: 10px;
+}
+
+.botao {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Seletores IDs */
+
+#cards {
+  display: flex;
+    
+}
+
+/* @media screen and (max-width: 600px) {
+  .b-container {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 10px;
+  }
+
+  .logo {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .nav-menu {
+      flex-basis: 100%;
+  }
+
+  .menu {
+      flex-direction: column;
+      margin-bottom: 10px;
+  }
+
+  .menu li {
+      margin-left: 0;
+  }
+
+  .controls {
+      margin-left: 0;
+  }
+} */
