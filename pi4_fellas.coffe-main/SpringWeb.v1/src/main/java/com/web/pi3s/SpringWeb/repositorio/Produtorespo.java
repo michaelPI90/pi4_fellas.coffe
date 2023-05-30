@@ -14,7 +14,8 @@ public interface Produtorespo extends CrudRepository<Produtomodels, Integer> {
 
     Optional<Produtomodels> findByNomeProduto(String nomeProduto);
    
-   Produtomodels findByid(Integer id);
+   Produtomodels findByid(Long userID);
+Optional <Produtomodels> findById(Long userID);
 
     List<Produtomodels> findByNomeProdutoContainingIgnoreCase(String nomeProduto);
 
@@ -26,7 +27,7 @@ public interface Produtorespo extends CrudRepository<Produtomodels, Integer> {
      @Modifying(clearAutomatically = true)
      @Transactional
      @Query(value="UPDATE TB_PRODUTO SET qntd_estoque=? WHERE id=?", nativeQuery = true)
-     public Integer alterarProduto(int qntd_estoque, int id);
+     public Integer alterarProduto(int qntd_estoque, Long long1);
     
 
 }

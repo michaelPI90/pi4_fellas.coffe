@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -60,25 +60,33 @@
         <thead>
           <tr>
             <th>Produto</th>
-            <th>Quantidade</th>
             <th>Preço Unitário</th>
+            <th>Quantidade</th>
             <th>Subtotal</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src="/imagens/xicara - 1.jpg" alt="Produto 1">
-              <h3>Mocaccino</h3>
+          <tr th:each="item : ${listaItens}">
+            <td>Mocaccino</h3>
             </td>
-            <td>
-              <input type="number" min="1" value="1">
+            <td><span th:text="${item.quantidade}" id="valor" name="id"></span></td>
+            <td th:value="${item.produto.qntdEstoque}" id="qntdEstoque" name="qntdEstoque">
+              <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item?.produto.id}, acao=${1})}" 
+                role="button"> + <i class="fa fa-plus"></i></a>
+
+
+                <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item?.produto.id}, acao=${0})}" 
+                  role="button"> - <i class="fa fa-minus"></i></a>
+            </td>
             </td>
             <td>R$ 99,99</td>
-            <td>R$ 99,99</td>
             <td>
-              <button class="remove-button">Remover</button>
+              <a th:href="@{/removerItem/{id}(id=${item?.produto.id})}" class="remove-button">Remover</a>
+            
+            </td>
+            <td>
+            
             </td>
           </tr>
           <tr>
@@ -87,12 +95,22 @@
               <h3>Café Expresso</h3>
             </td>
             <td>
-              <input type="number" min="1" value="1">
+
+              <a class="btn btn-primary btn-lg btn-block"
+              th:href="@{/alterarQuantidade/{id}/{acao}{id=${item.produto.id},acao=${1}}}" 
+                role="button"><i class="fa fa-plus"></i></a>
+
             </td>
+
+          
+
+
+            
             <td>R$ 49,99</td>
             <td>R$ 49,99</td>
             <td>
-              <button class="remove-button">Remover</button>
+              <button th:href="@{/removerItem/{id}(id=${produto?.id})}" class="remove-button">Remover</button>
+            
             </td>
           </tr>
         </tbody>
@@ -114,7 +132,7 @@
         </div>
 
         <div class="checkout-buttons">
-          <a href="#" class="continue-shopping">Continuar Comprando</a>
+          <a href="/fellas.coffe/homeCliente" class="continue-shopping">Continuar Comprando</a>
           <a href="#" class="checkout-button">Finalizar Compra</a>
         </div>
       </div>

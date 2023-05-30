@@ -116,7 +116,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/statusProduto/{productId}")
-    public String atualizar(Model model, @PathVariable Integer productId, Produtomodels user) {
+    public String atualizar(Model model, @PathVariable Long productId, Produtomodels user) {
 
         salvarProduto(model, productId, user);
 
@@ -144,7 +144,7 @@ public class ProdutoController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/salvarProduto")
-    public ModelAndView salvarProduto(Model model, Integer userID, Produtomodels product) {
+    public ModelAndView salvarProduto(Model model, Long userID, Produtomodels product) {
         ModelAndView modelAndView = new ModelAndView();
         Produtomodels u = produtorespo.findByid(userID);
 

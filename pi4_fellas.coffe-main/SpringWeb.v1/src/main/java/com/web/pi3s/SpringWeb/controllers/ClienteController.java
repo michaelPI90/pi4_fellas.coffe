@@ -1,9 +1,11 @@
 package com.web.pi3s.SpringWeb.controllers;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.web.pi3s.SpringWeb.models.Clientemodels;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Clienterespo;
+import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,9 +32,21 @@ public class ClienteController {
   @Autowired
   PasswordEncoder enconder;
 
+  @Autowired
+  Produtorespo produtorespo;
+
   @GetMapping("/homeCliente")
-  public String index() {
-    return "/cliente/home";
+  public ModelAndView listaProduto(ModelAndView modelAndView) {
+    List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
+    // Produtomodels produtos = new Produtomodels();
+    // Collections.sort(produtosOrdenados, Collections.reverseOrder());
+    modelAndView.setViewName("cliente/home");
+    // modelAndView.addObject("produtos", Collections.sort(produtosOrdenados,
+    // Collections.reverseOrder()));
+    modelAndView.addObject("produtos", produtosOrdenados);
+
+    return modelAndView;
+
   }
 
   @GetMapping("/logado")
@@ -44,7 +59,6 @@ public class ClienteController {
 
   }
 
-
   @GetMapping("/alterar")
   public ModelAndView viwAlterar() {
     ModelAndView mv = new ModelAndView();
@@ -55,24 +69,23 @@ public class ClienteController {
 
   }
 
-
   @GetMapping("/alterarCadastro")
-public String exibirFormulario(Model model, HttpSession session) {
+  public String exibirFormulario(Model model, HttpSession session, Clientemodels user) {
     Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
 
     // Verifica se o usuário está logado na sessão
     if (usuarioLogado == null) {
-        // Redireciona para a página de login caso não esteja logado
-        return "redirect:/fellas.coffe/clienteLogin";
+      // Redireciona para a página de login caso não esteja logado
+      return "redirect:/fellas.coffe/clienteLogin";
     }
 
     // Adicione o usuário logado ao modelo para exibir os dados no formulário
+    session.setAttribute("usuario", usuarioLogado);
     model.addAttribute("usuario", usuarioLogado);
 
     // Retorne o nome da página de formulário para que seja exibido o conteúdo
     return "cliente/alterarDadosCliente";
-}
-
+  }
 
   @GetMapping("/clienteLogin")
   public ModelAndView formCliente() {
@@ -97,7 +110,7 @@ public String exibirFormulario(Model model, HttpSession session) {
   }
 
   @GetMapping("/detalhesProduto")
-  public ModelAndView detalhesProduto(Model model) {
+  public ModelAndView detalhesProduto() {
 
     ModelAndView modelAndView = new ModelAndView();
     Produtomodels detalhesProduto = new Produtomodels();
@@ -109,9 +122,28 @@ public String exibirFormulario(Model model, HttpSession session) {
 
   }
 
+  @Controller
+  public class ProdutoController {
+
+    @Autowired
+    private Produtorespo produtorespo;
+
+    @GetMapping("/detalhesProduto/{id}")
+    public String exibirDetalhesProduto(@PathVariable("id") Long id, Model model) {
+      // Obtenha o produto do banco de dados com base no ID
+      Produtomodels produto = produtorespo.findByid(id);
+
+      // Adicione o produto ao modelo
+      model.addAttribute("produto", produto);
+
+      // Retorne o nome da página HTML (sem a extensão .html)
+      return "detalhesProduto";
+    }
+  }
+
   @PostMapping("clienteLogar")
   ModelAndView listarUsuario(Model model, Clientemodels user, HttpSession session) {
-    
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("usuario", new Clientemodels());
     String erroMsg = null;
@@ -119,7 +151,6 @@ public String exibirFormulario(Model model, HttpSession session) {
     Clientemodels userEncontrado = this.clienterespo.findByEmail(user.getEmail());
     if (userEncontrado == null) {
       erroMsg = "Email não encontrado clique em cadastra-se caso não tenha cadastro";
-
 
     } else if (!userEncontrado.isStatusAtivo()) {
       erroMsg = "Usuário inativo!!!";
@@ -131,6 +162,14 @@ public String exibirFormulario(Model model, HttpSession session) {
     }
     model.addAttribute("erro", erroMsg);
     mv.setViewName("/cliente/loginCliente");
+    return mv;
+  }
+
+  @GetMapping("clienteLogar")
+  public ModelAndView exibirFormularioLogin(Model model) {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("usuario", new Clientemodels());
+    mv.setViewName("/cliente/homeLogado");
     return mv;
   }
 
@@ -214,42 +253,49 @@ public String exibirFormulario(Model model, HttpSession session) {
     }
   }
 
-
-
-  @PostMapping("/alterarCadastro")
-public String alterarCadastro(Model model, HttpSession session, Clientemodels novoUsuario) {
+  @PostMapping("/salvarAltercaoCadastro")
+  public String alterarCadastro(Model model, HttpSession session, Clientemodels novoUsuario) {
     Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
-    
+
     // Verifica se o usuário está logado na sessão
     if (usuarioLogado == null) {
-        // Redireciona para a página de login caso não esteja logado
-        return "redirect:/fellas.coffe/clienteLogin";
+      // Redireciona para a página de login caso não esteja logado
+      return "redirect:/fellas.coffe/clienteLogin";
     }
-    
+
     // Atualiza os dados do usuário logado com os novos dados
-    usuarioLogado.setNome(novoUsuario.getNome());
-    usuarioLogado.setEmail(novoUsuario.getEmail());
-    usuarioLogado.setGenero(novoUsuario.getGenero());
+
+    usuarioLogado.setCpf(novoUsuario.getCpf());
     // Outros campos que precisam ser atualizados
-    
+
     // Salva as alterações no repositório
     clienterespo.save(usuarioLogado);
-    
+
     // Atualiza o usuário na sessão
     session.setAttribute("usuarioLogado", usuarioLogado);
-    
+
     // Redireciona para a página de perfil do usuário
     return "redirect:/fellas.coffe/logado";
-}
-
-
-  @GetMapping("/carrinho")
-  public String visualizarCarrionho() {
-    return "/cliente/carrinho";
   }
 
+  @PostMapping("/alterarcliente")
+  public ResponseEntity<String> alterarDadosUsuario(@RequestBody Clientemodels usuario) {
+    // Encontre o usuário correspondente no banco de dados com base no ID ou algum
+    // identificador único
+    // e atualize os campos relevantes com os valores fornecidos no objeto "usuario"
+    // Exemplo:
+    Clientemodels usuarioExistente = clienterespo.findById(usuario.getId()).orElse(usuario);
+    if (usuarioExistente != null) {
+      usuarioExistente.setNome(usuario.getNome());
+      usuarioExistente.setEmail(usuario.getEmail());
+      usuarioExistente.setStatusAtivo(usuario.isStatusAtivo());
+      clienterespo.save(usuarioExistente);
+      return ResponseEntity.ok("Usuário atualizado com sucesso!");
+    } else {
+      return ResponseEntity.badRequest().body("Usuário não encontrado!");
+    }
 
-
+  }
 
   @PostMapping("/Logout")
   public ModelAndView logout(HttpSession session) {
@@ -257,5 +303,12 @@ public String alterarCadastro(Model model, HttpSession session, Clientemodels no
 
     return formCliente();
   }
+
+  
+  
+
+
+  
+
 
 }

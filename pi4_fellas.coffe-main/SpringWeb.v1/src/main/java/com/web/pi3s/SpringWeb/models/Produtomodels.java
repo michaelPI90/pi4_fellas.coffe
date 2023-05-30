@@ -16,10 +16,18 @@ import jakarta.transaction.Transactional;
 public class Produtomodels {
     private static final long serialVersionUID = 1L;
 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public void setImagem(List<Imagenmodels> imagem) {
+        this.imagem = imagem;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private String nomeProduto;
     @Column(nullable = false, length = 2000)
@@ -36,18 +44,18 @@ public class Produtomodels {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<Imagenmodels> imagem;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public Produtomodels() {
     }
 
-    public Produtomodels(Integer id, String nomeProduto, double precoProduto, int qntdEstoque, String avaliacao,
+    public Produtomodels(Long id, String nomeProduto, double precoProduto, int qntdEstoque, String avaliacao,
             boolean statusAtivo) {
         this.id = id;
         this.nomeProduto = nomeProduto;
@@ -57,7 +65,7 @@ public class Produtomodels {
         this.statusAtivo = statusAtivo;
     }
 
-    public Produtomodels(Integer id, int qntdEstoque) {
+    public Produtomodels(Long id, int qntdEstoque) {
         this.id = id;
         this.qntdEstoque = qntdEstoque;
 
