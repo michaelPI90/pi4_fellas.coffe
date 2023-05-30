@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.ItenCompraProduto;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
+
+import ch.qos.logback.core.model.Model;
 
 @Controller
 public class Carrinho {
@@ -22,93 +25,104 @@ public class Carrinho {
     Produtorespo produtorespo;
 
     private List<ItenCompraProduto> intemCompra = new ArrayList<ItenCompraProduto>();
+    public Compra compra = new Compra();
+
+    public void calcularTotal() {
+        compra.setValorTotal(0.);
+        for (ItenCompraProduto it : intemCompra) {
+            compra.setValorTotal(compra.getValorTotal() + it.getValorTotal());
+            System.out.println(compra);
+        }
+    }
 
     @GetMapping("/carrinho")
-
     public ModelAndView comprar() {
         ModelAndView mv = new ModelAndView("cliente/carrinho");
+
+        calcularTotal();
+        mv.addObject("compra", compra);
         mv.addObject("listaItens", intemCompra);
         return mv;
 
     }
 
     @GetMapping("/adcionarProduto/{id}")
-    public ModelAndView mostrarCarrinho(@PathVariable("id") Long id) {
-
+    public String mostrarCarrinho(@PathVariable("id") Long id) {
+    
         System.out.println("ID" + id);
-        ModelAndView mv = new ModelAndView("cliente/carrinho");
+    
         Optional<Produtomodels> prod = produtorespo.findById(id);
         Produtomodels produto = prod.get();
-
-        int controle = 0;
+    
+        boolean produtoExistente = false;
+    
         for (ItenCompraProduto it : intemCompra) {
             if (it.getProduto().getId().equals(produto.getId())) {
                 it.setQuantidade(it.getQuantidade() + 1);
-                controle = 1;
+                it.setValorTotal(it.getValorTotal() + it.getValorUnitario());
+                produtoExistente = true;
                 break;
             }
-
         }
-        if (controle == 0) {
+    
+        if (!produtoExistente) {
             ItenCompraProduto item = new ItenCompraProduto();
             item.setProduto(produto);
-            item.setValorProduto(produto.getPrecoProduto());
-            item.setQuantidade(item.getQuantidade() + 1);
-            item.setValorTotal(item.getQuantidade() * item.getValorProduto());
+            item.setValorUnitario(produto.getPrecoProduto());
+            item.setQuantidade(1);
+            item.setValorTotal(item.getValorUnitario());
             intemCompra.add(item);
         }
-        mv.addObject("listaItens", intemCompra);
-        return mv;
-
+    
+        return "redirect:/carrinho";
     }
+    
 
     @GetMapping("/alterarQuantidade/{id}/{acao}")
-    public ModelAndView alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao) {
-        ModelAndView mv = new ModelAndView("cliente/carrinho");
+    public String alterarQuantidade(@PathVariable Long id, @PathVariable Integer acao) {
+
         for (ItenCompraProduto it : intemCompra) {
             if (it.getProduto().getId().equals(id)) {
-                if(acao == 1){
-                it.setQuantidade(it.getQuantidade() + 1);
-            } else if (acao == 0) {
-                if(it.getQuantidade() <= 0){
-                    break;
+                if (acao == 1) {
+                    it.setQuantidade(it.getQuantidade() + 1);
+                    it.setValorTotal(0.);
+
+                    it.setValorTotal(it.getValorTotal() + (it.getQuantidade() * it.getValorUnitario()));
+                } else if (acao == 0) {
+                    if (it.getQuantidade() <= 0) {
+                        break;
+                    }
+                    it.setQuantidade(it.getQuantidade() - 1);
+                    it.setValorTotal(0.);
+                    it.setValorTotal(it.getValorTotal() + (it.getQuantidade() * it.getValorUnitario()));
                 }
-                it.setQuantidade(it.getQuantidade() - 1);
-             
-            }
-            break;
+
+               
+                break;
             }
         }
-        
-        mv.addObject("listaItens", intemCompra);
-        return mv;
-    
-     
-}
 
+        return "redirect:/carrinho";
+    }
 
+    @GetMapping("/removerItem/{id}")
+    public String removerItem(@PathVariable Long id) {
 
-@GetMapping("/removerItem/{id}")
-public ModelAndView removerItem(@PathVariable Long id) {
-    ModelAndView mv = new ModelAndView("cliente/carrinho");
-    
-    // Encontre o item a ser removido com base no ID
-    ItenCompraProduto itemRemover = null;
-    for (ItenCompraProduto it : intemCompra) {
-        if (it.getProduto().getId().equals(id)) {
-            itemRemover = it;
-            break;
+        // Encontre o item a ser removido com base no ID
+        ItenCompraProduto itemRemover = null;
+        for (ItenCompraProduto it : intemCompra) {
+            if (it.getProduto().getId().equals(id)) {
+                itemRemover = it;
+                break;
+            }
         }
-    }
-    
-    // Remova o item da lista
-    if (itemRemover != null) {
-        intemCompra.remove(itemRemover);
-    }
-    
-    mv.addObject("listaItens", intemCompra);
-    return mv;
-}
 
+        // Remova o item da lista
+        if (itemRemover != null) {
+            intemCompra.remove(itemRemover);
+        }
+
+        return "redirect:/carrinho";
+    }
 
 }

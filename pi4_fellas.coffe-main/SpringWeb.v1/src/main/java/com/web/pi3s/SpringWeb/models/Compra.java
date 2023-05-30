@@ -27,9 +27,12 @@ public class Compra {
     @Temporal(value = TemporalType.DATE)
     private Date dataCompra = new Date();
     private String formaDePagamnto;
-    private String valorTotal;
+    private Double valorTotal=0.0;
 
     
+
+    public Compra() {
+    }
 
     public int getId() {
         return id;
@@ -63,12 +66,16 @@ public class Compra {
         this.formaDePagamnto = formaDePagamnto;
     }
 
-    public String getValorTotal() {
+    public Double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(String valorTotal) {
+    public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+   
+
+   
 
 }

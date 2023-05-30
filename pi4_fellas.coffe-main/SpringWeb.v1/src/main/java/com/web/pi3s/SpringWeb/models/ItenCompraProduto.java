@@ -27,8 +27,20 @@ public class ItenCompraProduto {
     
 
 
-    private Double valorProduto;
-    private Double valorTotal;
+    private Double valorUnitario=0.0;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(Double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    private Double valorTotal=0.0;
 
     public int getId() {
         return id;
@@ -65,13 +77,7 @@ public class ItenCompraProduto {
         this.quantidade = quantidade;
     }
 
-    public Double getValorProduto() {
-        return valorProduto;
-    }
-
-    public void setValorProduto(Double valorProduto) {
-        this.valorProduto = valorProduto;
-    }
+ 
 
     public Double getValorTotal() {
         return valorTotal;
@@ -81,13 +87,13 @@ public class ItenCompraProduto {
         this.valorTotal = valorTotal;
     }
 
-    public ItenCompraProduto(int id, Produtomodels produto, Compra compra, Integer quantidade, Double valorProduto,
+    public ItenCompraProduto(int id, Produtomodels produto, Compra compra, Integer quantidade, Double valorUnitario,
             Double valorTotal) {
         this.id = id;
         this.produto = produto;
         this.compra = compra;
         this.quantidade = quantidade;
-        this.valorProduto = valorProduto;
+        this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
     }
 

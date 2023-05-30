@@ -109,8 +109,11 @@
                         <span class="txt-preco">R$ 15,90</span>
                         <div>
                             <button type="button"
-                                class="btn btn-warning d-flex justify-content-center align-items-center gap-2 btn-compra"><img
-                                    src="/imagens/bag-dash-fill.svg" alt="Icone de compra"> Comprar</button>
+                                class="btn btn-warning d-flex justify-content-center align-items-center gap-2 btn-compra">
+                                <img
+                                    src="/imagens/bag-dash-fill.svg" alt="Icone de compra" th:href="@{/adcionarProduto/{id}(id=${produto?.id})}">Comprar</button>
+                                
+                 
                         </div>
                     </div>
                 </div>
