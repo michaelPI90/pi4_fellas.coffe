@@ -24,7 +24,7 @@ public class HomeController {
   @RequestMapping("/userBackoffice")
   public String index(Model model, Usermodels usuario) {
   
-        return "/home/index";
+        return "home/index";
 
   }
 
