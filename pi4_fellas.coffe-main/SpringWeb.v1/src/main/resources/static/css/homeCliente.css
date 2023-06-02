@@ -46,6 +46,7 @@ input {
   box-sizing: border-box;
   background-color: #efad60;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 }
 
 .logo {
@@ -113,6 +114,7 @@ input {
   padding: 20px;
   margin-top: 15px;
   border-radius: 5px;
+  width: 300px;
 }
 
 .titulo-cadastro {
@@ -138,7 +140,9 @@ input {
 
 #cards {
   display: flex;
-    
+  gap: 25px;
+  justify-content: center;
+  
 }
 
 /* @media screen and (max-width: 600px) {

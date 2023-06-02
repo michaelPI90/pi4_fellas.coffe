@@ -21,7 +21,7 @@
             gap: 20px;
         }
     </style>
-   
+
 
     <title>Home - Cliente</title>
 </head>
@@ -62,21 +62,14 @@
     </header>
 
     <div id="cards">
-        <div class="card-container">
-        <div class="card" style="width: 300px;">
-            <div th:each="produto : ${produtos}">
+        <div class="card" th:each="produto : ${produtos}">
             <img src="/imagens/xicara - 1.jpg" class="card-img-top" alt="Imagem do Produto 1">
             <div class="card-body">
                 <h5 class="card-title">Café Expresso</h5>
                 <p class="card-text"><span th:text="${produto.nomeProduto}"></p>
-                    <a th:href="@{detalhesProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Detalhes</a>
-            </div>
-            </div>
+                <a th:href="@{detalhesProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Detalhes</a>
             </div>
         </div>
-
-
-
     </div>
 </body>
 
