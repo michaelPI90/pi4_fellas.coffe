@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.models.Clientemodels;
 import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.ItenCompraProduto;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 
 import ch.qos.logback.core.model.Model;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Carrinho {
@@ -124,5 +126,31 @@ public class Carrinho {
 
         return "redirect:/carrinho";
     }
+
+
+//     @GetMapping("/resumoDoPedido")
+// public String exibirResumoDoPedido(Model model, HttpSession session) {
+//     // Verificar se o cliente está logado na sessão
+//     Clientemodels clienteLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+//     if (clienteLogado == null) {
+//         // Cliente não está logado, redirecionar para a página de login
+//         return "redirect:/clienteLogin";
+//     }
+
+//     // Aqui você pode recuperar os dados do banco de dados e definir o modelo
+//     // Buscar a lista de pedidos do cliente logado
+//     ItenCompraProduto it  = clienteLogado.
+//     model.addAttribute("pedidos", pedidos);
+
+//     // Dados da entrega
+//     String endereco = clienteLogado.getEnderecoEntrega();
+//     model.addAttribute("endereco", endereco);
+
+//     // Dados do pagamento
+    
+
+//     return "/cliente/resumoDoPedido";
+// }
+
 
 }

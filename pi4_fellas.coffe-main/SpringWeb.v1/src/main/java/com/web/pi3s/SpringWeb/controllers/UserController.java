@@ -41,7 +41,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/home/logar")
+    @PostMapping("/logar")
     String listarUsuario(Model model, Usermodels user) {
         Optional<Usermodels> userEncontrado = this.repository.findByEmail(user.getEmail());
 
@@ -62,8 +62,15 @@ public class UserController {
             return "/logado/logadoAdmin";
         }
         model.addAttribute("erro", erroMsg);
-        return "/home/index";
+        return "redirect:/home/index";
     }
+
+    @GetMapping("/logar")
+String LoginUser(Model model) {
+    model.addAttribute("user", new Usermodels());
+    return "nomeDoSeuTemplate"; // substitua "nomeDoSeuTemplate" pelo nome do seu template para exibir o formulário de login
+}
+
 
     @GetMapping("/admin/listar")
     String listar(Model model, Usermodels user) {

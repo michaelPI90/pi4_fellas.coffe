@@ -42,7 +42,7 @@
                             </svg>
                         </a>
                     </div>
-                    <a href="" class="estilizacao-link">Faça login / Crie seu login</a>
+                   
                     <div class="shopping-cart">
                         <a href="#">
                             <svg id="shopping_cart_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
@@ -101,23 +101,25 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Café Expresso</h5>
-                    <p class="card-text">Café expresso pequeno.</p>
-                    <div class="d-flex justify-content-between align-items-center elementos-compra">
-                        <span class="txt-preco">R$ 15,90</span>
-                        <div>
-                            <button type="button"
-                                class="btn btn-warning d-flex justify-content-center align-items-center gap-2 btn-compra">
-                                <img
-                                    src="/imagens/bag-dash-fill.svg" alt="Icone de compra" th:href="@{/adcionarProduto/{id}(id=${produto?.id})}">Comprar</button>
-                                
-                 
-                        </div>
+            <div class="content">
+                <div class="card-container">
+                  <div class="row">
+                    <div class="card" th:each="produto : ${produto}">
+                      <img src="/product/1" alt="Imagem 1">
+                      <h3 th:text="${produto?.id}" id="id" name="id"></h3>
+                      <p>Nome do Produto:  <span th:text="${produto.nomeProduto}"></span></p>
+                      <p>Preco<span th:text="${produto.precoProduto}"></span></p>
+                      <p>Quantidade<span th:text="${produto?.qntdEstoque}" id="qntdEstoque" name="qntdEstoque"></span></p>
+                      <p><span type="checkbox" th:checked="${produto.statusAtivo}" /></span></p>
+                      <a th:href="@{/adcionarProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Detalhes</a>
+                      
+          
+          
+          
                     </div>
+                  </div>
                 </div>
-            </div>
+              </div>
         </div>
     </div>
 </body>

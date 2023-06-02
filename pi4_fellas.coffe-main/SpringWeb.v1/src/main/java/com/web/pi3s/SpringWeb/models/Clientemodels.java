@@ -26,28 +26,28 @@ public class Clientemodels implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int id;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nome;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String cpf;
-    @Column(nullable = false, unique = true)
+ 
     private String genero;
     @Column(nullable = false)
     private boolean statusAtivo = true;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password2;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = true)
     @DateTimeFormat(pattern = "dd-MMM-YYYY")
     private String dataNasc;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String enderecoFaturamento;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String enderecoEntrega;
 
     public void setPassword(String password) {

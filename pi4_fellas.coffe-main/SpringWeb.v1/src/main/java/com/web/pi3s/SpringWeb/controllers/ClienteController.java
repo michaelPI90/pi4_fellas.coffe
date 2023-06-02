@@ -14,8 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.pi3s.SpringWeb.models.Clientemodels;
+import com.web.pi3s.SpringWeb.models.ItenCompraProduto;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Clienterespo;
+import com.web.pi3s.SpringWeb.repositorio.ItenComprarespo;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
@@ -32,6 +34,8 @@ public class ClienteController {
   @Autowired
   PasswordEncoder enconder;
 
+  @Autowired 
+  ItenComprarespo itenComprarespo;
   @Autowired
   Produtorespo produtorespo;
 
@@ -109,37 +113,38 @@ public class ClienteController {
 
   }
 
-  @GetMapping("/detalhesProduto")
-  public ModelAndView detalhesProduto() {
+  // @GetMapping("/detalhesProduto")
+  // public ModelAndView detalhesProduto() {
 
-    ModelAndView modelAndView = new ModelAndView();
-    Produtomodels detalhesProduto = new Produtomodels();
+  //   ModelAndView modelAndView = new ModelAndView();
+  //   Produtomodels detalhesProduto = new Produtomodels();
 
-    modelAndView.setViewName("cliente/detalhesProduto");
-    modelAndView.addObject("detalhesProduto", detalhesProduto);
+  //   modelAndView.setViewName("cliente/detalhesProduto");
+  //   modelAndView.addObject("detalhesProduto", detalhesProduto);
 
-    return modelAndView;
+  //   return modelAndView;
 
+  // }
+
+  @GetMapping("/detalhesProduto/{id}")
+  public ModelAndView exibirDetalhesProduto(@PathVariable Long id) {
+    // Obtenha o produto do banco de dados com base no ID
+    ModelAndView model = new ModelAndView();
+    Produtomodels produto = produtorespo.findByid(id);
+
+    // Adicione o produto ao modelo
+    model.addObject("produto", produto);
+    model.setViewName(("produtos/detalhesProduto"));
+    // Retorne o nome da página HTML (sem a extensão .html)
+    return model;
   }
 
-  @Controller
-  public class ProdutoController {
 
-    @Autowired
-    private Produtorespo produtorespo;
 
-    @GetMapping("/detalhesProduto/{id}")
-    public String exibirDetalhesProduto(@PathVariable("id") Long id, Model model) {
-      // Obtenha o produto do banco de dados com base no ID
-      Produtomodels produto = produtorespo.findByid(id);
+  
 
-      // Adicione o produto ao modelo
-      model.addAttribute("produto", produto);
+   
 
-      // Retorne o nome da página HTML (sem a extensão .html)
-      return "detalhesProduto";
-    }
-  }
 
   @PostMapping("clienteLogar")
   ModelAndView listarUsuario(Model model, Clientemodels user, HttpSession session) {
@@ -296,6 +301,57 @@ public class ClienteController {
     }
 
   }
+
+
+
+
+
+  @PostMapping("/finalizarCompra")
+public ModelAndView finalizarCompra(HttpSession session) {
+    ModelAndView modelAndView = new ModelAndView();
+
+    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    if (usuarioLogado == null) {
+        modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
+        return modelAndView;
+    }
+
+    // Lógica para finalizar a compra
+
+    modelAndView.setViewName("cliente/pagamento");
+    return modelAndView;
+}
+
+
+
+
+
+
+@GetMapping("/resumoDoPedido")
+public String exibirResumoDoPedido(Model model, HttpSession session) {
+    // Verificar se o cliente está logado na sessão
+    Clientemodels clienteLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+    if (clienteLogado == null) {
+        // Cliente não está logado, redirecionar para a página de login
+        return "redirect:/clienteLogin";
+    }
+
+    // Aqui você pode recuperar os dados do banco de dados e definir o modelo
+    // Buscar a lista de pedidos do cliente logado
+    List<ItenCompraProduto> pedidos = itenComprarespo.findByid(clienteLogado.getId());
+    model.addAttribute("pedidos", pedidos);
+
+    // Dados da entrega
+    String endereco = clienteLogado.getEnderecoEntrega();
+    model.addAttribute("endereco", endereco);
+
+    // Dados do pagamento
+    
+
+    return "/cliente/resumoDoPedido";
+}
+
 
   @PostMapping("/Logout")
   public ModelAndView logout(HttpSession session) {

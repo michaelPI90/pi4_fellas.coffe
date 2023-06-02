@@ -45,9 +45,9 @@
                         </svg>
                     </a>
                 </div>
-                <a href="#">Faça login / Crie seu login</a>
+                <a href="/fellas.coffe/clienteLogin">Faça login / Crie seu login</a>
                 <div class="shopping-cart">
-                    <a href="#">
+                    <a href="/carrinho">
                         <svg id="shopping_cart_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                             viewBox="0 0 32 32">
                             <path id="Caminho_11" data-name="Caminho 11" d="M0,0H32V32H0Z" fill="none"></path>
@@ -69,7 +69,7 @@
             <div class="card-body">
                 <h5 class="card-title">Café Expresso</h5>
                 <p class="card-text"><span th:text="${produto.nomeProduto}"></p>
-                    <a th:href="@{/adcionarProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Detalhes</a>
+                    <a th:href="@{detalhesProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Detalhes</a>
             </div>
             </div>
             </div>
