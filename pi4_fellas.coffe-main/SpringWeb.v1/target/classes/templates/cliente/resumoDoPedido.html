@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/js/cadastro.js"></script>
   <title>Resumo do Pedido</title>
   <link rel="stylesheet" href="/css/resumoDoPedido.css">
 </head>
@@ -68,8 +69,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="pedido : ${pedidos}">
-                <td th:text="${pedido.produto}"></td>
+              <tr th:each="pedido : ${listarItens}">
+                <td th:text="${pedido.produto.nomeProduto}"></td>
                 <td th:text="${pedido.quantidade}"></td>
                 <td th:text="${pedido.valorUnitario}"></td>
                 <td th:text="${pedido.valorTotal}"></td>
@@ -95,17 +96,75 @@
           <div class="delivery-details">
             <h3>Detalhes da Entrega</h3>
             <table>
-              <tr>
-                <td>Endereço de Entrega:</td>
-                <td>Rua Exemplo, 123</td>
+              
+                <th>Endereço de Entrega</th>
+                <tr th:each="usuario : ${user}">
+                <td th:text="${usuario.enderecosEntrega}"></td>
+               
+                
+            
+              </tr>
+                
+                
+              </tr>
+              <th>Endereço de Faturamento</th>
+              <tr th:each="usuario : ${user}" >
+               
+                <td th:text="${usuario.enderecoFaturamento}"></td>
+               
               </tr>
               <tr>
-                <td>Cidade:</td>
-                <td>Exemplo</td>
-              </tr>
-              <tr>
-                <td>CEP:</td>
-                <td>12345-678</td>
+
+                <form method="POST" action="/fellas.coffe/adicionarEnderecoEntrega">
+                  <div>
+                    <button id="botao-form-adicionar-endereco" type="button" class="btn btn-primary">+ Adicionar Endereço de
+                        Entrega</button>
+                </div>
+                <div class="form-adicionar-endereco">
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon3">CEP:</span>
+                        <input type="text" class="form-control" id="input-cep" aria-describedby="basic-addon3">
+                        <button id="botao-form" type="button" class="btn btn-primary">Consultar</button>
+                    </div>
+                    <div class="input-group mb-3 w-100">
+                        <span class="input-group-text" id="basic-addon3">Logradouro:</span>
+                        <input disabled type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon3">Bairro:</span>
+                        <input disabled type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon3">Cidade:</span>
+                        <input disabled type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon3">Estado:</span>
+                        <input disabled type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon3">Número:</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon3">Complemento:</span>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+                    <div>
+                        <button id="botao-salvar-modificacoes" type="button" class="btn btn-primary">Salvar Modificações</button>
+                    </div>
+                </div>
+              </form>
+
+              <tr th:each="usuario : ${usuarioLogado}" >
+               
+                <td th:text="${usuario.enderecosEntrega}"></td>
+          
+           <td></td>
+
+
+          
+          
               </tr>
             </table>
           </div>

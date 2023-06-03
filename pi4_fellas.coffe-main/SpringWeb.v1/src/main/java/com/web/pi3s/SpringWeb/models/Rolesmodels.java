@@ -19,6 +19,7 @@ public class Rolesmodels implements GrantedAuthority {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
     private RoleName roleName;
+    @Column
     @ManyToMany
     private List<Usermodels> usuarios;
 

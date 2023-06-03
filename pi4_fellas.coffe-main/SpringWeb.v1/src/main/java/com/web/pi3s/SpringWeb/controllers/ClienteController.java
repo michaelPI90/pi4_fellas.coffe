@@ -1,5 +1,6 @@
 package com.web.pi3s.SpringWeb.controllers;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
@@ -34,16 +35,17 @@ public class ClienteController {
   @Autowired
   PasswordEncoder enconder;
 
-  @Autowired 
+  @Autowired
   ItenComprarespo itenComprarespo;
   @Autowired
   Produtorespo produtorespo;
+  private List<ItenCompraProduto> intemCompra = new ArrayList<ItenCompraProduto>();
 
   @GetMapping("/homeCliente")
   public ModelAndView listaProduto(ModelAndView modelAndView) {
     List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
     // Produtomodels produtos = new Produtomodels();
-    // Collections.sort(produtosOrdenados, Collections.reverseOrder());
+    // Collections.sort(produtosOrdenados, Collectionds.reverseOrder());
     modelAndView.setViewName("cliente/home");
     // modelAndView.addObject("produtos", Collections.sort(produtosOrdenados,
     // Collections.reverseOrder()));
@@ -116,13 +118,13 @@ public class ClienteController {
   // @GetMapping("/detalhesProduto")
   // public ModelAndView detalhesProduto() {
 
-  //   ModelAndView modelAndView = new ModelAndView();
-  //   Produtomodels detalhesProduto = new Produtomodels();
+  // ModelAndView modelAndView = new ModelAndView();
+  // Produtomodels detalhesProduto = new Produtomodels();
 
-  //   modelAndView.setViewName("cliente/detalhesProduto");
-  //   modelAndView.addObject("detalhesProduto", detalhesProduto);
+  // modelAndView.setViewName("cliente/detalhesProduto");
+  // modelAndView.addObject("detalhesProduto", detalhesProduto);
 
-  //   return modelAndView;
+  // return modelAndView;
 
   // }
 
@@ -138,13 +140,6 @@ public class ClienteController {
     // Retorne o nome da página HTML (sem a extensão .html)
     return model;
   }
-
-
-
-  
-
-   
-
 
   @PostMapping("clienteLogar")
   ModelAndView listarUsuario(Model model, Clientemodels user, HttpSession session) {
@@ -302,39 +297,13 @@ public class ClienteController {
 
   }
 
-
-
-
-
-  @PostMapping("/finalizarCompra")
-public ModelAndView finalizarCompra(HttpSession session) {
-    ModelAndView modelAndView = new ModelAndView();
-
-    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
-
-    if (usuarioLogado == null) {
-        modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
-        return modelAndView;
-    }
-
-    // Lógica para finalizar a compra
-
-    modelAndView.setViewName("cliente/pagamento");
-    return modelAndView;
-}
-
-
-
-
-
-
-@GetMapping("/resumoDoPedido")
-public String exibirResumoDoPedido(Model model, HttpSession session) {
+  @GetMapping("/resumoDoPedido")
+  public String exibirResumoDoPedido(Model model, HttpSession session) {
     // Verificar se o cliente está logado na sessão
     Clientemodels clienteLogado = (Clientemodels) session.getAttribute("usuarioLogado");
     if (clienteLogado == null) {
-        // Cliente não está logado, redirecionar para a página de login
-        return "redirect:/clienteLogin";
+      // Cliente não está logado, redirecionar para a página de login
+      return "redirect:/clienteLogin";
     }
 
     // Aqui você pode recuperar os dados do banco de dados e definir o modelo
@@ -343,28 +312,61 @@ public String exibirResumoDoPedido(Model model, HttpSession session) {
     model.addAttribute("pedidos", pedidos);
 
     // Dados da entrega
-    String endereco = clienteLogado.getEnderecoEntrega();
+    List <String> endereco = clienteLogado.getEnderecosEntrega();
     model.addAttribute("endereco", endereco);
 
     // Dados do pagamento
-    
 
     return "/cliente/resumoDoPedido";
+  }
+
+  @PostMapping("/adicionarEnderecoEntrega")
+public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam("enderecoEntrega") String enderecoEntrega) {
+    ModelAndView modelAndView = new ModelAndView();
+    
+    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    if (usuarioLogado == null) {
+        modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
+        return modelAndView;
+    }
+
+    // Adicione o novo endereço à lista de endereços de entrega do usuário
+    List<String> enderecosEntrega = usuarioLogado.getEnderecosEntrega();
+    enderecosEntrega.add(enderecoEntrega);
+    usuarioLogado.setEnderecosEntrega(enderecosEntrega);
+
+    // Atualize a sessão com o usuário atualizado
+    session.setAttribute("usuarioLogado", usuarioLogado);
+
+    modelAndView.setViewName("cliente/resumoDoPedido");
+    return modelAndView;
 }
 
 
   @PostMapping("/Logout")
   public ModelAndView logout(HttpSession session) {
+    // Recupera o carrinho do cliente da sessão
+    Clientemodels clientemodels = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    if (clientemodels != null) {
+      // Zera o carrinho
+
+      intemCompra.removeAll(intemCompra);
+      
+
+    }
+
     session.invalidate();
 
     return formCliente();
   }
 
-  
-  
+  // @PostMapping("/Logout")
+  // public ModelAndView logout(HttpSession session) {
+  // session.invalidate();
 
-
-  
-
+  // return formCliente();
+  // }
 
 }

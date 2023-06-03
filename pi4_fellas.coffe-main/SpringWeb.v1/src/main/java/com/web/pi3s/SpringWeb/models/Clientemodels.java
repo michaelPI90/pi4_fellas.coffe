@@ -1,6 +1,8 @@
 package com.web.pi3s.SpringWeb.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,8 +49,20 @@ public class Clientemodels implements UserDetails {
     private String dataNasc;
     @Column(nullable = true)
     private String enderecoFaturamento;
-    @Column(nullable = true)
-    private String enderecoEntrega;
+    @Column(nullable = true)  
+    private List<String> enderecosEntrega = new ArrayList<>();
+
+    
+
+  
+
+    @Override
+    public String toString() {
+        return "Clientemodels id=" + id + ", nome=" + nome + ", password=" + password + ", cpf=" + cpf + ", genero="
+                + genero + ", statusAtivo=" + statusAtivo + ", password2=" + password2 + ", email=" + email
+                + ", dataNasc=" + dataNasc + ", enderecoFaturamento=" + enderecoFaturamento + ", enderecosEntrega="
+                + enderecosEntrega + "";
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -118,30 +132,23 @@ public class Clientemodels implements UserDetails {
         this.enderecoFaturamento = enderecoFaturamento;
     }
 
-    public String getEnderecoEntrega() {
-        return enderecoEntrega;
-    }
+    
 
-    public void setEnderecoEntrega(String enderecoEntrega) {
-        this.enderecoEntrega = enderecoEntrega;
-    }
 
-    public Clientemodels(int id, String nome, String password, String bairro, String password2, String email,
-            String dataNasc, String enderecoFaturamento, String enderecoEntrega, String cep, String cpf, String genero,
-            boolean statusAtivo) {
+    public Clientemodels(int id, String nome, String password, String cpf, String genero, boolean statusAtivo,
+            String password2, String email, String dataNasc, String enderecoFaturamento,
+            List<String> enderecosEntrega) {
         this.id = id;
         this.nome = nome;
         this.password = password;
-
+        this.cpf = cpf;
+        this.genero = genero;
+        this.statusAtivo = statusAtivo;
         this.password2 = password2;
         this.email = email;
         this.dataNasc = dataNasc;
         this.enderecoFaturamento = enderecoFaturamento;
-        this.enderecoEntrega = enderecoEntrega;
-
-        this.cpf = cpf;
-        this.genero = genero;
-        this.statusAtivo = statusAtivo;
+        this.enderecosEntrega = enderecosEntrega;
     }
 
     public Clientemodels() {
@@ -191,15 +198,16 @@ public class Clientemodels implements UserDetails {
         this.statusAtivo = statusAtivo;
     }
 
-    @Override
-    public String toString() {
-        return "Clientemodels [id=" + id + ", nome=" + nome + ", password=" + password + ", cpf=" + cpf + ", genero="
-                + genero + ", statusAtivo=" + statusAtivo + ", password2=" + password2 + ", email=" + email
-                + ", dataNasc=" + dataNasc + ", enderecoFaturamento=" + enderecoFaturamento + ", enderecoEntrega="
-                + enderecoEntrega + "]";
+    public List<String> getEnderecosEntrega() {
+        return enderecosEntrega;
     }
 
+    public void setEnderecosEntrega(List<String> enderecosEntrega) {
+        this.enderecosEntrega = enderecosEntrega;
+    }
+
+}
 
     
 
-}
+
