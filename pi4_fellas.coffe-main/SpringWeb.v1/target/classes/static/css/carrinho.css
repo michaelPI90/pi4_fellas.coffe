@@ -1,44 +1,7 @@
-/* Seletores Globais */
-
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
-}
-
-p, a {
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 500;
-    text-decoration: none;
-    
-
-}
-
-footer {
-  background-color: #f5f5f5;
-  padding: 20px 0;
-  text-align: center;
-  color: #888;
-  font-size: 14px;
-}
-
-main {
-  padding: 40px 0;
-}
-
-main h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-/* Seletores de Classes */
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 /* HEADER */
@@ -127,7 +90,14 @@ main h2 {
   font-weight: bold;
 }
 
+p, a {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    color: #9e3f15;
+    text-decoration: none;
+    
 
+}
 
 /* estilos adicionais para o ícone do carrinho de compras */
 .header__content__cart__color {
@@ -165,112 +135,127 @@ main h2 {
   }
 }
 
-.order-summary {
-  display: flex;
-  justify-content: space-between;
+/* HEADER FINALIZADO */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.order-details {
-  flex: 1;
-  margin-right: 20px;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+
+main {
+  padding: 40px 0;
 }
 
-.order-details h3,
-.delivery-details h3,
-.payment-details h3 {
-  font-size: 24px;
-  color: #333;
-  margin-top: 0;
+main h2 {
+  font-size: 28px;
 }
 
-.order-details table,
-.delivery-details table,
-.payment-details table {
+table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
-.order-details table th,
-.delivery-details table th,
-.payment-details table th,
-.order-details table td,
-.delivery-details table td,
-.payment-details table td {
-  padding: 10px;
+table th,
+table td {
   border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
 }
 
-.order-details table th,
-.delivery-details table th,
-.payment-details table th {
+table th {
   background-color: #f5f5f5;
   font-weight: bold;
-  color: #333;
 }
 
-.order-details table td:first-child,
-.delivery-details table td:first-child,
-.payment-details table td:first-child {
-  width: 200px;
+table td img {
+  width: 80px;
+  height: auto;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-.order-details table td:last-child,
-.delivery-details table td:last-child,
-.payment-details table td:last-child {
-  text-align: right;
+table td h3 {
+  margin-top: 8px;
 }
 
-.order-total {
-  margin-top: 20px;
-  text-align: right;
+table td input[type="number"] {
+  width: 60px;
+  padding: 5px;
 }
 
-.order-total h4 {
+.remove-button {
+  background-color: #9e3f15;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkout {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.checkout .total {
+  margin-bottom: 20px;
+}
+
+.checkout .total h4 {
   font-size: 18px;
   margin: 0;
 }
 
-.order-total h3 {
+.checkout .total h3 {
   font-size: 24px;
   margin: 10px 0 0;
-  color: #9e3f15;
 }
 
-.delivery-details {
-  margin-top: 30px;
+.shipping {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.delivery-details table {
-  margin-top: 15px;
+.shipping h4 {
+  font-size: 18px;
+  margin: 0;
 }
 
-.delivery-details table td:first-child {
-  font-weight: bold;
-  color: #333;
+.shipping-inputs {
+  margin-top: 10px;
 }
 
-.payment-details {
-  margin-top: 30px;
+.shipping-inputs input[type="text"] {
+  padding: 5px;
+  width: 200px;
+  margin-right: 10px;
 }
 
-.payment-details table {
-  margin-top: 15px;
+.shipping-inputs .calculate-button {
+  background-color: #9e3f15;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.payment-details table td:first-child {
-  font-weight: bold;
-  color: #333;
+.shipping-result {
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 .checkout-buttons {
   display: flex;
   justify-content: flex-end;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .checkout-buttons a {
@@ -281,59 +266,15 @@ main h2 {
   font-size: 18px;
   text-decoration: none;
   margin-left: 10px;
-  border-radius: 4px;
 }
 
-/* campo frete*/
+.checkout-buttons .continue-shopping {
+  background-color: #ccc;
+  color: #000;
+}
 
-.order-details table tr.frete td {
+footer {
   background-color: #f5f5f5;
-  color: #9e3f15;
-  font-weight: bold;
-  color: #333;
-}
-
-.form-adicionar-endereco {
-  margin: 30px 0px 30px 30px;
-  width: 600px;
-  float: left;
-  display: none;
-}
-
-
-/* Seletores IDs */
-
-#botao-form-adicionar-endereco {
-  margin: 30px 0px 15px 0px;
-  border-radius: 5px;
-  border-color: #9E4015;
-  background-color: #9E4015;
-}
-
-
-#botao-salvar-modificacoes {
-  margin: 10px 0px 10px 0px;
-  border-radius: 5px;
-  border-color: #9E4015;
-  background-color: #9E4015;
-}
-
-
-#botao-form {
-  margin-left: 20px;
-  border-radius: 5px;
-  border-color: #9E4015;
-  background-color: #9E4015;
-}
-
-#input-cep {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-#card-adicionar-endereco {
-  float: right;
-  margin-right: 60px;
-  display: none;
-  width: 350px;
+  padding: 20px 0;
+  text-align: center;
 }
