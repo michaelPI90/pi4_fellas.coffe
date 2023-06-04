@@ -6,6 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrinho - Americanas</title>
   <link rel="stylesheet" href="/css/carrinho.css">
+
+  <script>
+    function redirecionar() {
+      event.preventDefault();
+      // Obtenha o valor selecionado do select
+      var opcaoSelecionada = document.getElementById("selecao").value;
+
+      // Construa a URL com o valor selecionado
+      var url = "/calculoFrete?frete=" + opcaoSelecionada;
+
+      // Redirecione o usuário para a URL
+      window.location.href = url;
+      return false;
+
+    }
+
+    function armazenarOpcaoSelecionada() {
+      var select = document.getElementById("selecao");
+      var valorSelecionado = select.value;
+
+      // Armazenar o valor selecionado no armazenamento local
+      localStorage.setItem("opcaoSelecionada", valorSelecionado);
+    }
+
+    // Verificar se há uma opção selecionada armazenada e definir como selecionada
+    document.addEventListener("DOMContentLoaded", function () {
+      var select = document.getElementById("selecao");
+      var opcaoSelecionada = localStorage.getItem("opcaoSelecionada");
+
+      if (opcaoSelecionada) {
+        select.value = opcaoSelecionada;
+      }
+    });
+  </script>
 </head>
 
 <body>
@@ -73,19 +107,19 @@
               <span th:text="${item.produto.nomeProduto}" id="valor" name="id"></span>
             </td>
             <td><span th:text="${item.valorUnitario}" id="valor" name="id"></span></td>
-        
+
             <td th:value="${item.quantidade}" id="quantidade" name="quantidade">
-           
+
               <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item?.produto.id}, acao=${1})}" role="button"> + <i
                   class="fa fa-plus"></i> </a>
-                  <span th:text="${item.quantidade}" id="valor" name="id"></span>
+              <span th:text="${item.quantidade}" id="valor" name="id"></span>
 
               <a th:href="@{/alterarQuantidade/{id}/{acao}(id=${item?.produto.id}, acao=${0})}" role="button"> - <i
                   class="fa fa-minus"></i></a>
             </td>
             </td>
             <td><span th:text="${item.valorTotal}" id="valor" name="id"></span></td>
-        
+
             <td>
               <a th:href="@{/removerItem/{id}(id=${item?.produto.id})}" class="remove-button">Remover</a>
 
@@ -94,40 +128,50 @@
 
             </td>
           </tr>
-          
+
         </tbody>
       </table>
 
       <div class="checkout">
         <div class="total">
-            <!-- <div th:each="valorCompra : ${compra}"> -->
-            <h4>Total:</h4>
-            <span th:text="${compra.valorTotal}"></span>
-            <!-- </div> -->
+          <!-- <div th:each="valorCompra : ${compra}"> -->
+          <h4>Total:</h4>
+          <span th:text="${compra.valorTotal}"></span>
+          <!-- </div> -->
 
         </div>
 
-        <div class="shipping">
-          <h4>Calcular Frete:</h4>
-          <div class="shipping-inputs">
-            <input type="text" placeholder="CEP">
-            <button class="calculate-button">Calcular</button>
+        <form onsubmit="redirecionar(event)">
+          <div class="shipping">
+            <h4>Selecione uma opção de frete:</h4>
+            <div class="shipping-inputs">
+              <select class="form-select w-50 mb-2" id="selecao" aria-label="Default select example"
+                onchange="armazenarOpcaoSelecionada()">
+                <!-- <option value="0">Selecione um frete</option> -->
+                <option id="frete" name="frete" value="12.21">Correios - SEDEX: 12,21 - Prazo: 1-2 dias úteis</option>
+                <option id="frete" name="frete" value="19.22">Correios - PAC: 19,22 - Prazo: 5 - 6 dias úteis</option>
+                <option id="frete" name="frete" value="15.64">Jadlog - PAckage: 15,64 - Prazo: 5 - 6 dias úteis</option>
+              </select>
+
+              <button type="submit" class="calculate-button">Calcular</button>
+
+            </div>
+
           </div>
-          <p class="shipping-result">O prazo e valor do frete serão exibidos aqui</p>
-        </div>
+        </form>
 
         <div class="checkout-buttons">
           <a href="/fellas.coffe/homeCliente" class="continue-shopping">Continuar Comprando</a>
 
 
-       
+
 
           <form th:action=@{finalizarCompra} method="post">
 
 
             <button type="submit">finalizar Compra</button>
 
-         </form>
+          </form>
         </div>
       </div>
     </div>

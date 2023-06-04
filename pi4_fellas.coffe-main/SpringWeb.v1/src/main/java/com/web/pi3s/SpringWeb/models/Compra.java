@@ -28,10 +28,8 @@ public class Compra {
     private Date dataCompra = new Date();
     private String formaDePagamnto;
     private Double valorTotal=0.0;
+    private Double frete;
 
-    
-
-    
 
     public Compra() {
     }
@@ -75,6 +73,21 @@ public class Compra {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public double getFrete() {
+        if (frete != null) {
+            return frete.doubleValue();
+        } else {
+            // Trate o caso em que o frete é nulo, se necessário.
+            return 0.0; // Por exemplo, retorne um valor padrão de 0.0 caso o frete seja nulo.
+        }
+    }
+
+    public void setFrete(double frete) {
+        this.frete = frete;
+    }
+
+    
 
    
 

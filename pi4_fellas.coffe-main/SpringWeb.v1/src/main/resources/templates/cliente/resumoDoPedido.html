@@ -90,16 +90,16 @@
                 <td>R$ 49,99</td>
                 <td>R$ 49,99</td>
               </tr>
-              <tr class="frete">
+              <tr th:each="valorFrete : ${compra}" class="frete">
                 <td colspan="3">Frete:</td>
-                <td>R$ 10,00</td>
+                <td th:text="${valorFrete.frete}"></td>
               </tr>
             </tbody>
           </table>
 
           <div class="order-total">
             <h4>Total Geral:</h4>
-            <h3>R$ 259,97</h3>
+            <h3><span th:text="${compra.valorTotal}"></span></h3>
           </div>
 
           <div class="delivery-details">
