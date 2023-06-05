@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console.coffee</title>
+  <link rel="stylesheet" href="/css/login.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <script src="script.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="b-container">
+      <div class="logo">
+        <img src="/imagens/logo-header.png" alt="" />
+      </div>
+
+      <div class="nav-menu">
+        <ul class="menu">
+          <li>
+            <!-- <a href="">Home</a> -->
+          </li>
+        </ul>
+      </div>
+      <div class="controls">
+        <div class="profile">
+          <a href="#">
+            <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+              viewBox="0 0 32 32">
+              <path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />
+              <path id="Caminho_10" data-name="Caminho 10"
+                d="M15.333,2A13.333,13.333,0,1,0,28.667,15.333,13.338,13.338,0,0,0,15.333,2ZM8.76,23.707c.573-1.2,4.067-2.373,6.573-2.373s6.013,1.173,6.573,2.373a10.567,10.567,0,0,1-13.147,0Zm15.053-1.933c-1.907-2.32-6.533-3.107-8.48-3.107s-6.573.787-8.48,3.107a10.667,10.667,0,1,1,16.96,0Zm-8.48-14.44A4.667,4.667,0,1,0,20,12,4.655,4.655,0,0,0,15.333,7.333Zm0,6.667a2,2,0,1,1,2-2A2,2,0,0,1,15.333,14Z"
+                transform="translate(0.667 0.667)" />
+            </svg>
+         
+          </a>
+        </div>
+    
+      </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="titulo-cadastro">
+        <h1>Fazer Login</h1>
+      </div>
+      <div class="formulario">
+        <form th:action=@{api/usuario/logar} method="post">
+          <div class="lineInput">
+            <input type="text" name="email" placeholder="E-mail">
+          </div>
+          <div class="lineInput">
+            <input type="password" name="password" placeholder="Senha">
+          </div>
+          <div th:text="${erro}" class="alert al" role="alert"></div>
+          <div class="botao">
+            <button>Entrar</button>
+          </div>
+          <div class="link">
+          </div>
+      </div>
+      </form>
+    </div>
+
+</body>
+
+</html>

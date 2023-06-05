@@ -62,12 +62,15 @@
       <div class="payment-form">
         <div class="payment-methods">
           <h3>Escolha a forma de pagamento:</h3>
+          
+          <form action="finalizarCompra" method="post">
           <label>
             <input type="radio" name="payment" value="boleto" onclick="togglePaymentOption('boleto')">
             Boleto Bancário
           </label>
           <label>
-            <input type="radio" name="payment" value="cartao" onclick="togglePaymentOption('cartao')">
+            <div th:each="usuario : ${formaDePagamnto}" >
+            <input type="radio" name="payment" th:value="${usuario.formaDePagamnto}" onclick="togglePaymentOption('cartao')">
             Cartão de Crédito
           </label>
         </div>
@@ -78,9 +81,11 @@
           <div class="payment-option" id="boleto">
             <p>Você selecionou Boleto Bancário como forma de pagamento. Finalize seu pedido para gerar o boleto.</p>
           </div>
-
+      
+          <button type="submit" class="submit-button">Finalizar Pagamento</button>
           <div class="payment-option" id="cartao">
-            <form>
+          </form>
+            <form action="finalizarCompra" method="post">
               <div class="form-row">
                 <label for="card-number">Número do Cartão:</label>
                 <input type="text" id="card-number" name="card-number" required>

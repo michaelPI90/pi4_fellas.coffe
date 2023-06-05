@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #fafbfc;
+}
+
+main {
+    padding: 30px 50px 0px 50px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.consultar-produto {
+    padding: 20px 0px 0px 0px;
+}
+
+.lineInput {
+    display: grid;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-produto {
+    padding: 15px 0px;
+}
+
+.botao-consultar {
+    margin: 15px 0px;
+}
+
+button {
+    font-weight: bold;
+    border: 0px;
+    padding: 10px 15px;
+    background-color: #592e0b;
+    color: white;
+    border-radius: 5px;
+    transition: all ease 0.3s;
+}
+
+button:hover {
+background-color: #69360d;
+transform: scale(0.95);
+}
+
+.content {
+    margin-top: 15px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    width: 80%;
+}
+
+table th {
+    background-color: #592e0b;
+    color: white;
+}
+
+table th, td {
+    text-align: left;
+    padding: 1px 8px;
+}
+
+table td img {
+    width: 22px;
+
+}
+
+.center {
+    text-align: center;
+}
+
+.adicionar-produto {
+    padding: 0px 50px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}

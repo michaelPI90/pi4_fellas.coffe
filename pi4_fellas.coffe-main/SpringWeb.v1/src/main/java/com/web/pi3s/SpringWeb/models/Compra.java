@@ -30,6 +30,22 @@ public class Compra {
     private Double valorTotal=0.0;
     private Double frete;
 
+    private String numeroPedido;
+    
+
+
+    public void setFrete(Double frete) {
+        this.frete = frete;
+    }
+
+ 
+    public String getNumeroPedido() {
+        return numeroPedido;
+    }
+
+    public void setNumeroPedido(String numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
 
     public Compra() {
     }

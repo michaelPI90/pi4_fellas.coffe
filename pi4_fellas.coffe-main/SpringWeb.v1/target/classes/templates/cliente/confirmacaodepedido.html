@@ -51,17 +51,13 @@
             </div>
     </header>
   <main>
-    <div class="container">
+    <div>
       <h2>Confirmação de Pedido</h2>
-      <div class="order-confirmation">
-        <div class="order-details">
-          <h3>Detalhes do Pedido</h3>
-          <p>Número do Pedido: <span id="order-number">123456</span></p>
-          <p>Valor Total: <span id="order-total">R$ 259,97</span></p>
-          <p>Status: <span id="order-status">Aguardando Pagamento</span></p>
-          <p class="success-message">Gravado com Sucesso</p>
-        </div>
-      </div>
+      <p th:text="${mensagem}"></p>
+      <h3>Dados do Pedido:</h3>
+      <p>Número do Pedido: <span th:text="${compra.numeroPedido}"></span></p>
+      <p>Valor Total: <span th:text="${compra.valorTotal}"></span></p>
+
     </div>
   </main>
 
