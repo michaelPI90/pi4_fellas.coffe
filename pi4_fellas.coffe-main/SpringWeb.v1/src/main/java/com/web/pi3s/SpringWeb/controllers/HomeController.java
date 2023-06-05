@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
@@ -24,7 +25,7 @@ public class HomeController {
   @RequestMapping("/userBackoffice")
   public String index(Model model, Usermodels usuario) {
   
-        return "cliente/alterarCliente";
+        return "home/index";
 
   }
 
@@ -121,6 +122,8 @@ public class HomeController {
       return (false);
     }
   }
+
+
 
  
 }

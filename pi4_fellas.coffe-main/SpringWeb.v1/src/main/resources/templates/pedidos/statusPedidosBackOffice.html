@@ -69,22 +69,22 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <td class="dados-linhas"><input type="date" disabled class="form-control" id="basic-url"
+               
+                <tr th:each="compra : ${compra}">
+                    <td class="dados-linhas"  th:text="${compra.dataCompra}" ><input type="date"  disabled class="form-control" id="basic-url"
                             aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Número do Pedido..."
+                    <td class="dados-linhas" th:text="${compra.numeroPedido}" ><input type="text" disabled placeholder="Número do Pedido..."
                             class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Valor Total do Pedido..."
+                    <td class="dados-linhas" "${compra.valorTotal}"><input type="text" disabled placeholder="Valor Total do Pedido..."
                             class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
                     <td class="dados-linhas"><select disabled id="combobox-status" class="form-select w-75"
-                            name="status-pedido" field="*{status-pedido}" aria-label="Default select example">
+                            name="status" field="*{status-pedido}" aria-label="Default select example">
                             <option selected>Status Atual</option>
-                            <option value="Aguardando Pagamento">Aguardando Pagamento</option>
-                            <option value="Pagamento Rejeitado">Pagamento Rejeitado</option>
-                            <option value="Pagamento com Sucesso">Pagamento com Sucesso</option>
-                            <option value="Aguardando Retirada">Aguardando Retirada</option>
-                            <option value="Em transito">Em transito</option>
-                            <option value="Entregue">Entregue</option>
+                            <option value=" EM_ANDAMENTO"> EM_ANDAMENTO</option>
+                            <option value="ENVIADO">Pagamento Rejeitado</option>
+                            <option value="ENTREGUE">Pagamento com Sucesso</option>
+                          
+                
                         </select>
                     </td>
                     <td class="dados-linhas"><button id="botao-editar-pedido" class="btn btn-primary"

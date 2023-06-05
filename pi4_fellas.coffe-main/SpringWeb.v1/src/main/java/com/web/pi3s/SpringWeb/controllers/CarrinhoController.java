@@ -230,6 +230,23 @@ public class CarrinhoController {
         return buscarUserlogado(session);
     }
 
+    @PostMapping("/enderecoSelecionado")
+    public ModelAndView salvarEndereco(@RequestParam("flexRadioDefault") List<String> enderecoEscolhido, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+        session.setAttribute("usuarioLogado", usuarioLogado);
+
+
+        
+        List<String> endereco = usuarioLogado.getEnderecosEntrega();
+        usuarioLogado.setEnderecosEntrega(enderecoEscolhido);
+        mv.addObject("endereco", endereco);
+        mv.addObject("formaDePagamnto", compra);
+        
+        return pagamento(session);
+
+    }
+
 
 
     @GetMapping("/formaDePagamento")
@@ -245,19 +262,7 @@ public class CarrinhoController {
 
     }
 
-    @PostMapping("/enderecoSelecionado")
-    public ModelAndView salvarEndereco(@RequestParam("flexRadioDefault") List<String> enderecoEscolhido, HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
-        session.setAttribute("usuarioLogado", usuarioLogado);
-        List<String> endereco = usuarioLogado.getEnderecosEntrega();
-        usuarioLogado.setEnderecosEntrega(enderecoEscolhido);
-        mv.addObject("endereco", endereco);
-        mv.addObject("formaDePagamnto", compra);
-        
-        return pagamento(session);
 
-    }
 
     @GetMapping("/resumoDaCompra")
 public ModelAndView exibirResumoDaCompra(HttpSession session) {
@@ -344,15 +349,16 @@ public ModelAndView exibirPedido( HttpSession session) {
     // Gerar número sequencial do pedido
     String numeroPedido = gerarNumeroPedido();
     compra.setNumeroPedido(numeroPedido);
+     // Definir o status do pedido
     compra.setStatus(StatusPedido.EM_ANDAMENTO);
 
-    // Definir o status do pedido
+  
  
     // Salvar a compra no banco de dados
     Compra compraSalva = comprasrespo.save(compra);
 
     // Salvar os itens da compra no banco de dados
-    for (ItenCompraProduto it : intemCompra) {
+    for (ItenCompraProduto it : intemCompra) { 
         it.setCompra(compraSalva);
         itenComprarespo.save(it);
     }
@@ -361,6 +367,7 @@ public ModelAndView exibirPedido( HttpSession session) {
     String mensagem = "Pedido criado com sucesso!\n";
     mensagem += "Número do Pedido: " + numeroPedido + "\n";
     mensagem += "Valor Total: " + compraSalva.getValorTotal() + "\n";
+    mensagem +=  "Status do Pedido: " + compraSalva.getStatus();
  
     // Adicionar a compra salva e a mensagem ao modelo
     modelAndView.addObject("compra", compraSalva);

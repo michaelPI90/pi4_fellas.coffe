@@ -70,7 +70,7 @@
           </label>
           <label>
             <div th:each="usuario : ${formaDePagamnto}" >
-            <input type="radio" name="payment" th:value="${usuario.formaDePagamnto}" onclick="togglePaymentOption('cartao')">
+            <input type="radio" name="payment" value="$cartao" onclick="togglePaymentOption('cartao')">
             Cartão de Crédito
           </label>
         </div>
@@ -85,7 +85,22 @@
           <button type="submit" class="submit-button">Finalizar Pagamento</button>
           <div class="payment-option" id="cartao">
           </form>
+
+
+
+
+
+
             <form action="finalizarCompra" method="post">
+
+
+              <label>
+                <div th:each="usuario : ${formaDePagamnto}" >
+                <input type="radio" name="payment" value="$cartao" onclick="togglePaymentOption('cartao')">
+                Cartão de Crédito
+              </label>
+            </div>
+            
               <div class="form-row">
                 <label for="card-number">Número do Cartão:</label>
                 <input type="text" id="card-number" name="card-number" required>

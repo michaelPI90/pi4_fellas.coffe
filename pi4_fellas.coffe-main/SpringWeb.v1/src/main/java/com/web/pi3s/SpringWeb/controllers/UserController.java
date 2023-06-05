@@ -20,14 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.models.Usermodels;
+import com.web.pi3s.SpringWeb.repositorio.Comprasrespo;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
 
 @Controller
 @RequestMapping("/api/usuario")
 public class UserController {
+
+    @Autowired
+    Comprasrespo comprasrespo;
 
     UserController userController;
 
@@ -37,9 +42,7 @@ public class UserController {
     Userrespo repository;
     Produtorespo repoProd;
 
-    public void apagarUsuarioPorId(UUID id) {
 
-    }
 
     @PostMapping("/logar")
     String listarUsuario(Model model, Usermodels user) {
@@ -110,39 +113,7 @@ public String exibirListaUsuarios(Model model) {
         return "/alterar/alterar";
     }
 
-    // @GetMapping("/alterarStatus/{userId}")
-    // public String atualizar(Model model, @PathVariable UUID userId, Usermodels user) {
-
-    //     salvar(userId, user);
-
-    //     return "redirect:/api/usuario/admin/listar";
-    // }
-
-    // @GetMapping("/listarTodos")
-    // public ResponseEntity<List<Usermodels>> listarTodos() {
-
-    // return ResponseEntity.ok(repository.findAll());
-
-    // }
-
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // @PostMapping("/salvar")
-    // public ModelAndView salvar(UUID userID, Usermodels user) {
-    //     ModelAndView modelAndView = new ModelAndView();
-    //     Usermodels u = repository.findByUserId(user.getUserId());
-
-    //     if (u.isStatusAtivo()) {
-    //         u.setStatusAtivo(false);
-
-    //     } else {
-    //         u.setStatusAtivo(true);
-    //     }
-    //     repository.save(u);
-
-    //     modelAndView.setViewName("alterar/alterar");
-    //     return modelAndView;
-
-    // }
+   
 
     @PostMapping("/alterarDadosUsuario")
     public ResponseEntity<String> atualizarDados(@RequestBody Usermodels user) {
@@ -182,11 +153,27 @@ public String exibirListaUsuarios(Model model) {
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/admin/apagar/{id}")
-    public String deleteUser(@PathVariable("id") UUID id, Usermodels model) {
-        userController.apagarUsuarioPorId(id);
-        return "redirect:/usuario/admin/listar";
+
+    @GetMapping("/listaTodasCompras")
+    public ModelAndView listaTodasCompras() {
+        ModelAndView modelAndView = new ModelAndView();
+    
+        // Buscar todas as compras feitas na loja, ordenadas por data de forma decrescente
+       
+
+       
+
+        List<Compra> compras = (List<Compra>) comprasrespo.findAll();
+        // Adicionar a lista de compras ao modelo
+        modelAndView.addObject("compra", compras);
+        modelAndView.setViewName("pedidos/statusPedidosBackOffice");
+        return modelAndView;
     }
+    
+
+
+
+
+
 
 }
