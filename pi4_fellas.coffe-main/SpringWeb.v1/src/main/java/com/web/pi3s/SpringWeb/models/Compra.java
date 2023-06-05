@@ -4,7 +4,11 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.web.pi3s.SpringWeb.Enum.StatusPedido;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +33,11 @@ public class Compra {
     private String formaDePagamnto;
     private Double valorTotal=0.0;
     private Double frete;
+    
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
+    
 
     private String numeroPedido;
     
@@ -101,6 +110,19 @@ public class Compra {
 
     public void setFrete(double frete) {
         this.frete = frete;
+    }
+
+
+    
+
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
     }
 
     

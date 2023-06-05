@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.Enum.StatusPedido;
 import com.web.pi3s.SpringWeb.models.Clientemodels;
 import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.ItenCompraProduto;
@@ -343,9 +344,10 @@ public ModelAndView exibirPedido( HttpSession session) {
     // Gerar número sequencial do pedido
     String numeroPedido = gerarNumeroPedido();
     compra.setNumeroPedido(numeroPedido);
+    compra.setStatus(StatusPedido.EM_ANDAMENTO);
+
     // Definir o status do pedido
  
-
     // Salvar a compra no banco de dados
     Compra compraSalva = comprasrespo.save(compra);
 
