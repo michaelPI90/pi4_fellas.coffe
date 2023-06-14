@@ -109,9 +109,9 @@
                       <h3 th:text="${produto?.id}" id="id" name="id"></h3>
                       <p>Nome do Produto:  <span th:text="${produto.nomeProduto}"></span></p>
                       <p>Preco<span th:text="${produto.precoProduto}"></span></p>
-                      <p>Quantidade<span th:text="${produto?.qntdEstoque}" id="qntdEstoque" name="qntdEstoque"></span></p>
+                      <p>Avaliação:<span th:text="${produto?.avaliacao}" id="avaliacao" name="avaliacao"></span></p>
                       <p><span type="checkbox" th:checked="${produto.statusAtivo}" /></span></p>
-                      <a th:href="@{/adcionarProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Detalhes</a>
+                      <a th:href="@{/adcionarProduto/{id}(id=${produto?.id})}" class="btn btn-primary btn-card">Comprar</a>
                       
           
           

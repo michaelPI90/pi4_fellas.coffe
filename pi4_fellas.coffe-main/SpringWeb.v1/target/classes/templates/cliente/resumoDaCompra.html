@@ -103,7 +103,7 @@
               <tr>
                 <th>Endereço de Entrega</th>
                 <td th:each="usuario : ${user}" class="card-title">
-                  <h6 th:text="${usuario.enderecosEntrega}"></h6>
+                  <h6 th:value="${usuario.enderecosEntrega}"></h6>
                 </td>
               </tr>
               <tr>

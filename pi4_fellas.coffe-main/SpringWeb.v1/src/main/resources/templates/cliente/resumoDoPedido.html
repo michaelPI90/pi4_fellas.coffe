@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resumo do Pedido</title>
-  
+
   <!-- BootStrap CSS -->
   <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
@@ -15,7 +15,7 @@
   <!-- Script JS -->
   <script src="/js/resumoDoPedido.js" defer></script>
   <script src="/js/cadastro.js"></script>
-  
+
 </head>
 
 <body>
@@ -84,7 +84,7 @@
                 <td th:text="${pedido.valorUnitario}"></td>
                 <td th:text="${pedido.valorTotal}"></td>
               </tr>
-            
+
               <tr th:each="valorFrete : ${compra}" class="frete">
                 <td colspan="3">Frete:</td>
                 <td th:text="${valorFrete.frete}"></td>
@@ -102,13 +102,15 @@
             <table>
 
               <th>Endereço de Entrega</th>
-     
+
               </tr>
 
 
               </tr>
-              <th>Endereço de Faturamento</th>
-             
+              <th>Endereço de Faturamento</th> 
+              <tr th:each="cliente : ${user}" class="enderecoFaturamento">
+                <td th:text="${cliente?.enderecoFaturamento}"></td>
+              </tr>
 
               </tr>
               <tr>
@@ -122,79 +124,96 @@
                     <div class="input-group mb-3 w-50">
                       <label for="input-cep">Digite seu CEP para entrega:</label>
                       <input type="text" id="cep1" name="enderecoEntrega" placeholder="Digite o CEP">
-                     <button type="button" onclick="consultarCep('cep1', 'logradouro1', 'bairro1', 'cidade1', 'estado1')">Consultar</button>
+                      <button type="button"
+                        onclick="consultarCep('cep1', 'logradouro1', 'bairro1', 'cidade1', 'estado1')">Consultar</button>
                     </div>
                     <div class="input-group mb-3 w-100">
-                      <label  class="input-group-text" for="logradouro1">Logradouro:</label>
-                      <input class="form-control" id="logradouro1" name="enderecoEntrega" aria-describedby="basic-addon3" readonly>
+                      <label class="input-group-text" for="logradouro1">Logradouro:</label>
+                      <input class="form-control" id="logradouro1" name="enderecoEntrega"
+                        aria-describedby="basic-addon3" readonly>
                     </div>
                     <div class="input-group mb-3 w-100">
                       <label class="input-group-text" for="bairro1">Bairro:</label>
-                      <input disabled type="text" class="form-control" id="bairro1" name="enderecoEntrega" aria-describedby="basic-addon3" readonly>
+                      <input disabled type="text" class="form-control" id="bairro1" name="enderecoEntrega"
+                        aria-describedby="basic-addon3" readonly>
                     </div>
                     <div class="input-group mb-3 w-50">
                       <label class="input-group-text" for="cidade1">Cidade:</label>
-                      <input disabled type="text" class="form-control" id="cidade1" name="enderecoEntrega" aria-describedby="basic-addon3" readonly>
+                      <input disabled type="text" class="form-control" id="cidade1" name="enderecoEntrega"
+                        aria-describedby="basic-addon3" readonly>
                     </div>
                     <div class="input-group mb-3 w-50">
                       <label class="input-group-text" for="estado1">Estado:</label>
-                      <input disabled type="text" class="form-control" id="estado1" name="enderecoEntrega" aria-describedby="basic-addon3" readonly>
+                      <input disabled type="text" class="form-control" id="estado1" name="enderecoEntrega"
+                        aria-describedby="basic-addon3" readonly>
                     </div>
-                    
-                    
+
+
                     <div class="input-group mb-3 w-50">
                       <span class="input-group-text" id="basic-addon3">Número:</span>
-                      <input type="text" class="form-control" id="basic-url" name="enderecoEntrega" aria-describedby="basic-addon3">
+                      <input type="text" class="form-control" id="basic-url" name="enderecoEntrega"
+                        aria-describedby="basic-addon3">
                     </div>
                     <div class="input-group mb-3 w-50">
                       <span class="input-group-text" id="basic-addon3">Complemento:</span>
-                      <input type="text" class="form-control" id="basic-url" name="enderecoEntrega" aria-describedby="basic-addon3">
+                      <input type="text" class="form-control" id="basic-url" name="enderecoEntrega"
+                        aria-describedby="basic-addon3">
                     </div>
                     <button> Adicionar</button>
                   </div>
-                  
-                 
+
+
                 </form>
 
 
 
 
                 <form action="enderecoSelecionado" method="post">
-                  <button id="botao-salvar-modificacoes" type="button" class="btn btn-primary">Selecionar Enderecos</button>
-                 
+                  <button id="botao-salvar-modificacoes" type="button" class="btn btn-primary">Selecionar
+                    Enderecos</button>
+
                   <div>
-                   <div id="card-adicionar-endereco" class="card">
-                     <div class="card-body">
-                       <h5  th:each="usuario : ${user}" class="card-title" >
-        
- 
-                     
-                         
-                     
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="flexRadioDefault" th:value="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 1}__]}"  id="flexRadioDefault1">
-                          <label class="form-check-label" for="flexRadioDefault1">
-                            Selecionar esse endereço para entregas 
-                             <h5 th:text="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 1}__]}"></h5>
-                             <h5 th:text="${usuario.enderecoFaturamento}"></h5>
-  
-  
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" th:value="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 2}__]}" id="flexRadioDefault1">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                Selecionar esse endereço para entregas                     
-                                  <h5 th:text="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 2}__]}"></h5>
-                         </label>
-                       </div>
-                     </div> 
-                   </div>
+                    <div id="card-adicionar-endereco" class="card">
+                      <div class="card-body">
+                        <h5 th:each="usuario : ${user}" class="card-title">
+
+
+
+
+
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                              th:value="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 1}__]}"
+                              id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              Selecionar esse endereço para entregas
+                              <h5
+                                th:text="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 1}__]}">
+                              </h5>
+                              <h5 th:text="${usuario.enderecoFaturamento}"></h5>
+
+
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                  th:value="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 2}__]}"
+                                  id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Selecionar esse endereço para entregas
+                                  <h5
+                                    th:text="${usuario.enderecosEntrega[__${#lists.size(usuario.enderecosEntrega) - 2}__]}">
+                                  </h5>
+                                </label>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <button id="botao-salvar-modificacoes" type="submit" class="btn btn-primary">Ir para
+                      pagamento</button>
+
                   </div>
-                    <button id="botao-salvar-modificacoes" type="submit" class="btn btn-primary">Ir para pagamento</button>
-                 
           </div>
         </div>
       </div>
-    </div>
   </main>
 
 

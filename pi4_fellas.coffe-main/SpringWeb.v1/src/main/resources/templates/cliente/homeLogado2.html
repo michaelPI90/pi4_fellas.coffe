@@ -33,10 +33,9 @@
                 <img src="/imagens/logo-header.png" alt="Imagem do logotipo da empresa." />
             </div>
 
-            
             <div class="controls">
                 <div class="profile">
-                    <a href="/fellas.coffe/clienteLogin">
+                    <a href="/fellas.coffe/alterarCadastro">
                         <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                             viewBox="0 0 32 32">
                             <path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />
@@ -46,7 +45,11 @@
                         </svg>
                     </a>
                 </div>
-                <a href="/fellas.coffe/clienteLogin">Faça login / Crie seu login</a>
+
+                <div aria-disabled="true"><span th:text="${session?.usuarioLogado?.nome}" class="usuarioLogado"
+                        id="username" name="username">
+                </div>
+
                 <div class="shopping-cart">
                     <a href="/carrinho">
                         <svg id="shopping_cart_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"

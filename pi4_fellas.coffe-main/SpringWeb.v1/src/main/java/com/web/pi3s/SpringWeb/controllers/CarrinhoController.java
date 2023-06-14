@@ -194,6 +194,11 @@ public class CarrinhoController {
             modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
             return modelAndView;
         }
+        if (intemCompra.size() == 0){
+            modelAndView.setViewName("redirect:/carrinho");
+            
+            return modelAndView;
+        }
 
         // Lógica para finalizar a compra
         calcularTotal();

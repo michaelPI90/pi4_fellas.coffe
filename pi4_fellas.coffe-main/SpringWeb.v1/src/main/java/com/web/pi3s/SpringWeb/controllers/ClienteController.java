@@ -54,12 +54,15 @@ public class ClienteController {
     return modelAndView;
 
   }
+  
 
   @GetMapping("/logado")
   public ModelAndView logado() {
+     List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("cliente/homeLogado");
+    mv.setViewName("cliente/homeLogado2");
     mv.addObject("userLogado", new Clientemodels());
+    mv.addObject("produtos", produtosOrdenados);
 
     return mv;
 
@@ -169,7 +172,7 @@ public class ClienteController {
   public ModelAndView exibirFormularioLogin(Model model) {
     ModelAndView mv = new ModelAndView();
     mv.addObject("usuario", new Clientemodels());
-    mv.setViewName("/cliente/homeLogado");
+    mv.setViewName("/cliente/home");
     return mv;
   }
 
@@ -339,7 +342,7 @@ public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam(
     // Atualize a sessão com o usuário atualizado
     session.setAttribute("usuarioLogado", usuarioLogado);
 
-    modelAndView.setViewName("cliente/resumoDoPedido");
+    modelAndView.setViewName("/cliente/resumoDoPedido");
     return modelAndView;
 }
 
