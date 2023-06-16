@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrinho - Console.coffee</title>
   <link rel="stylesheet" href="/css/carrinho.css">
+  <link rel="stylesheet" href="/css/stylesHover.css">
+
+   <!-- Script JS -->
+   <script src="/js/scriptHover.js" defer></script>
 
   <script>
     function redirecionar() {
@@ -57,18 +61,28 @@
           </li>
         </ul>
         <div class="controls">
-          <div class="profile">
-            <a href="/fellas.coffe/clienteLogin">
-              <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                viewBox="0 0 32 32">
-                <path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />
-                <path id="Caminho_10" data-name="Caminho 10"
-                  d="M15.333,2A13.333,13.333,0,1,0,28.667,15.333,13.338,13.338,0,0,0,15.333,2ZM8.76,23.707c.573-1.2,4.067-2.373,6.573-2.373s6.013,1.173,6.573,2.373a10.567,10.567,0,0,1-13.147,0Zm15.053-1.933c-1.907-2.32-6.533-3.107-8.48-3.107s-6.573.787-8.48,3.107a10.667,10.667,0,1,1,16.96,0Zm-8.48-14.44A4.667,4.667,0,1,0,20,12,4.655,4.655,0,0,0,15.333,7.333Zm0,6.667a2,2,0,1,1,2-2A2,2,0,0,1,15.333,14Z"
-                  transform="translate(0.667 0.667)" />
-              </svg>
-
+          <div>
+            <a id="profile" href="">
+                <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                    viewBox="0 0 32 32">
+                    <path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />
+                    <path id="Caminho_10" data-name="Caminho 10"
+                        d="M15.333,2A13.333,13.333,0,1,0,28.667,15.333,13.338,13.338,0,0,0,15.333,2ZM8.76,23.707c.573-1.2,4.067-2.373,6.573-2.373s6.013,1.173,6.573,2.373a10.567,10.567,0,0,1-13.147,0Zm15.053-1.933c-1.907-2.32-6.533-3.107-8.48-3.107s-6.573.787-8.48,3.107a10.667,10.667,0,1,1,16.96,0Zm-8.48-14.44A4.667,4.667,0,1,0,20,12,4.655,4.655,0,0,0,15.333,7.333Zm0,6.667a2,2,0,1,1,2-2A2,2,0,0,1,15.333,14Z"
+                        transform="translate(0.667 0.667)" />
+                </svg>
             </a>
-          </div>
+        </div>
+        <ul id="lista-opcoes-usuario" class="list-group">
+            <a href="/fellas.coffe/alterarCadastro">
+                <li class="list-group-item">Perfil</li>
+            </a>
+            <a href="/fellas.coffe/meusPedidos">
+                <li class="list-group-item">Ver Meus Pedidos</li>
+            </a>
+            <a href="/fellas.coffe/Logout">
+                <li class="list-group-item">Sair</li>
+            </a>
+        </ul>
           <div aria-disabled="true"><span th:text="${session?.usuarioLogado?.nome}" class="usuarioLogado" id="username"
               name="username">
           </div>

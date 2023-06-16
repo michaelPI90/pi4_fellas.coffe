@@ -323,7 +323,7 @@ public ModelAndView exibirResumoDaCompra(HttpSession session) {
         modelAndView.addObject("endereco", endereco);
         modelAndView.addObject("compra", compra);
         modelAndView.addObject("listarItens", intemCompra);
-        modelAndView.addObject("user", usuarioLogado);
+        modelAndView.addObject("usuarioLogado", usuarioLogado);
         modelAndView.setViewName("cliente/resumoDaCompra");
         // Resto do código...
 
