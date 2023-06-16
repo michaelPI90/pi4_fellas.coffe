@@ -12,8 +12,6 @@ body {
   padding: 0;
 }
 
-
-
 .b-container {
   display: flex;
   align-items: center;
@@ -143,14 +141,6 @@ p, a {
   }
 }
 
-
-/* header {
-    background-color: #592e0b;
-    padding: 10px;
-    color: white;
-    text-align: center;
-} */
-
 main {
     padding: 15px 50px;
 }
@@ -220,6 +210,15 @@ a {
 
 .container {
     margin: 20px 0px; 
+}
+
+#container-botoes-opcoes {
+  display: flex;
+  margin: 20px 0px 0px 20px;
+}
+
+#botao-listar-usuario {
+  margin-right: 20px;
 }
 
 

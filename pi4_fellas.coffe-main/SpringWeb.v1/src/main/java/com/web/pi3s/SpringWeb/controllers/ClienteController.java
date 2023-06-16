@@ -43,7 +43,7 @@ public class ClienteController {
   Produtorespo produtorespo;
   private List<ItenCompraProduto> intemCompra = new ArrayList<ItenCompraProduto>();
 
-   @Autowired
+  @Autowired
   Comprasrespo comprarespo;
 
   @GetMapping("/homeCliente")
@@ -59,11 +59,10 @@ public class ClienteController {
     return modelAndView;
 
   }
-  
 
   @GetMapping("/logado")
   public ModelAndView logado() {
-     List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
+    List<Produtomodels> produtosOrdenados = this.produtorespo.ordernar();
     ModelAndView mv = new ModelAndView();
     mv.setViewName("cliente/homeLogado2");
     mv.addObject("userLogado", new Clientemodels());
@@ -94,9 +93,9 @@ public class ClienteController {
     }
 
     // Adicione o usuário logado ao modelo para exibir os dados no formulário
-    //session.setAttribute("usuario", usuarioLogado);
+    // session.setAttribute("usuario", usuarioLogado);
     model.addAttribute("usuario", usuarioLogado);
-    //salvarAlteracao(model, usuarioLogado);
+    // salvarAlteracao(model, usuarioLogado);
 
     // Retorne o nome da página de formulário para que seja exibido o conteúdo
     return "cliente/alterarDadosCliente";
@@ -109,7 +108,7 @@ public class ClienteController {
       erroMsg = "CPF INVÁLIDO";
     } else {
       usuario.setPassword(usuario.getPassword2());
-     usuario.setPassword(enconder.encode(usuario.getPassword()));
+      usuario.setPassword(enconder.encode(usuario.getPassword()));
       clienterespo.save(usuario); // Função que executa o cadastro
       return "redirect:/fellas.coffe/logado";
     }
@@ -324,7 +323,7 @@ public class ClienteController {
     model.addAttribute("pedidos", pedidos);
 
     // Dados da entrega
-    List <String> endereco = clienteLogado.getEnderecosEntrega();
+    List<String> endereco = clienteLogado.getEnderecosEntrega();
     model.addAttribute("endereco", endereco);
 
     // Dados do pagamento
@@ -333,14 +332,15 @@ public class ClienteController {
   }
 
   @PostMapping("/adicionarEnderecoEntrega")
-public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam("enderecoEntrega") String enderecoEntrega) {
+  public ModelAndView adicionarEnderecoEntrega(HttpSession session,
+      @RequestParam("enderecoEntrega") String enderecoEntrega) {
     ModelAndView modelAndView = new ModelAndView();
-    
+
     Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
 
     if (usuarioLogado == null) {
-        modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
-        return modelAndView;
+      modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
+      return modelAndView;
     }
 
     // Adicione o novo endereço à lista de endereços de entrega do usuário
@@ -353,9 +353,9 @@ public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam(
 
     modelAndView.setViewName("/cliente/resumoDoPedido");
     return modelAndView;
-}
+  }
 
-@GetMapping("/meusPedidos")
+  @GetMapping("/meusPedidos")
   public ModelAndView exibirPedidos(Clientemodels cliente, ModelAndView model, HttpSession session) {
     // Verificar se o cliente está logado na sessão
     Clientemodels clienteLogado = (Clientemodels) session.getAttribute("usuarioLogado");
@@ -368,11 +368,10 @@ public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam(
     model.addObject("pedidos", compraClienteID);
     model.setViewName("/cliente/listaDosPedidosCliente");
 
-
     return model;
   }
 
-@GetMapping("/detalhesPedido/{id}")
+  @GetMapping("/detalhesPedido/{id}")
   public ModelAndView exibirDetalhesPedido(@PathVariable int id, HttpSession session) {
     // Obtenha o produto do banco de dados com base no ID
     ModelAndView model = new ModelAndView();
@@ -397,7 +396,6 @@ public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam(
       // Zera o carrinho
 
       intemCompra.removeAll(intemCompra);
-      
 
     }
 
@@ -405,12 +403,5 @@ public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam(
 
     return formCliente();
   }
-
-  // @PostMapping("/Logout")
-  // public ModelAndView logout(HttpSession session) {
-  // session.invalidate();
-
-  // return formCliente();
-  // }
 
 }

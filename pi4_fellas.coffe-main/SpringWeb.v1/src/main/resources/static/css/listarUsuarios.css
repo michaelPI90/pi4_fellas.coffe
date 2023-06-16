@@ -42,8 +42,8 @@ button {
 }
 
 button:hover {
-background-color: #69360d;
-transform: scale(0.95);
+    background-color: #69360d;
+    transform: scale(0.95);
 }
 
 .content {
@@ -52,7 +52,8 @@ transform: scale(0.95);
 
 table {
     border-collapse: collapse;
-    border: 1px solid #ccc;
+    border-spacing: 5px;
+    border: 5px;
     width: 80%;
 }
 
@@ -61,17 +62,21 @@ table th {
     color: white;
 }
 
-table th, td {
+table th,
+td {
     text-align: left;
     padding: 2px 8px;
 }
 
 table td img {
     width: 22px;
-
 }
 
 .center {
+    text-align: center;
+}
+
+.cabecalhos-colunas {
     text-align: center;
 }
 
@@ -80,9 +85,211 @@ a {
     text-decoration: none;
 }
 
-#dados{
+#dados {
     font-size: medium;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #fafbfc;
+}
 
+.b-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    background-color: #efad60;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    flex: 1;
+}
+
+.logo img {
+    width: 270px;
+}
+
+.nav-menu {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.menu li {
+    margin-left: 30px;
+}
+
+.controls {
+    margin-left: 30px;
+}
+
+.profile,
+.shopping-cart {
+    margin-left: 30px;
+}
+
+.profile a,
+.shopping-cart a {
+    display: flex;
+    align-items: center;
+}
+
+.profile svg,
+.shopping-cart svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    fill: #9e3f15;
+}
+
+.profile #account_circle_black_24dp {
+    position: relative;
+}
+
+.profile #account_circle_black_24dp:before {
+    content: "Faça login/crie seu login";
+    position: absolute;
+    top: -10px;
+    right: 40px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+p,
+a {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    color: #9e3f15;
+    text-decoration: none;
+}
+
+.header__content__cart__color {
+    fill: #9e3f15;
+}
+
+@media screen and (max-width: 600px) {
+    .b-container {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .nav-menu {
+        flex-basis: 100%;
+    }
+
+    .menu {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .menu li {
+        margin-left: 0;
+    }
+
+    .controls {
+        margin-left: 0;
+    }
+}
+
+main {
+    padding: 15px 50px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.titulo-cadastro {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario {
+    align-items: center;
+}
+
+.lineInput {
+    display: grid;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.botao {
+    margin-top: 10px;
+    text-align: center;
+}
+
+button {
+    font-weight: bold;
+    border: 0px;
+    padding: 10px 15px;
+    background-color: #9e3f15;
+    color: white;
+    border-radius: 5px;
+    transition: all ease 0.3s;
+}
+
+button:hover {
+    transform: scale(0.95);
+}
+
+.link {
+    padding: 15px;
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    margin: 20px 0px;
+}
+
+#container-botoes-opcoes {
+    display: flex;
+    margin: 20px 0px 0px 20px;
+}
+
+#botao-listar-usuario {
+    margin-right: 20px;
+}
+
+#cabecalho-pagina {
+    font-family: n;
+}
