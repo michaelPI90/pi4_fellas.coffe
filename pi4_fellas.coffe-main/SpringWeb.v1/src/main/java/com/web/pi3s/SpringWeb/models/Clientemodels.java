@@ -51,6 +51,8 @@ public class Clientemodels implements UserDetails {
     private String enderecoFaturamento;
     @Column(nullable = true)  
     private List<String> enderecosEntrega = new ArrayList<>();
+    @Column(nullable = true)  
+    private String enderecoEntrega;
 
 
   
@@ -150,6 +152,25 @@ public class Clientemodels implements UserDetails {
         this.enderecosEntrega = enderecosEntrega;
     }
 
+    
+
+    public Clientemodels(int id, String nome, String password, String cpf, String genero, boolean statusAtivo,
+            String password2, String email, String dataNasc, String enderecoFaturamento, List<String> enderecosEntrega,
+            String enderecoEntrega) {
+        this.id = id;
+        this.nome = nome;
+        this.password = password;
+        this.cpf = cpf;
+        this.genero = genero;
+        this.statusAtivo = statusAtivo;
+        this.password2 = password2;
+        this.email = email;
+        this.dataNasc = dataNasc;
+        this.enderecoFaturamento = enderecoFaturamento;
+        this.enderecosEntrega = enderecosEntrega;
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
     public Clientemodels() {
     }
 
@@ -204,6 +225,16 @@ public class Clientemodels implements UserDetails {
     public void setEnderecosEntrega(List<String> enderecosEntrega) {
         this.enderecosEntrega = enderecosEntrega;
     }
+
+    public String getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(String enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
+    
 
 }
 

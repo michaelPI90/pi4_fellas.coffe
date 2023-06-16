@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.ItenCompraProduto;
 
 
@@ -13,5 +14,7 @@ public interface ItenComprarespo extends CrudRepository<ItenCompraProduto, Integ
     
 
     List<ItenCompraProduto> findByid(Integer userID);
+
+    ItenCompraProduto findByCompra(Compra compra);
 
 }

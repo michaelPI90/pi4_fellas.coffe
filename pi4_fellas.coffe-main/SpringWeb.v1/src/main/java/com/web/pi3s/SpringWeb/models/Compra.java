@@ -1,11 +1,14 @@
 package com.web.pi3s.SpringWeb.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.web.pi3s.SpringWeb.Enum.StatusPedido;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -33,6 +36,7 @@ public class Compra {
     private String formaDePagamnto;
     private Double valorTotal=0.0;
     private Double frete;
+    private List<String> enderecosEntrega = new ArrayList<>();
     
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
@@ -124,6 +128,18 @@ public class Compra {
     public void setStatus(StatusPedido status) {
         this.status = status;
     }
+
+
+    public List<String> getEnderecosEntrega() {
+        return enderecosEntrega;
+    }
+
+
+    public void setEnderecosEntrega(List<String> enderecosEntrega) {
+        this.enderecosEntrega = enderecosEntrega;
+    }
+
+    
 
     
 

@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrinho - Console.coffee</title>
   <link rel="stylesheet" href="/css/carrinho.css">
+  <link rel="stylesheet" href="/css/stylesHover.css">
+
+   <!-- Script JS -->
+   <script src="/js/scriptHover.js" defer></script>
 
   <script>
     function redirecionar() {
@@ -68,7 +72,18 @@
               </svg>
 
             </a>
-          </div>
+        </div>
+        <ul id="lista-opcoes-usuario" class="list-group">
+            <a href="/fellas.coffe/alterarCadastro">
+                <li class="list-group-item">Perfil</li>
+            </a>
+            <a href="/fellas.coffe/meusPedidos">
+                <li class="list-group-item">Ver Meus Pedidos</li>
+            </a>
+            <a href="/fellas.coffe/Logout">
+                <li class="list-group-item">Sair</li>
+            </a>
+        </ul>
           <div aria-disabled="true"><span th:text="${session?.usuarioLogado?.nome}" class="usuarioLogado" id="username"
               name="username">
           </div>

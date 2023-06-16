@@ -1,0 +1,17 @@
+/* Seletores de IDs */
+
+#profile {
+    fill: #9E3F15;
+    width: 32px;
+    height: 32px;
+}
+
+#profile:hover {
+    fill: #EFAD60;
+    display: block;
+}
+
+#lista-opcoes-usuario {
+    width: 170px;
+    display: none;
+}

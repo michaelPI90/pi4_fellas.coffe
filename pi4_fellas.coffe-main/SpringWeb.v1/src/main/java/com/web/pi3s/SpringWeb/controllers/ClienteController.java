@@ -15,9 +15,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.pi3s.SpringWeb.models.Clientemodels;
+import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.ItenCompraProduto;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.repositorio.Clienterespo;
+import com.web.pi3s.SpringWeb.repositorio.Comprasrespo;
 import com.web.pi3s.SpringWeb.repositorio.ItenComprarespo;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
@@ -40,6 +42,9 @@ public class ClienteController {
   @Autowired
   Produtorespo produtorespo;
   private List<ItenCompraProduto> intemCompra = new ArrayList<ItenCompraProduto>();
+
+   @Autowired
+  Comprasrespo comprarespo;
 
   @GetMapping("/homeCliente")
   public ModelAndView listaProduto(ModelAndView modelAndView) {
@@ -89,11 +94,28 @@ public class ClienteController {
     }
 
     // Adicione o usuário logado ao modelo para exibir os dados no formulário
-    session.setAttribute("usuario", usuarioLogado);
+    //session.setAttribute("usuario", usuarioLogado);
     model.addAttribute("usuario", usuarioLogado);
+    //salvarAlteracao(model, usuarioLogado);
 
     // Retorne o nome da página de formulário para que seja exibido o conteúdo
     return "cliente/alterarDadosCliente";
+  }
+
+  @PostMapping("/alterarCadastroCliente/{id}")
+  public String salvarAlteracao(@PathVariable int id, Model model, Clientemodels usuario) {
+    String erroMsg = null;
+    if (validadorCPF(usuario.getCpf()) == false) {
+      erroMsg = "CPF INVÁLIDO";
+    } else {
+      usuario.setPassword(usuario.getPassword2());
+     usuario.setPassword(enconder.encode(usuario.getPassword()));
+      clienterespo.save(usuario); // Função que executa o cadastro
+      return "redirect:/fellas.coffe/logado";
+    }
+    model.addAttribute("erro", erroMsg);
+    return "/cliente/alterarDadosCliente";
+
   }
 
   @GetMapping("/clienteLogin")
@@ -117,19 +139,6 @@ public class ClienteController {
     return modelAndView;
 
   }
-
-  // @GetMapping("/detalhesProduto")
-  // public ModelAndView detalhesProduto() {
-
-  // ModelAndView modelAndView = new ModelAndView();
-  // Produtomodels detalhesProduto = new Produtomodels();
-
-  // modelAndView.setViewName("cliente/detalhesProduto");
-  // modelAndView.addObject("detalhesProduto", detalhesProduto);
-
-  // return modelAndView;
-
-  // }
 
   @GetMapping("/detalhesProduto/{id}")
   public ModelAndView exibirDetalhesProduto(@PathVariable Long id) {
@@ -346,8 +355,40 @@ public ModelAndView adicionarEnderecoEntrega(HttpSession session, @RequestParam(
     return modelAndView;
 }
 
+@GetMapping("/meusPedidos")
+  public ModelAndView exibirPedidos(Clientemodels cliente, ModelAndView model, HttpSession session) {
+    // Verificar se o cliente está logado na sessão
+    Clientemodels clienteLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+    if (clienteLogado == null) {
+      // Cliente não está logado, redirecionar para a página de login
+      model.setViewName("redirect:/fellas.coffe/clienteLogin");
+      return model;
+    }
+    List<Compra> compraClienteID = this.comprarespo.ordernarPedidos(clienteLogado.getId());
+    model.addObject("pedidos", compraClienteID);
+    model.setViewName("/cliente/listaDosPedidosCliente");
 
-  @PostMapping("/Logout")
+
+    return model;
+  }
+
+@GetMapping("/detalhesPedido/{id}")
+  public ModelAndView exibirDetalhesPedido(@PathVariable int id, HttpSession session) {
+    // Obtenha o produto do banco de dados com base no ID
+    ModelAndView model = new ModelAndView();
+    Compra pedido = this.comprarespo.findById(id);
+    ItenCompraProduto itensPedido = this.itenComprarespo.findByCompra(pedido);
+    Clientemodels clienteLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    // Adicione o produto ao modelo
+    model.addObject("user", clienteLogado);
+    model.addObject("itensPedido", itensPedido);
+    model.setViewName(("/cliente/resumoDoPedidoCliente"));
+    // Retorne o nome da página HTML (sem a extensão .html)
+    return model;
+  }
+
+  @GetMapping("/Logout")
   public ModelAndView logout(HttpSession session) {
     // Recupera o carrinho do cliente da sessão
     Clientemodels clientemodels = (Clientemodels) session.getAttribute("usuarioLogado");
