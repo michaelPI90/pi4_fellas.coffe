@@ -211,6 +211,33 @@ public class CarrinhoController {
         return modelAndView;
     }
 
+    @GetMapping("/checkout")
+public ModelAndView buscarUserLogado(HttpSession session) {
+    ModelAndView modelAndView = new ModelAndView();
+
+    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    if (usuarioLogado == null) {
+        modelAndView.setViewName("redirect:/fellas.coffe/clienteLogin");
+        return modelAndView;
+    }
+    if (intemCompra.size() == 0){
+        modelAndView.setViewName("redirect:/carrinho");
+        return modelAndView;
+    }
+
+    // Lógica para finalizar a compra
+    calcularTotal();
+    compra.setCliente(usuarioLogado);
+    modelAndView.addObject("compra", compra);
+
+    modelAndView.addObject("listarItens", intemCompra);
+    modelAndView.addObject("user", usuarioLogado);
+    modelAndView.setViewName("cliente/resumoDoPedido");
+    return modelAndView;
+}
+
+
 
     @PostMapping("adicionarEnderecoEntrega")
     public ModelAndView adicionarEnderecoEntrega(HttpSession session,  @RequestParam("enderecoEntrega") String enderecoEntrega) {
@@ -229,6 +256,7 @@ public class CarrinhoController {
         usuarioLogado.setEnderecosEntrega(enderecosEntrega);
 
         // Atualize a sessão com o usuário atualizado
+        modelAndView.addObject("enderecoEntrega", enderecosEntrega);
         session.setAttribute("usuarioLogado", usuarioLogado);
 
      

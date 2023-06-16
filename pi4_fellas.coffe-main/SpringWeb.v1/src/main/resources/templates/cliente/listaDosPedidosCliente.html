@@ -94,7 +94,8 @@
             <tbody>
               <tr th:each="pedidoCliente : ${pedidos}">
                 <td th:text="${pedidoCliente.numeroPedido}"></td>
-                <td th:text="${pedidoCliente.dataCompra}"></td>
+                <td th:text="${#dates.format(pedidoCliente.dataCompra , 'dd/MM/yyyy')}"></td>  
+               
                 <td th:text="${pedidoCliente.valorTotal}"></td>
                 <td th:text="${pedidoCliente.status}"></td>
                 <td><a th:href="@{detalhesPedido/{id}(id=${pedidoCliente?.id})}"><button>Mais detalhes</button></a></td>

@@ -119,8 +119,9 @@
             <table>
               <tr>
                 <th>Endereço de Entrega</th>
-                <td th:each="enderecoUsuario : ${user}" class="card-title">
-                  <h6 th:value="${enderecoUsuario?.enderecosEntrega}"></h6>
+                <td >
+                  <h6  th:text="${endereco}"></h6>
+                
                 </td>
               </tr>
               <tr>

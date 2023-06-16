@@ -1,7 +1,11 @@
 package com.web.pi3s.SpringWeb.Enum;
 
 public enum StatusPedido {
-    EM_ANDAMENTO,
-    ENVIADO,
-    ENTREGUE;
+     EM_ANDAMENTO,
+   AGUARDANDO_PAGAMENTO,
+   PAGAMENTO_REJEITADO,
+   PAGAMENTO_SUCESSO,
+   AGUARDANDO_RETIRADA,
+   EM_TRANSITO,
+   ENTREGUE;
 }

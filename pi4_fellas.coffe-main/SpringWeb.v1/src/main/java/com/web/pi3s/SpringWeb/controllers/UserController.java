@@ -20,12 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.Enum.StatusPedido;
+import com.web.pi3s.SpringWeb.models.Clientemodels;
 import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.models.Usermodels;
 import com.web.pi3s.SpringWeb.repositorio.Comprasrespo;
 import com.web.pi3s.SpringWeb.repositorio.Produtorespo;
 import com.web.pi3s.SpringWeb.repositorio.Userrespo;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/api/usuario")
@@ -45,7 +49,7 @@ public class UserController {
 
 
     @PostMapping("/logar")
-    String listarUsuario(Model model, Usermodels user) {
+    String listarUsuario(Model model, Usermodels user,  HttpSession session) {
         Optional<Usermodels> userEncontrado = this.repository.findByEmail(user.getEmail());
 
         String erroMsg = null;
@@ -61,6 +65,7 @@ public class UserController {
             return "/logado/logadoEstoquista";
 
         } else {
+            session.setAttribute("usuarioLogado", userEncontrado);
             model.addAttribute("usuarios", repository.findAll());
             return "/logado/logadoAdmin";
         }
@@ -166,11 +171,42 @@ public String exibirListaUsuarios(Model model) {
         List<Compra> compras = (List<Compra>) comprasrespo.findAll();
         // Adicionar a lista de compras ao modelo
         modelAndView.addObject("compra", compras);
+          modelAndView.addObject("statusPedidoValues", StatusPedido.values());
         modelAndView.setViewName("pedidos/statusPedidosBackOffice");
         return modelAndView;
     }
     
+@PostMapping("/editarStatus")
+public String editarStatus(@RequestParam("numeroPedido") String numeroPedido, @RequestParam("status") String status) {
+    Optional<Compra> optionalCompra = comprasrespo.findBynumeroPedido(numeroPedido);
 
+    if (optionalCompra.isPresent()) {
+        Compra compra = optionalCompra.get();
+        // Converter a String para o tipo correto (se StatusPedido for uma enumeração)
+        StatusPedido novoStatus = StatusPedido.valueOf(status);
+        compra.setStatus(novoStatus);
+        comprasrespo.save(compra);
+    }
+
+    // Retorne a página ou redirecione para onde for necessário após a conclusão da edição
+   return "redirect:/api/usuario/listaTodasCompras";
+}
+
+
+
+
+
+@GetMapping("/Logout")
+  public String logout(HttpSession session) {
+    // Recupera o carrinho do cliente da sessão
+ 
+
+    
+
+    session.invalidate();
+
+    return "home/index";
+  }
 
 
 
