@@ -281,6 +281,23 @@ public ModelAndView buscarUserLogado(HttpSession session) {
     }
 
 
+    @GetMapping("/enderecoSelecionado")
+public ModelAndView exibirEnderecoSelecionado(HttpSession session) {
+    ModelAndView mv = new ModelAndView();
+    Clientemodels usuarioLogado = (Clientemodels) session.getAttribute("usuarioLogado");
+
+    List<String> enderecoSelecionado = usuarioLogado.getEnderecosEntrega();
+    mv.addObject("enderecoSelecionado", enderecoSelecionado);
+    
+    // Adicione aqui qualquer outra informação adicional necessária para a página
+    
+  // Substitua "nome_da_sua_pagina" pelo nome correto da sua página
+    
+    return pagamento(session);
+}
+
+
+
 
     @GetMapping("/formaDePagamento")
     public ModelAndView pagamento(HttpSession session) {

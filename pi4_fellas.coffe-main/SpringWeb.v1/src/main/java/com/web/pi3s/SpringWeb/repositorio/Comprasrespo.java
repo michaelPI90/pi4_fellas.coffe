@@ -19,6 +19,9 @@ public interface Comprasrespo extends JpaRepository<Compra, Long> {
     @Query(value = "select * from tb_compra where cliente_id = ? order by data_compra desc", nativeQuery = true)
     public List<Compra> ordernarPedidos(int id);
 
+      @Query(value = "SELECT * FROM tb_compra ORDER BY data_compra DESC", nativeQuery = true)
+    List<Compra> ordernarPedidos();
+
     Compra findById(int id);
 
     Optional<Compra> findBynumeroPedido(String numeroPedido);
