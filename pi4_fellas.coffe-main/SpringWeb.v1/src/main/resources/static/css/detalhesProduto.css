@@ -1,4 +1,4 @@
-/* Estilização Victor */
+/* Seletores de Classes */
 
 .carrossel-layout {
     width: 400px;
@@ -15,11 +15,6 @@
     margin-top: 290px;
 }
 
-.btn-compra {
-       height: 40px;
-    width: 140px;
-}
-
 .txt-preco {
     font-size: 20px;
     font-weight: 600;
@@ -31,8 +26,6 @@
     font-size: 18px;
     font-weight: 700;
 }
-
-/* Estilização João */
 
 .b-container {
     display: flex;
@@ -85,4 +78,47 @@
 
 .shopping-cart {
     fill: #9e3f15;
+}
+
+.carousel-inner {
+    width: 400px;
+    height: 500px;
+}
+
+.texto-informacoes-card {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Seletores de IDs */
+
+#container-card {
+    width: 400px;
+    height: 500px;
+    border-radius: 15px;
+}
+
+#item-card {
+    width: 400px;
+    height: 500px;
+    border-radius: 15px;
+}
+
+#card-informacoes {
+    width: 400px;
+}
+
+#botao-comprar {
+    border-color: #9E4015;
+    background-color: #9E4015;
+    border-radius: 5px;
+    margin: 0px 10px 10px 230px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+#link-botao-comprar {
+    text-decoration: none;
+    color: #fff;
 }

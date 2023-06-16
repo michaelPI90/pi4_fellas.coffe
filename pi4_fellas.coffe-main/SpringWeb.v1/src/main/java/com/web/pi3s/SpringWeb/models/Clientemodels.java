@@ -52,7 +52,6 @@ public class Clientemodels implements UserDetails {
     @Column(nullable = true)  
     private List<String> enderecosEntrega = new ArrayList<>();
 
-    
 
   
 

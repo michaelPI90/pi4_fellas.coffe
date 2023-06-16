@@ -337,3 +337,26 @@ main h2 {
   display: none;
   width: 350px;
 }
+
+#botao-consultar-cep {
+  border-radius: 5px;
+  border-color: #9E4015;
+  background-color: #9E4015;
+  color: #fff;
+  margin-left: 15px;
+}
+
+#label-text-cep {
+  margin: 5px 10px 0px 0px;
+}
+
+#input-buscar-cep {
+  border-radius: 10px;
+}
+
+#botao-adicionar-endereco {
+  border-radius: 5px;
+  border-color: #9E4015;
+  background-color: #9E4015;
+  color: #fff;
+}

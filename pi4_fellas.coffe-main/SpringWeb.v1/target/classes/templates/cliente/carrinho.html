@@ -59,7 +59,7 @@
         <div class="controls">
           <div class="profile">
             <a href="/fellas.coffe/clienteLogin">
-              <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+              <svg id="account_circle_black_24dp" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                 viewBox="0 0 32 32">
                 <path id="Caminho_9" data-name="Caminho 9" d="M0,0H32V32H0Z" fill="none" />
                 <path id="Caminho_10" data-name="Caminho 10"
@@ -72,7 +72,7 @@
           <div aria-disabled="true"><span th:text="${session?.usuarioLogado?.nome}" class="usuarioLogado" id="username"
               name="username">
           </div>
-          
+
         </div>
       </div>
   </header>
@@ -114,10 +114,6 @@
 
             <td>
               <a th:href="@{/removerItem/{id}(id=${item?.produto.id})}" class="remove-button">Remover</a>
-
-            </td>
-            <td>
-
             </td>
           </tr>
 
@@ -153,23 +149,15 @@
         </form>
 
         <div class="checkout-buttons">
-          <a href="/fellas.coffe/homeCliente" class="continue-shopping">Continuar Comprando</a>
-
-
-
-
+          <a id="botao-continuar-comprando" href="/fellas.coffe/homeCliente">Continuar Comprando</a>
           <form th:action=@{checkout} method="post">
-
-
-            <button type="submit">finalizar Compra</button>
+            <button id="botao-finalizar-compra" type="submit">finalizar Compra</button>
 
           </form>
         </div>
       </div>
     </div>
   </main>
-
-
 </body>
 
 </html>
