@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.pi3s.SpringWeb.Enum.StatusPedido;
 import com.web.pi3s.SpringWeb.models.Compra;
 import com.web.pi3s.SpringWeb.models.Produtomodels;
 import com.web.pi3s.SpringWeb.models.Usermodels;
@@ -166,10 +167,26 @@ public String exibirListaUsuarios(Model model) {
         List<Compra> compras = (List<Compra>) comprasrespo.findAll();
         // Adicionar a lista de compras ao modelo
         modelAndView.addObject("compra", compras);
+          modelAndView.addObject("statusPedidoValues", StatusPedido.values());
         modelAndView.setViewName("pedidos/statusPedidosBackOffice");
         return modelAndView;
     }
     
+@PostMapping("/editarStatus")
+public String editarStatus(@RequestParam("numeroPedido") String numeroPedido, @RequestParam("status") String status) {
+    Optional<Compra> optionalCompra = comprasrespo.findBynumeroPedido(numeroPedido);
+
+    if (optionalCompra.isPresent()) {
+        Compra compra = optionalCompra.get();
+        // Converter a String para o tipo correto (se StatusPedido for uma enumeração)
+        StatusPedido novoStatus = StatusPedido.valueOf(status);
+        compra.setStatus(novoStatus);
+        comprasrespo.save(compra);
+    }
+
+    // Retorne a página ou redirecione para onde for necessário após a conclusão da edição
+    return "/api/usuario/listaTodasCompras";
+}
 
 
 

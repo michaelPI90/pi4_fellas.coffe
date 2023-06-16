@@ -19,7 +19,13 @@
     <title>Status Pedidos</title>
 </head>
 
+
+
 <body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 
     <!-- Header & NavBar - Cabeçalho -->
 
@@ -68,115 +74,87 @@
                     <th scope="col" class="titulos-colunas">Editar Pedido</th>
                 </tr>
             </thead>
+           
+
             <tbody class="table-group-divider">
-               
-                <tr th:each="compra : ${compra}">
-                    <td class="dados-linhas"  th:text="${compra.dataCompra}" ><input type="date"  disabled class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas" th:text="${compra.numeroPedido}" ><input type="text" disabled placeholder="Número do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas" "${compra.valorTotal}"><input type="text" disabled placeholder="Valor Total do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><select disabled id="combobox-status" class="form-select w-75"
-                            name="status" field="*{status-pedido}" aria-label="Default select example">
-                            <option selected>Status Atual</option>
-                            <option value=" EM_ANDAMENTO"> EM_ANDAMENTO</option>
-                            <option value="ENVIADO">Pagamento Rejeitado</option>
-                            <option value="ENTREGUE">Pagamento com Sucesso</option>
-                          
-                
-                        </select>
-                    </td>
-                    <td class="dados-linhas"><button id="botao-editar-pedido" class="btn btn-primary"
-                            onclick="editarPedido()">Editar</button></td>
-                </tr>
-                <tr>
-                    <td class="dados-linhas"><input type="date" disabled class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Número do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Valor Total do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><select disabled id="combobox-status-2" class="form-select w-75"
-                            name="status-pedido" field="*{status-pedido}" aria-label="Default select example">
-                            <option selected>Status Atual</option>
-                            <option value="Aguardando Pagamento">Aguardando Pagamento</option>
-                            <option value="Pagamento Rejeitado">Pagamento Rejeitado</option>
-                            <option value="Pagamento com Sucesso">Pagamento com Sucesso</option>
-                            <option value="Aguardando Retirada">Aguardando Retirada</option>
-                            <option value="Em transito">Em transito</option>
-                            <option value="Entregue">Entregue</option>
-                        </select>
-                    </td>
-                    <td class="dados-linhas"><button id="botao-editar-pedido" class="btn btn-primary"
-                            onclick="editarPedido2()">Editar</button></td>
-                </tr>
-                <tr>
-                    <td class="dados-linhas"><input type="date" disabled class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Número do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Valor Total do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><select disabled id="combobox-status-3" class="form-select w-75"
-                            name="status-pedido" field="*{status-pedido}" aria-label="Default select example">
-                            <option selected>Status Atual</option>
-                            <option value="Aguardando Pagamento">Aguardando Pagamento</option>
-                            <option value="Pagamento Rejeitado">Pagamento Rejeitado</option>
-                            <option value="Pagamento com Sucesso">Pagamento com Sucesso</option>
-                            <option value="Aguardando Retirada">Aguardando Retirada</option>
-                            <option value="Em transito">Em transito</option>
-                            <option value="Entregue">Entregue</option>
-                        </select>
-                    </td>
-                    <td class="dados-linhas"><button id="botao-editar-pedido" class="btn btn-primary"
-                            onclick="editarPedido3()">Editar</button></td>
-                </tr>
-                <tr>
-                    <td class="dados-linhas"><input type="date" disabled class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Número do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Valor Total do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><select disabled id="combobox-status-4" class="form-select w-75"
-                            name="status-pedido" field="*{status-pedido}" aria-label="Default select example">
-                            <option selected>Status Atual</option>
-                            <option value="Aguardando Pagamento">Aguardando Pagamento</option>
-                            <option value="Pagamento Rejeitado">Pagamento Rejeitado</option>
-                            <option value="Pagamento com Sucesso">Pagamento com Sucesso</option>
-                            <option value="Aguardando Retirada">Aguardando Retirada</option>
-                            <option value="Em transito">Em transito</option>
-                            <option value="Entregue">Entregue</option>
-                        </select>
-                    </td>
-                    <td class="dados-linhas"><button id="botao-editar-pedido" class="btn btn-primary"
-                            onclick="editarPedido4()">Editar</button></td>
-                </tr>
-                <tr>
-                    <td class="dados-linhas"><input type="date" disabled class="form-control" id="basic-url"
-                            aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Número do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><input type="text" disabled placeholder="Valor Total do Pedido..."
-                            class="form-control" id="basic-url" aria-describedby="basic-addon3"></td>
-                    <td class="dados-linhas"><select disabled id="combobox-status-5" class="form-select w-75"
-                            name="status-pedido" field="*{status-pedido}" aria-label="Default select example">
-                            <option selected>Status Atual</option>
-                            <option value="Aguardando Pagamento">Aguardando Pagamento</option>
-                            <option value="Pagamento Rejeitado">Pagamento Rejeitado</option>
-                            <option value="Pagamento com Sucesso">Pagamento com Sucesso</option>
-                            <option value="Aguardando Retirada">Aguardando Retirada</option>
-                            <option value="Em transito">Em transito</option>
-                            <option value="Entregue">Entregue</option>
-                        </select>
-                    </td>
-                    <td class="dados-linhas"><button id="botao-editar-pedido" class="btn btn-primary"
-                            onclick="editarPedido5()">Editar</button></td>
-                </tr>
+                <form id="formulário" th:action="@{/api/usuario/editarStatus}" method="post">
+                    <tr th:each="compra, rowStat : ${compra}">
+                        <td class="dados-linhas">
+                            <input type="text" disabled class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                                th:value="${#dates.format(compra.dataCompra, 'dd/MM/yyyy')}">
+                        </td>
+                        <td class="dados-linhas">
+                            <input type="text" disabled placeholder="Número do Pedido..." class="form-control" id="numeroPedido"
+                                name="numeroPedido" th:value="${compra.numeroPedido}">
+                        </td>
+                        <td class="dados-linhas">
+                            <input type="text" disabled placeholder="Número do Pedido..." class="form-control" id="basic-url"
+                                aria-describedby="basic-addon3" th:value="${compra.valorTotal}">
+                        </td>
+                        <td>
+                            <div class="lineInput">
+                                <select  name="status"  disabled placeholder="Selecione um grupo" required>
+                                    <option th:each="status : ${statusPedidoValues}" 
+                                            th:value="${status}"
+                                            th:text="${status}"
+                                            th:selected="${status == compra.status}"></option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="dados-linhas">
+                            <button type="button" class="btn btn-primary editar-btn" onclick="habilitarEdicao(this)">Editar</button>
+                            <button type="submit" class="btn btn-success salvar-btn">Salvar</button>
+                        </td>
+                    </tr>
+                </form>
             </tbody>
-        </div>
-    </table>
+            
+            
+        </table>
+    
+       
+        
+        <script>
+            function habilitarEdicao(btn) {
+                const row = btn.closest('tr');
+                row.querySelectorAll('input.form-control').forEach(input => {
+                    input.disabled = false;
+                });
+                row.querySelector('.editar-btn').style.display = 'none';
+                row.querySelector('.salvar-btn').style.display = 'inline-block';
+        
+                // Habilitar apenas o select da linha atual
+                row.querySelector('.lineInput select').disabled = false;
+            }
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                let form = document.getElementById('formulário');
+        
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+        
+                    let select = event.submitter.closest('tr').querySelector('.lineInput select');
+        
+                    if (select) {
+                        let selectedValue = select.value;
+                        console.log(selectedValue);
+        
+                        // Envie o formulário manualmente
+                        form.submit();
+                    }
+                });
+            });
+        </script>
+        
+        
+        
+    </body>
+    
+    </html>
+
+
+   
+
 
 </body>
 
