@@ -256,6 +256,7 @@ public ModelAndView buscarUserLogado(HttpSession session) {
         usuarioLogado.setEnderecosEntrega(enderecosEntrega);
 
         // Atualize a sessão com o usuário atualizado
+        modelAndView.addObject("enderecoEntrega", enderecosEntrega);
         session.setAttribute("usuarioLogado", usuarioLogado);
 
      
