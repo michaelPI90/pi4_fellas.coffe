@@ -159,21 +159,23 @@ public String exibirListaUsuarios(Model model) {
     }
 
 
-   @GetMapping("/listaTodasCompras")
-public ModelAndView listaTodasCompras() {
-    ModelAndView modelAndView = new ModelAndView();
+    @GetMapping("/listaTodasCompras")
+    public ModelAndView listaTodasCompras() {
+        ModelAndView modelAndView = new ModelAndView();
     
-    // Buscar todas as compras feitas na loja, ordenadas por data de forma decrescente
-    List<Compra> compras = comprasrespo.ordernarPedidos();
+        // Buscar todas as compras feitas na loja, ordenadas por data de forma decrescente
        
-    // Adicionar a lista de compras ao modelo
-    modelAndView.addObject("compra", compras);
-    modelAndView.addObject("statusPedidoValues", StatusPedido.values());
-    modelAndView.setViewName("pedidos/statusPedidosBackOffice");
-    
-    return modelAndView;
-}
 
+       
+
+        List<Compra> compras = (List<Compra>) comprasrespo.findAll();
+       
+        // Adicionar a lista de compras ao modelo
+        modelAndView.addObject("compra", compras);
+          modelAndView.addObject("statusPedidoValues", StatusPedido.values());
+        modelAndView.setViewName("pedidos/statusPedidosBackOffice");
+        return modelAndView;
+    }
     
 @PostMapping("/editarStatus")
 public String editarStatus(@RequestParam("numeroPedido") String numeroPedido, @RequestParam("status") String status) {
